@@ -48,7 +48,7 @@ export async function POST(request) {
       // One new comment per minute and valid parent in same exercise.
       const [inserted] = await db`INSERT INTO public.pme_comments
          (exercise_id, user_id, parent_id, content, status)
-         SELECT e.id, ${userId}, ${parentId}::bigint, ${content}, 'pending'
+         SELECT e.id, ${userId}, ${parentId}::bigint, ${content}, 'published'
          FROM public.pme_exercises e
          WHERE e.id=${exerciseId}
            AND (${parentId}::bigint IS NULL OR EXISTS (
@@ -59,7 +59,7 @@ export async function POST(request) {
              AND recent.created_at > now()-interval '60 seconds')
          RETURNING id::text AS id`;
       if (!inserted) return json({ error: 'Wait a minute between comments, or check the parent/exercise.' }, 429);
-      return json({ ok: true, status: 'pending', id: inserted.id }, 201);
+      return json({ ok: true, status: 'published', id: inserted.id }, 201);
     }
     return json({ error: 'Unknown action' }, 400);
   } catch (error) { return errorResponse(error); }
