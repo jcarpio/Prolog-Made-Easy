@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Programming does not have to mean a list of instructions."><title>Think Differently — Prolog Made Easy</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/theme/white.css"><link rel="stylesheet" href="../assets/slides.css"></head>
+<body><a class="back" href="../index.html#chapters">← All chapters</a><div class="reveal"><div class="slides"><section class="center"><span class="pill">CHAPTER 01</span><h1>Think Differently</h1><p class="muted">Programming does not have to mean a list of instructions.</p><p class="small">Use → to advance · Esc for slide overview</p></section><section><h2>What if we described a world?</h2>Instead of saying <em>how</em> to compute something, we can describe relationships and ask questions.</section><section><h2>A tiny world</h2><pre><code class="language-prolog">likes(ada, tea).
+likes(ben, coffee).
+likes(ada, music).</code></pre><p class="muted">Each statement is a <strong>fact</strong>.</p></section><section><h2>Ask a question</h2><pre><code class="language-prolog">?- likes(ada, tea).
+true.
+
+?- likes(ben, tea).
+false.</code></pre><p class="small muted">Assuming this is the complete program, the second query cannot be proven.</p></section><section><h2>Your first challenge</h2><p>Which fact would you add to make this query succeed?</p><pre><code class="language-prolog">?- likes(ben, music).</code></pre></section><section><h2>The big idea</h2><p>Prolog programs describe what is known. Queries ask what follows from that knowledge.</p><p class="pill">Next: Facts &amp; Rules</p><p class="small"><a href="02-facts-and-rules.html">Continue to chapter 02 →</a></p></section></div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script><script>Reveal.initialize({hash:true,slideNumber:true,transition:'slide',center:true,controls:true,progress:true});</script></body></html>
