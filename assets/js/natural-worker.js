@@ -1,7 +1,8 @@
 /* Tau Prolog runs in a separate Web Worker so it can be stopped safely. */
 let session=null;
+// Tau Prolog expects the browser global `window`; in a classic Worker it is `self`.
 self.window = self;
-try { importScripts('../vendor/tau-prolog/core.js'); }
+try { importScripts('../vendor/tau-prolog/core.js'); if (typeof pl === 'undefined' || typeof pl.create !== 'function') { throw new Error('core.js loaded, but the Prolog API (pl.create) was not initialized'); } }
 catch (e) { postMessage({type:'init-error', message:'Tau Prolog could not be loaded from local assets/vendor/tau-prolog/core.js. '+String(e)}); }
 function stringifyError(e){try{return String(e && e.toString ? e.toString() : e);}catch(_){return 'Unknown Prolog error';}}
 function consult(program, callback){
