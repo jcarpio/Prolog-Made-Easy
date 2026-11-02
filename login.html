@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102734">
+  <meta name="description" content="Sign in to the Prolog Made Easy community with Google.">
+  <title>Join the community · Prolog Made Easy</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/assets/css/auth.css">
+  <script type="module" src="/assets/js/auth.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar"><a class="brand" href="/">◈ Prolog <strong>Made Easy</strong></a><nav><a href="/">← Back to the book</a></nav></header>
+  <main id="main">
+    <section class="welcome">
+      <p class="eyebrow">A NEW WAY TO LEARN TOGETHER</p>
+      <h1>Join the <em>Prolog community!</em></h1>
+      <p>Ask questions, celebrate those “OH! NOW I GET IT!” moments, and help other logic explorers.</p>
+      <div class="auth-card">
+        <p id="auth-status" class="status" role="status" aria-live="polite">Checking your session…</p>
+        <div id="signed-out" hidden>
+          <button id="google-sign-in" type="button" class="button"><span class="google-g" aria-hidden="true">G</span> Continue with Google</button>
+          <p class="note">No account needed to read the book or run Prolog exercises.</p>
+        </div>
+        <div id="signed-in" hidden>
+          <h2>Welcome, <span id="user-name"></span>!</h2>
+          <p>You are signed in as <strong id="user-email"></strong>.</p>
+          <p class="note">Nicknames, newsletter preferences, comments and voting are coming next. Signing in does not subscribe you to the newsletter.</p>
+          <button id="sign-out" type="button" class="button outline">Sign out</button>
+        </div>
+        <div id="auth-error" class="error" role="alert" hidden></div>
+      </div>
+      <p class="legal">By signing in, you authenticate with Google via Neon Auth. Only basic profile information is requested. <a href="/">Return to chapters</a>.</p>
+    </section>
+  </main>
+</body>
+</html>
