@@ -2,6 +2,9 @@ import { createRemoteJWKSet, jwtVerify } from 'jose';
 
 const authUrl = process.env.NEON_AUTH_URL || 'https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-central-1.aws.neon.tech/neondb/auth';
 const jwksUrl = process.env.NEON_AUTH_JWKS_URL || `${authUrl}/.well-known/jwks.json`;
+
+const issuer = new URL(authUrl).origin;
+
 const jwks = createRemoteJWKSet(new URL(jwksUrl));
 
 export const json = (data, status = 200) => new Response(JSON.stringify(data), {
@@ -20,11 +23,13 @@ export async function requireUser(request) {
   if (!match) throw Object.assign(new Error('Sign in required'), { status: 401 });
   try {
     // Match the configured Neon Auth instance; never trust unsigned or client-supplied user IDs.
-    const { payload } = await jwtVerify(match[1], jwks, {
-      issuer: process.env.NEON_AUTH_ISSUER || authUrl,
-      algorithms: ['RS256', 'ES256', 'EdDSA'],
-      clockTolerance: 10
-    });
+    
+const { payload } = await jwtVerify(match[1], jwks, {
+  issuer,
+  algorithms: ['EdDSA'],
+  clockTolerance: 10
+});
+
     if (!payload.sub || typeof payload.sub !== 'string') throw new Error('Missing sub');
     return payload.sub;
   } catch {
