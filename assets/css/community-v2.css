@@ -1,0 +1,9 @@
+/* Additive styles. Keep existing assets/css/community.css and auth.css unchanged. */
+.pme-community-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin:1.3rem 0}
+.pme-action{border:1px solid #90bdb3;border-radius:9px;padding:.7rem 1rem;color:#0c7169;background:white;font:inherit;font-weight:700;cursor:pointer}
+.pme-action:hover{background:#e1f1ec}.pme-action:disabled{opacity:.5;cursor:wait}
+.pme-community-form{margin:1rem 0;display:grid;gap:1rem}.pme-community-form label{display:grid;gap:.5rem;font-weight:700}
+.pme-community-form textarea{box-sizing:border-box;width:100%;padding:1rem;font:inherit;border:1px solid #9cbdb5;border-radius:8px;resize:vertical}
+#profile-form{display:grid;gap:1rem;margin-top:1rem}#profile-form[hidden]{display:none}
+#profile-form>input{padding:.9rem;border:1px solid #9cbdb5;border-radius:8px;font:inherit}
+.pme-newsletter-choice{display:flex;align-items:start;gap:.6rem;font-size:1rem}.pme-newsletter-choice input{margin-top:.35rem}
