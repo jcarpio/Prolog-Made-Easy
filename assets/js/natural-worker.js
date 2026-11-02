@@ -1,7 +1,7 @@
 /* Tau Prolog runs in a separate Web Worker so it can be stopped safely. */
 let session=null;
-try { importScripts('https://cdn.jsdelivr.net/npm/tau-prolog@0.3.4/modules/core.js'); }
-catch (e) { postMessage({type:'init-error', message:'Tau Prolog could not be downloaded. Check your connection. '+String(e)}); }
+try { importScripts('../vendor/tau-prolog/core.js'); }
+catch (e) { postMessage({type:'init-error', message:'Tau Prolog could not be loaded from local assets/vendor/tau-prolog/core.js. '+String(e)}); }
 function stringifyError(e){try{return String(e && e.toString ? e.toString() : e);}catch(_){return 'Unknown Prolog error';}}
 function consult(program, callback){
   if(typeof pl==='undefined'){postMessage({type:'error',message:'Tau Prolog is unavailable. The interpreter script did not load.'});return;}
