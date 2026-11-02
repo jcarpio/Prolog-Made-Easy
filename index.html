@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#081d2b">
   <title>Prolog Made Easy — Learn Logic Programming the Fun Way!</title>
   <link rel="stylesheet" href="assets/css/home.css">
-<script defer src="/assets/js/header-auth.js"></script>
+  <script defer src="/assets/js/header-auth.js"></script>
 
 </head>
 <body>
@@ -17,15 +17,24 @@
     <nav aria-label="Main navigation">
       <a href="#chapters">Chapters</a><a href="#approach">How it works</a><a class="nav-cta" href="chapters/04-natural-numbers.html">Try Prolog ↗</a>
      
-<a
-  href="/login.html"
-  class="sign-in-link"
-  id="header-auth-link"
-  aria-label="Sign in"
-  title="Sign in"
->
-  Sign in
-</a>
+<div class="header-account">
+  <a href="/login.html"
+     class="sign-in-link"
+     id="header-auth-link">
+    Sign in
+  </a>
+
+  <div id="account-menu" class="account-menu" hidden>
+    <div id="account-nickname" class="account-name"></div>
+
+    <a href="/profile.html">My profile</a>
+
+    <button type="button" id="header-sign-out">
+      Sign out
+    </button>
+  </div>
+</div>
+
 
     </nav>
   </header>
