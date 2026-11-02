@@ -27208,13 +27208,20 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   };
   var mounts = [...document.querySelectorAll("[data-pme-community]")];
   async function token() {
-    const { data, error: error61 } = await auth.token();
-    if (error61) {
-      throw new Error(error61.message || "Unable to get authentication token.");
+    const response = await fetch(`${AUTH_URL}/token`, {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store"
+    });
+    if (!response.ok) {
+      throw new Error(
+        `Unable to obtain JWT from Neon Auth (HTTP ${response.status})`
+      );
     }
+    const data = await response.json();
     const jwt2 = data?.token;
-    if (!jwt2 || typeof jwt2 !== "string") {
-      throw new Error("Please sign in first.");
+    if (typeof jwt2 !== "string" || jwt2.split(".").length !== 3) {
+      throw new Error("Neon Auth did not return a valid JWT.");
     }
     return jwt2;
   }
