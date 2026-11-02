@@ -1,1 +1,27 @@
-:root{color-scheme:light;--ink:#102734;--accent:#087d71;--paper:#f9f8f4;--muted:#547078}*{box-sizing:border-box}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{margin:0;background:var(--paper);color:var(--ink)}a{color:var(--accent)}a:focus-visible,button:focus-visible{outline:3px solid #efaa30;outline-offset:3px}.skip{position:absolute;transform:translateY(-150%);background:white;padding:1rem}.skip:focus{transform:none}.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem max(5vw,1.2rem);background:var(--ink);color:white}.topbar a{color:white;text-decoration:none}.brand{font-size:1.15rem;font-weight:500}.brand strong{color:#a4ded1}.welcome{max-width:770px;margin:clamp(2rem,6vw,5rem) auto;padding:0 1.3rem 4rem}.eyebrow{color:var(--accent);font-size:.8rem;font-weight:750;letter-spacing:.15em}h1{font:700 clamp(2.65rem,7vw,5.4rem)/1.04 Georgia,serif;letter-spacing:-.045em;margin:.6rem 0 1.5rem}h1 em{color:var(--accent)}.welcome>p{font-size:1.15rem;line-height:1.7}.auth-card{margin:2.2rem 0 1.5rem;padding:clamp(1.4rem,4vw,2.5rem);background:white;border:1px solid #c3dfd5;border-radius:22px;box-shadow:0 14px 40px #1027340b}.button{display:inline-flex;align-items:center;gap:.8rem;cursor:pointer;border:0;border-radius:10px;background:var(--accent);color:white;font-size:1rem;font-weight:700;padding:1rem 1.25rem;min-height:48px}.button:disabled{opacity:.55;cursor:wait}.button.outline{background:white;color:var(--accent);border:1px solid var(--accent)}.google-g{display:inline-grid;place-items:center;width:30px;height:30px;background:white;border-radius:50%;color:#4285f4;font-weight:800}.note,.legal{font-size:.9rem!important;color:var(--muted);line-height:1.6}.status{color:#2e7168;min-height:1.5em}.error{padding:1rem;margin-top:1rem;background:#fff0ed;color:#8d2c21;border-radius:8px}#signed-in h2{font-family:Georgia,serif;font-size:1.8rem}#user-email{overflow-wrap:anywhere}
+:root{color-scheme:light;--ink:#102734;--accent:#087d71;--paper:#f9f8f4;--muted:#547078}*{box-sizing:border-box}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{margin:0;background:var(--paper);color:var(--ink)}a{color:var(--accent)}a:focus-visible,button:focus-visible{outline:3px solid #efaa30;outline-offset:3px}.skip{position:absolute;transform:translateY(-150%);background:white;padding:1rem}.skip:focus{transform:none}.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem max(5vw,1.2rem);background:var(--ink);color:white}.topbar a{color:white;text-decoration:none}.brand{font-size:1.15rem;font-weight:500}.brand strong{color:#a4ded1}.welcome{max-width:770px;margin:clamp(2rem,6vw,5rem) auto;padding:0 1.3rem 4rem}.eyebrow{color:var(--accent);font-size:.8rem;font-weight:750;letter-spacing:.15em}h1{font:700 clamp(2.65rem,7vw,5.4rem)/1.04 Georgia,serif;letter-spacing:-.045em;margin:.6rem 0 1.5rem}h1 em{color:var(--accent)}.welcome>p{font-size:1.15rem;line-height:1.7}.auth-card{margin:2.2rem 0 1.5rem;padding:clamp(1.4rem,4vw,2.5rem);background:white;border:1px solid #c3dfd5;border-radius:22px;box-shadow:0 14px 40px #1027340b}.button{display:inline-flex;align-items:center;gap:.8rem;cursor:pointer;border:0;border-radius:10px;background:var(--accent);color:white;font-size:1rem;font-weight:700;padding:1rem 1.25rem;min-height:48px}.button:disabled{opacity:.55;cursor:wait}.button.outline{background:white;color:var(--accent);border:1px solid var(--accent)}.google-g{display:inline-grid;place-items:center;width:30px;height:30px;background:white;border-radius:50%;color:#4285f4;font-weight:800}.note,.legal{font-size:.9rem!important;color:var(--muted);line-height:1.6}.status{color:#2e7168;min-height:1.5em}
+
+.error{padding:1rem;margin-top:1rem;background:#fff0ed;color:#8d2c21;border-radius:8px}#signed-in h2{font-family:Georgia,serif;font-size:1.8rem}#user-email{overflow-wrap:anywhere}
+
+.continue-learning-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  margin: 12px 12px 12px 0;
+  border-radius: 10px;
+  background: #087f70;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background .2s ease;
+}
+
+.continue-learning-btn:hover {
+  background: #06675c;
+  color: #fff;
+}
+
+.continue-learning-btn:focus-visible {
+  outline: 3px solid #e3aa43;
+  outline-offset: 3px;
+}
