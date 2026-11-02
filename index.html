@@ -2,24 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Learn Prolog and logic programming through short, visual, approachable lessons.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prolog Made Easy: a free, fun, hands-on introduction to logic programming. Read stories, explore presentations, and run real Prolog in your browser.">
+  <meta name="theme-color" content="#081d2b">
   <title>Prolog Made Easy — Learn Logic Programming the Fun Way!</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/css/home.css">
 </head>
 <body>
-  <div class="wrap">
-    <header class="top"><a class="brand" href="index.html">Prolog Made Easy</a><nav class="nav" aria-label="Main navigation"><a href="#chapters">Chapters</a><a href="#about">About</a></nav></header>
-    <main>
-      <section class="hero"><div class="eyebrow">A free, visual introduction to logic programming</div><h1>Prolog<br>Made Easy<span style="color:#3c59d8">.</span></h1><p class="lead">What if programming was about describing what is true, rather than telling a computer what to do? Discover Prolog, one simple idea at a time.</p><a class="button" href="#chapters">Start learning →</a></section>
-      <section id="chapters" aria-labelledby="chapters-title"><h2 class="section-title" id="chapters-title">Start exploring</h2><p class="intro">Explore the ideas, then run your first real Prolog program in your browser.</p><div class="chapters">
-        <a class="chapter" href="chapters/01-think-differently.html"><span class="num">CHAPTER 01</span><h3>Think Differently!</h3><p>Programming with relationships instead of instructions.</p><span class="open">Open lesson →</span></a>
-        <a class="chapter" href="chapters/02-facts-and-rules.html"><span class="num">CHAPTER 02</span><h3>Facts &amp; Rules</h3><p>Describe a tiny world, then draw conclusions.</p><span class="open">Open lesson →</span></a>
-        <a class="chapter" href="chapters/03-questions-and-variables.html"><span class="num">CHAPTER 03</span><h3>Questions &amp; Variables</h3><p>Ask Prolog to find values that make a goal true.</p><span class="open">Open lesson →</span></a>
-      <a class="chapter" href="chapters/04-natural-numbers.html"><span class="num">INTERACTIVE LAB · 25–35 MIN</span><h3>Your First Prolog Program: Natural Numbers</h3><p>Zero, successors, recursion… and a real Prolog interpreter in your browser!</p><span class="open">Start coding →</span></a></div></section>
-      <section class="about" id="about"><h2>Simple to learn. Rigorous at its core.</h2><p>Prolog Made Easy is a free, growing introduction to logic programming. Each lesson blends accessible examples with careful explanations. No account required.</p></section>
-    </main>
-    <footer class="foot">Prolog Made Easy · An open educational project · <a href="https://github.com/jcarpio/Prolog-Made-Easy">Source on GitHub</a></footer>
-  </div>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Prolog Made Easy, home"><span class="brand-mark">◈</span> Prolog <strong>Made Easy</strong></a>
+    <nav aria-label="Main navigation"><a href="#chapters">Chapters</a><a href="#approach">How it works</a><a class="nav-cta" href="chapters/04-natural-numbers.html">Try Prolog ↗</a></nav>
+  </header>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <p class="eyebrow">A FREE, INTERACTIVE BOOK ABOUT LOGIC PROGRAMMING</p>
+        <h1 id="hero-title">Prolog<br><em>Made Easy!</em></h1>
+        <p class="hero-lead">Different thinking. Tiny programs.<br>Big <strong>“OH! NOW I GET IT!”</strong> moments.</p>
+        <p class="hero-copy">No boring walls of syntax. We'll tell stories, ask questions, make mistakes and write real Prolog from day one. Ready to stop looking for the steering wheel?</p>
+        <div class="hero-actions"><a class="button primary" href="chapters/01-think-differently.html">Start the adventure <span aria-hidden="true">↗</span></a><a class="button ghost" href="#chapters">Explore chapters ↓</a></div>
+        <div class="hero-meta"><span>◷ Short chapters</span><span>⌘ Real code in your browser</span><span>◎ No account needed</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="node node-one">?</div><div class="node node-two">true.</div><div class="node node-three">X</div><div class="hero-code"><span>% tell us what's true</span><br>natural(0).<br>natural(s(N)) :-<br>&nbsp; natural(N).<br><br><span>?- natural(X).</span><br><b>X = 0 ;</b><br><b>X = s(0) ;</b><br><b>...</b></div></div>
+    </section>
+
+    <div class="content-layout">
+      <aside class="sidebar" aria-label="Homepage sections"><div class="sticky"><small>IN THIS BOOK</small><a href="#chapters">01. Choose a chapter</a><a href="#approach">02. Learn by doing</a><a href="#about">03. What's the idea?</a><div class="side-note">Simple to learn.<br>Fun to explore.<br>Rigorous at its core.</div></div></aside>
+      <div class="content">
+        <section id="chapters" class="content-section" aria-labelledby="chapters-title">
+          <div class="section-marker">01 / YOUR LEARNING ADVENTURE</div>
+          <h2 id="chapters-title">Pick a chapter.<br><em>Let's get curious!</em></h2>
+          <p class="section-intro">Start with a new way of thinking, then run your first program. Feeling adventurous? Jump into Sudoku and watch constraints do the heavy lifting.</p>
+          <div class="chapter-grid">
+            <a class="chapter-card" href="chapters/01-think-differently.html"><div class="card-top"><span>CHAPTER 01</span><span class="card-tag">READ + SLIDES</span></div><div class="card-icon" aria-hidden="true">↝</div><h3>Think Differently!</h3><p>Driving a car? Easy. Surfing with a steering wheel? Not so much. Discover why Prolog is a different kind of adventure.</p><div class="card-footer"><span>Mindset · Beginner</span><strong>Read chapter ↗</strong></div></a>
+            <a class="chapter-card" href="chapters/02-facts-and-rules.html"><div class="card-top"><span>CHAPTER 02</span><span class="card-tag">LEARN</span></div><div class="card-icon" aria-hidden="true">∴</div><h3>Facts &amp; Rules</h3><p>Build a tiny world with things that are true. Then teach Prolog how those facts fit together.</p><div class="card-footer"><span>Foundations · Beginner</span><strong>Read chapter ↗</strong></div></a>
+            <a class="chapter-card" href="chapters/03-questions-and-variables.html"><div class="card-top"><span>CHAPTER 03</span><span class="card-tag">LEARN</span></div><div class="card-icon" aria-hidden="true">?-</div><h3>Questions &amp; Variables</h3><p>Stop telling the computer every step. Ask questions and discover the answers that make them true!</p><div class="card-footer"><span>Queries · Beginner</span><strong>Read chapter ↗</strong></div></a>
+            <a class="chapter-card interactive" href="chapters/04-natural-numbers.html"><div class="card-top"><span>CHAPTER 04</span><span class="card-tag">INTERACTIVE · 25–35 MIN</span></div><div class="card-icon" aria-hidden="true">0 → ∞</div><h3>Natural Numbers</h3><p>Two tiny clauses. Infinite possibilities! Write your first Prolog program and run it right here in your browser.</p><div class="card-footer"><span>Practice · Tau Prolog</span><strong>Start coding ↗</strong></div></a>
+            <a class="chapter-card interactive sudoku" href="chapters/05-sudoku-the-logic-way.html"><div class="card-top"><span>CHAPTER 05</span><span class="card-tag">LAB · 40–55 MIN</span></div><div class="card-icon sudoku-symbol" aria-hidden="true"><span>5</span><span>1</span><span>9</span><span>2</span><span>?</span><span>6</span><span>7</span><span>8</span><span>3</span></div><h3>Sudoku, the Logic Way!</h3><p>Wait... where's the algorithm?! Explore Markus Triska's elegant Sudoku solver and experiment with Scryer Prolog.</p><div class="card-footer"><span>Constraints · Scryer WASM experiment</span><strong>Explore Sudoku ↗</strong></div></a>
+          </div>
+          <p class="chapter-note">The Sudoku browser lab is experimental; the chapter and its explanations are available even if the Scryer engine cannot start.</p>
+        </section>
+        <section id="approach" class="content-section" aria-labelledby="approach-title"><div class="section-marker">02 / HOW WE LEARN</div><h2 id="approach-title">No spectators.<br><em>You're the programmer!</em></h2><p class="section-intro">We don't want you to read fifty pages before writing a line of code. Here, learning means trying things.</p><div class="steps"><div><div class="step-number">01</div><h3>Read a little</h3><p>A story, a question, or a surprisingly simple idea.</p></div><div><div class="step-number">02</div><h3>Try it yourself</h3><p>Edit a real Prolog program. Run a query. Ask for another answer.</p></div><div><div class="step-number">03</div><h3>Make it yours</h3><p>Break something. Fix it. Discover <em>why</em> it works.</p></div></div></section>
+        <section id="about" class="content-section about" aria-labelledby="about-title"><div class="section-marker">03 / THE BIG IDEA</div><h2 id="about-title">Stop looking for<br><em>the steering wheel!</em></h2><p>Prolog isn't Python with strange punctuation. It's a different way to think about programming: describe facts, relationships and constraints — then ask what follows.</p><p>This is an open, growing book in English. Every chapter is free to read, and the interactive exercises run in your browser. No signup. No fuss. Just curiosity.</p><a class="about-link" href="chapters/01-think-differently.html">Find out why Prolog is different ↗</a></section>
+      </div>
+    </div>
+  </main>
+  <footer class="footer"><span>◈ Prolog Made Easy</span><span>Learn Logic Programming the Fun Way!</span><a href="https://github.com/jcarpio/Prolog-Made-Easy" target="_blank" rel="noopener noreferrer">View source on GitHub ↗</a></footer>
 </body>
 </html>
