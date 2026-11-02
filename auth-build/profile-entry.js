@@ -5,20 +5,28 @@ const $=id=>document.getElementById(id);
 const status=$('profile-status'), form=$('profile-form');
 
 async function token() {
-  const { data, error } = await auth.token();
+  const response = await fetch(`${AUTH_URL}/token`, {
+    method: 'GET',
+    credentials: 'include',
+    cache: 'no-store'
+  });
 
-  if (error) {
-    throw new Error(error.message || 'Unable to get authentication token.');
+  if (!response.ok) {
+    throw new Error(
+      `Unable to obtain JWT from Neon Auth (HTTP ${response.status})`
+    );
   }
 
+  const data = await response.json();
   const jwt = data?.token;
 
-  if (!jwt || typeof jwt !== 'string') {
-    throw new Error('Please sign in first.');
+  if (typeof jwt !== 'string' || jwt.split('.').length !== 3) {
+    throw new Error('Neon Auth did not return a valid JWT.');
   }
 
   return jwt;
 }
+
 
 async function api(method, body){
  const response=await fetch('/api/profile', {method,headers:{'Authorization':`Bearer ${await token()}`,...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined,cache:'no-store'});

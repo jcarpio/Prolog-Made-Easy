@@ -3,17 +3,25 @@ const auth=createAuthClient('https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-cent
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
 const mounts=[...document.querySelectorAll('[data-pme-community]')];
 
-async function token() {
-  const { data, error } = await auth.token();
 
-  if (error) {
-    throw new Error(error.message || 'Unable to get authentication token.');
+async function token() {
+  const response = await fetch(`${AUTH_URL}/token`, {
+    method: 'GET',
+    credentials: 'include',
+    cache: 'no-store'
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `Unable to obtain JWT from Neon Auth (HTTP ${response.status})`
+    );
   }
 
+  const data = await response.json();
   const jwt = data?.token;
 
-  if (!jwt || typeof jwt !== 'string') {
-    throw new Error('Please sign in first.');
+  if (typeof jwt !== 'string' || jwt.split('.').length !== 3) {
+    throw new Error('Neon Auth did not return a valid JWT.');
   }
 
   return jwt;
