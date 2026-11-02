@@ -27208,9 +27208,15 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   };
   var mounts = [...document.querySelectorAll("[data-pme-community]")];
   async function token() {
-    const t = await auth.getJWTToken();
-    if (!t || typeof t !== "string") throw Error("Please sign in first.");
-    return t;
+    const { data, error: error61 } = await auth.token();
+    if (error61) {
+      throw new Error(error61.message || "Unable to get authentication token.");
+    }
+    const jwt2 = data?.token;
+    if (!jwt2 || typeof jwt2 !== "string") {
+      throw new Error("Please sign in first.");
+    }
+    return jwt2;
   }
   async function load(id, stats, comments) {
     const r = await fetch(`/api/community?exercise=${encodeURIComponent(id)}`, { cache: "no-store" });

@@ -27205,8 +27205,14 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   var status = $("profile-status");
   var form = $("profile-form");
   async function token() {
-    const jwt2 = await auth.getJWTToken();
-    if (!jwt2 || typeof jwt2 !== "string") throw new Error("Could not obtain a signed session token. Please sign in again.");
+    const { data, error: error61 } = await auth.token();
+    if (error61) {
+      throw new Error(error61.message || "Unable to get authentication token.");
+    }
+    const jwt2 = data?.token;
+    if (!jwt2 || typeof jwt2 !== "string") {
+      throw new Error("Please sign in first.");
+    }
     return jwt2;
   }
   async function api(method, body) {

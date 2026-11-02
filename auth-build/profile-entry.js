@@ -3,11 +3,23 @@ const AUTH_URL='https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-central-1.aws.neo
 const auth=createAuthClient(AUTH_URL);
 const $=id=>document.getElementById(id);
 const status=$('profile-status'), form=$('profile-form');
-async function token(){
-  const jwt=await auth.getJWTToken();
-  if (!jwt || typeof jwt!=='string') throw new Error('Could not obtain a signed session token. Please sign in again.');
+
+async function token() {
+  const { data, error } = await auth.token();
+
+  if (error) {
+    throw new Error(error.message || 'Unable to get authentication token.');
+  }
+
+  const jwt = data?.token;
+
+  if (!jwt || typeof jwt !== 'string') {
+    throw new Error('Please sign in first.');
+  }
+
   return jwt;
 }
+
 async function api(method, body){
  const response=await fetch('/api/profile', {method,headers:{'Authorization':`Bearer ${await token()}`,...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined,cache:'no-store'});
  const data=await response.json().catch(()=>({}));

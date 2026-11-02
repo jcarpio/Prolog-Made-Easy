@@ -2,7 +2,23 @@ import { createAuthClient } from '@neondatabase/auth';
 const auth=createAuthClient('https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-central-1.aws.neon.tech/neondb/auth');
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
 const mounts=[...document.querySelectorAll('[data-pme-community]')];
-async function token(){const t=await auth.getJWTToken();if(!t||typeof t!=='string')throw Error('Please sign in first.');return t;}
+
+async function token() {
+  const { data, error } = await auth.token();
+
+  if (error) {
+    throw new Error(error.message || 'Unable to get authentication token.');
+  }
+
+  const jwt = data?.token;
+
+  if (!jwt || typeof jwt !== 'string') {
+    throw new Error('Please sign in first.');
+  }
+
+  return jwt;
+}
+
 async function load(id,stats,comments){
  const r=await fetch(`/api/community?exercise=${encodeURIComponent(id)}`,{cache:'no-store'});
  const data=await r.json();if(!r.ok)throw Error(data.error||`HTTP ${r.status}`);
