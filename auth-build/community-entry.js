@@ -65,6 +65,34 @@ async function init(mount){
  const sendVote=async value=>{try{await send({action:'vote',exerciseId:id,value});await load(id,stats,comments);feedback.textContent='Vote recorded.';}catch(e){feedback.textContent=e.message;}};
  up.onclick=()=>sendVote(1);down.onclick=()=>sendVote(-1);controls.append(up,down);mount.append(controls);
  const form=el('form','pme-community-form');const label=el('label','','Share a question or discovery');const area=el('textarea','');area.maxLength=2000;area.minLength=3;area.rows=3;area.required=true;label.append(area);const submit=el('button','pme-action','Post comment');submit.type='submit';form.append(label,submit);mount.append(form,feedback);
- form.onsubmit=async e=>{e.preventDefault();submit.disabled=true;try{const result=await send({action:'comment',exerciseId:id,content:area.value});area.value='';feedback.textContent=result.status==='pending'?'Comment received! It will appear after moderation.':'Posted.';}catch(err){feedback.textContent=err.message;}finally{submit.disabled=false;}};
+
+form.onsubmit = async (e) => {
+  e.preventDefault();
+  submit.disabled = true;
+
+  try {
+    const result = await send({
+      action: 'comment',
+      exerciseId: id,
+      content: area.value
+    });
+
+    area.value = '';
+
+    if (result.status === 'published') {
+      await load(id, stats, comments);
+      feedback.textContent = 'Comment published successfully!';
+    } else {
+      feedback.textContent =
+        'Comment received! It will appear after moderation.';
+    }
+
+  } catch (err) {
+    feedback.textContent = err.message;
+  } finally {
+    submit.disabled = false;
+  }
+};
+
 }
 mounts.forEach(m=>init(m).catch(e=>{m.append(el('p','pme-community-muted',e.message));}));

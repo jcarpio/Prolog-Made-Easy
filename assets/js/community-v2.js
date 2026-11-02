@@ -27307,9 +27307,18 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       e.preventDefault();
       submit.disabled = true;
       try {
-        const result = await send({ action: "comment", exerciseId: id, content: area.value });
+        const result = await send({
+          action: "comment",
+          exerciseId: id,
+          content: area.value
+        });
         area.value = "";
-        feedback.textContent = result.status === "pending" ? "Comment received! It will appear after moderation." : "Posted.";
+        if (result.status === "published") {
+          await load(id, stats, comments);
+          feedback.textContent = "Comment published successfully!";
+        } else {
+          feedback.textContent = "Comment received! It will appear after moderation.";
+        }
       } catch (err) {
         feedback.textContent = err.message;
       } finally {
