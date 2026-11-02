@@ -29,9 +29,22 @@
           <p>You are signed in as <strong id="user-email"></strong>.</p>
           <p class="note">Nicknames, newsletter preferences, comments and voting are coming next. Signing in does not subscribe you to the newsletter.</p>
 
-<a href="/" class="continue-learning-btn">
-  Continue learning →
-</a>
+<div id="signed-in" hidden>
+  <h2>Welcome, <span id="user-name"></span>!</h2>
+
+  <p>
+    You are signed in as
+    <strong id="user-email"></strong>.
+  </p>
+
+  <a href="/" class="continue-learning-btn">
+    Continue learning →
+  </a>
+
+  <button id="sign-out" type="button">
+    Sign out
+  </button>
+</div>
 
         </div>
         <div id="auth-error" class="error" role="alert" hidden></div>
