@@ -1,0 +1,11 @@
+/* Prolog Made Easy community — inherits typography and colors from each chapter. */
+.pme-community{margin:3rem auto;padding:clamp(1.25rem,4vw,2.5rem);max-width:950px;border:1px solid #bddbd2;border-radius:16px;background:#f3f7f3;color:#152c36;font-family:inherit}
+.pme-community h2{margin:0 0 .5rem;font-size:clamp(1.5rem,3vw,2.1rem);color:#152c36}
+.pme-community h3{color:#152c36;margin:1.5rem 0 .75rem}
+.pme-community-muted{color:#536c70;font-size:.95rem}
+.pme-community-stats{font-weight:700;color:#08796e;padding:.75rem 0}
+.pme-community-comment{padding:1rem 0;border-top:1px solid #cbded6}
+.pme-community-comment strong{display:inline-block;margin-right:.75rem}
+.pme-community-comment time{font-size:.8rem}
+.pme-community-comment p{margin:.5rem 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.pme-community-notice{padding:.85rem 1rem;border-left:3px solid #0b8175;background:#e8f3ee;font-size:.94rem}

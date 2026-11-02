@@ -1,37 +1,58 @@
-# Prolog Made Easy — Chapter 1 (HTML + Reveal.js)
+# Prolog Made Easy · Social layer (phase 1)
 
-Static site for Vercel (`Framework Preset: Other`, `Root Directory: ./`).
+An additive starter, **not** a replacement for your existing site. Provides a Neon SQL schema, a read-only Vercel Function, and a public community block for the exercises. **No login or public posting is enabled yet.** This is intentional: anonymous writes must not be allowed until verified server-side sessions, validation, moderation and anti-spam safeguards are implemented.
 
-## Included
-- `index.html` — course homepage (from starter)
-- `chapters/01-think-differently.html` — complete English reading chapter, accessible/responsive
-- `chapters/01-think-differently-slides.html` — companion Reveal.js presentation
-- `assets/chapter-one.css` — new chapter styles
-- other existing starter chapters and styles retained
-- `vercel.json` — Git automatic deployment disabled (as in starter)
+## 1. Create the tables
 
-## Preview
-Run `python3 -m http.server 8000` from this directory and open `http://localhost:8000/chapters/01-think-differently.html`.
+Neon Console → `prolog-made-easy` → **Postgres database → SQL Editor**, select `production` / `neondb`, paste and run `social/001_schema.sql`. It is safe to re-run for tables/indexes and upserts the two exercise records. Existing records are not deleted.
 
-## Image credits and licences
-Photos are **real photographs**, hosted via `images.unsplash.com` (not generated with AI). They are free to use under the **Unsplash License**, **not necessarily in the public domain**. Links to the original pages and author credits appear in the HTML chapter. All image files load remotely: internet is needed to display them. For completely self-contained hosting, download the original files from their Unsplash source pages and change the image URLs to local paths.
+Do **not** paste a PostgreSQL password or DATABASE_URL into the HTML or this repository.
 
-| Section | Photographer | Source |
-| --- | --- | --- |
-| driving | Paul Esch-Laurent | https://unsplash.com/photos/a-person-driving-a-car-with-a-steering-wheel--Mep3_Xuw8g |
-| van | Daniel J. Schwarz | https://unsplash.com/photos/a-van-driving-down-a-winding-road-in-the-mountains-Wkkm_sIFtaw |
-| surf | Mike Perry | https://unsplash.com/photos/man-surfs-on-big-wave-GP-Jn-dfqMw |
-| japan | Ramon Buçard | https://unsplash.com/photos/japanese-signs-illuminate-a-night-scene-in-tokyo-A51aIjA7eg8 |
+## 2. Install and configure the Vercel Function
 
-Licence: https://unsplash.com/license
+Copy `api/`, `assets/`, `social/` and `package.json` into your existing repo root. If it already has a `package.json`, merge the `@neondatabase/serverless` dependency rather than replacing the file.
 
-## Scholarly references
-- McCauley et al. (2015), https://doi.org/10.1080/08993408.2015.1033205
-- Scherz et al. (1990), https://doi.org/10.2190/UHFF-4LNQ-63VA-Q60C
+```sh
+npm install
+```
 
-## Publishing
-1. Copy the repository contents over your existing clone (keep your current git history).
-2. Commit and push to GitHub.
-3. Publish **manually** from the project directory with `npx vercel --prod`.
+In **Vercel → existing prolog_made_easy project → Settings → Environment Variables**, add **DATABASE_URL** for Production using Neon's pooled connection string (`Connect` in Neon). Keep it secret. You may set a local `.env.local` for `vercel dev`, but **never commit it**. Ensure `.gitignore` includes `.env*` and `!.env.example`.
 
-Note: This zip is a starter snapshot, not a live checkout of your GitHub repository. Check any files that changed since the earlier starter before overwriting them.
+Vercel's automatic `/api` discovery works with the project preset `Other`; no Next.js required. Ensure `vercel.json` has not added legacy `builds` or a rewrite routing every `/api` request to `index.html`. Keep your manual deployment `git.deploymentEnabled: false` setting.
+
+## 3. Embed a community section into a chapter
+
+Add inside `<head>`:
+
+```html
+<link rel="stylesheet" href="../assets/css/community.css">
+```
+
+Add near the end of `chapters/04-natural-numbers.html` (inside body):
+
+```html
+<section class="pme-community" data-pme-community data-exercise-id="natural-numbers" aria-label="Community discussion"></section>
+<script defer src="../assets/js/community.js"></script>
+```
+
+For Sudoku use `data-exercise-id="sudoku-logic-way"` in `chapters/05-sudoku-the-logic-way.html`.
+
+The script displays aggregate votes and the most recent 30 **published** comments using safe `textContent`. Until authentication is connected, **no comments or votes can be submitted**. The public API never returns email addresses.
+
+## 4. Test and deploy
+
+Use `npx vercel dev` rather than `python3 -m http.server` to test the `/api` function locally. In production, visit `/api/community?exercise=natural-numbers`. Expected first response: an exercise record, `comments: []`, and zero votes.
+
+```sh
+git add api assets/js/community.js assets/css/community.css social/001_schema.sql package.json package-lock.json
+# Also add chapter HTML files if you edited them.
+git commit -m "Add secure read-only Neon community foundation"
+git push
+npx vercel --prod
+```
+
+**Note**: the `package-lock.json` is generated by `npm install`. The ZIP does not include installed packages.
+
+## Next phase — verified writes
+
+Connect Better Auth, verify login sessions **server-side** for each request, then implement protected routes for `profile`, `comments`, `votes` and `newsletter`. Use a stable verified auth user ID (do not trust IDs from browser JSON); reject cross-user edits, apply rate limits and moderation, and request explicit, revocable newsletter consent. Link the identity ID from Better Auth to `pme_profiles.user_id`. Avoid direct public write permissions to PostgreSQL.

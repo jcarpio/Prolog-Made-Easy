@@ -1,0 +1,8 @@
+{
+  "name": "prolog-made-easy-social",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.0"
+  }
+}
