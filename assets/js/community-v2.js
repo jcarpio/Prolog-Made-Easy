@@ -27199,7 +27199,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   }
 
   // community-entry.js
-  var auth = createAuthClient2("https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-central-1.aws.neon.tech/neondb/auth");
+  var AUTH_URL = "https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-central-1.aws.neon.tech/neondb/auth";
+  var auth = createAuthClient2(AUTH_URL);
   var el = (tag, cls, text) => {
     const e = document.createElement(tag);
     if (cls) e.className = cls;

@@ -1,5 +1,9 @@
 import { createAuthClient } from '@neondatabase/auth';
-const auth=createAuthClient('https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-central-1.aws.neon.tech/neondb/auth');
+
+const AUTH_URL = 'https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-central-1.aws.neon.tech/neondb/auth';
+
+const auth = createAuthClient(AUTH_URL);
+
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
 const mounts=[...document.querySelectorAll('[data-pme-community]')];
 
