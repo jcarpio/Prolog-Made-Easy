@@ -6,4 +6,13 @@ parent(sam, pat).</code></pre><p>Read <code>parent(alex, sam)</code> as “Alex 
     parent(X, Y),
     parent(Y, Z).</code></pre><p class="muted">Read <code>:-</code> as “if”. The comma means both goals must hold.</p></section><section><h2>Ask about the family</h2><pre><code class="language-prolog">?- grandparent(alex, pat).
 true.</code></pre><p>Prolog can use the rule and the facts together.</p></section><section><h2>Try to predict</h2><p>Will the following query succeed using only the facts and rule above?</p><pre><code class="language-prolog">?- grandparent(sam, pat).</code></pre><p class="fragment">No: we have not given a child of Pat.</p></section><section><h2>Keep exploring</h2><p>Facts state relationships. Rules let us derive new ones.</p><p class="small"><a href="03-questions-and-variables.html">Continue to chapter 03 →</a></p></section></div></div>
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script><script>Reveal.initialize({hash:true,slideNumber:true,transition:'slide',center:true,controls:true,progress:true});</script></body></html>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script><script>Reveal.initialize({hash:true,slideNumber:true,transition:'slide',center:true,controls:true,progress:true});</script>
+ 
+    <!-- Vercel Web Analytics -->
+    <script>
+      window.va = window.va || function () {
+        (window.vaq = window.vaq || []).push(arguments);
+      };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</body></html>
