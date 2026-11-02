@@ -5,6 +5,10 @@
 <meta name="description" content="Meet Markus Triska's declarative Sudoku solver, explore CLP(Z) constraints and solve a Sudoku using Scryer Prolog WebAssembly in your browser.">
 <title>Sudoku, the Logic Way! — Prolog Made Easy</title>
 <link rel="stylesheet" href="../assets/css/sudoku-editorial.css">
+
+<link rel="stylesheet" href="../assets/css/community-v2.css">
+<script defer src="../assets/js/community-v2.js"></script>
+
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -34,6 +38,13 @@
 </div></section>
 <section id="challenge" class="prose-section"><div class="section-marker">07 / HANDS-ON MISSIONS</div><h2>Your turn! No cheating... well, maybe a little.</h2><div class="mission-cards"><div class="mission"><small>MISSION 1 · 5 MIN</small><h3>Can you make Sudoku solve itself?</h3><p>Run the default query. Compare the nine computed rows to the reference answer. Did Prolog satisfy all the conditions?</p><button class="btn" type="button" data-query="problem(1, Rows), sudoku(Rows), maplist(labeling([ff]), Rows).">Load query</button></div><div class="mission"><small>MISSION 2 · 8 MIN</small><h3>What if we forget the columns?</h3><p>Comment out the line <code>maplist(all_distinct, Columns)</code> and run the program. Does that still describe Sudoku correctly? Why not?</p><details><summary>Hint</summary><p>The program may accept boards with repeated values in columns. A constraint model is only as good as the rules you include.</p></details></div><div class="mission"><small>MISSION 3 · 10 MIN</small><h3>The impossible puzzle</h3><p>Change one given value so that a row contains two identical fixed digits. Can the model solve it?</p><details><summary>Hint</summary><p>Replace the first row's second cell (<code>_</code>) with <code>1</code>. The first row already starts with <code>1</code>, so its values cannot be all distinct.</p></details></div></div></section>
 <section id="wrap" class="prose-section"><div class="section-marker">08 / THE BIG IDEA</div><h2>You described a solution without writing the search!</h2><p>Of course Scryer has an execution strategy, and the search can be expensive. Constraint propagation and <code>labeling/2</code> do real computational work behind the scenes.</p><p>But the <strong>program you wrote describes the valid boards</strong>, rather than every procedural move to solve one.</p><p class="pull">That's a different way to think about programming. And it is extraordinarily powerful.</p><p>Now, where did we put that steering wheel? Oh, that's right. We don't need it!</p><p class="source-links"><strong>Further reading:</strong> <a href="https://github.com/triska/clpfd/blob/master/sudoku.pl" target="_blank" rel="noopener noreferrer">Markus Triska's original public-domain solver</a> · <a href="https://www.scryer.pl/clpz" target="_blank" rel="noopener noreferrer">Scryer CLP(Z) documentation</a> · <a href="https://github.com/guregu/scryer-js" target="_blank" rel="noopener noreferrer">scryer-js</a></p></section>
+
+<section
+  class="pme-community"
+  data-pme-community
+  data-exercise-id="sudoku-logic-way">
+</section>
+
 </article></div></main><footer><a href="../index.html">← Prolog Made Easy</a><span>Open learning · Example adapted from Markus Triska (public domain)</span><a href="#main">Back to top ↑</a></footer>
 <script src="../assets/js/sudoku-lab.js" type="module"></script>
  <!-- Vercel Web Analytics -->
