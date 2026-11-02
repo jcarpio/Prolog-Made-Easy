@@ -39,8 +39,16 @@ async function init(){
   const {data,error}=await auth.getSession(); if(error)throw error;
   if(!data?.user){location.assign('/login.html');return;}
   $('signed-name').textContent=data.user.name||'Logic Explorer';
-  const {profile}=await api('GET');
-  if(profile){$('nickname').value=profile.nickname;$('newsletter').checked=profile.subscribed;}
+
+const { profile } = await api('GET');
+
+if (profile) {
+  $('nickname').value = profile.nickname;
+  $('newsletter').checked = profile.subscribed === true;
+} else {
+  $('newsletter').checked = true;
+}
+
   form.hidden=false; status.textContent=profile?'Update your community profile.':'Choose a nickname to join the discussion.';
  }catch(e){status.textContent=e.message||'Unable to load profile.';}
 }

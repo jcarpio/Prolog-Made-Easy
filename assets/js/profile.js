@@ -27240,7 +27240,9 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       const { profile } = await api("GET");
       if (profile) {
         $("nickname").value = profile.nickname;
-        $("newsletter").checked = profile.subscribed;
+        $("newsletter").checked = profile.subscribed === true;
+      } else {
+        $("newsletter").checked = true;
       }
       form.hidden = false;
       status.textContent = profile ? "Update your community profile." : "Choose a nickname to join the discussion.";
