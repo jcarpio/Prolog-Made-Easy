@@ -9,13 +9,13 @@
   <link rel="stylesheet" href="assets/css/home.css">
   <script defer src="/assets/js/header-auth.js"></script>
 
-</head>
+<link rel="stylesheet" href="/assets/css/learning.css"><script type="module" src="/assets/js/learning.js"></script></head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="topbar">
     <a class="brand" href="index.html" aria-label="Prolog Made Easy, home"><span class="brand-mark">◈</span> Prolog <strong>Made Easy</strong></a>
     <nav aria-label="Main navigation">
-      <a href="#chapters">Chapters</a><a href="#approach">How it works</a><a class="nav-cta" href="chapters/04-natural-numbers.html">Try Prolog ↗</a>
+      <a href="/progress.html">My learning path</a><a href="#approach">How it works</a><a class="nav-cta" href="chapters/04-natural-numbers.html">Try Prolog ↗</a>
      
 <div class="header-account">
   <a href="/login.html"
@@ -45,7 +45,7 @@
         <h1 id="hero-title">Prolog<br><em>Made Easy!</em></h1>
         <p class="hero-lead">Different thinking. Tiny programs.<br>Big <strong>“OH! NOW I GET IT!”</strong> moments.</p>
         <p class="hero-copy">No boring walls of syntax. We'll tell stories, ask questions, make mistakes and write real Prolog from day one. Ready to stop looking for the steering wheel?</p>
-        <div class="hero-actions"><a class="button primary" href="chapters/01-think-differently.html">Start the adventure <span aria-hidden="true">↗</span></a><a class="button ghost" href="#chapters">Explore chapters ↓</a></div>
+        <div class="hero-actions"><a class="button primary" href="/progress.html">Start the adventure <span aria-hidden="true">↗</span></a><a class="button ghost" href="#chapters">Explore chapters ↓</a></div>
         <div class="hero-meta"><span>◷ Short chapters</span><span>⌘ Real code in your browser</span><span>◎ No account needed</span></div>
       </div>
       <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="node node-one">?</div><div class="node node-two">true.</div><div class="node node-three">X</div><div class="hero-code"><span>% tell us what's true</span><br>natural(0).<br>natural(s(N)) :-<br>&nbsp; natural(N).<br><br><span>?- natural(X).</span><br><b>X = 0 ;</b><br><b>X = s(0) ;</b><br><b>...</b></div></div>
