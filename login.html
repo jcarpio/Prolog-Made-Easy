@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#102734">
-  <meta name="description" content="Sign in to the Prolog Made Easy community with Google.">
+  <meta name="description" content="Sign in to the Prolog Made Easy community with Google or an email code.">
   <title>Join the community · Prolog Made Easy</title>
   <link rel="icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/auth.css">
@@ -22,15 +22,31 @@
         <p id="auth-status" class="status" role="status" aria-live="polite">Checking your session…</p>
         <div id="signed-out" hidden>
           <button id="google-sign-in" type="button" class="button"><span class="google-g" aria-hidden="true">G</span> Continue with Google</button>
+          <p class="auth-divider">or use your email</p>
+          <form id="email-sign-in-form">
+            <label for="sign-in-email">Your email address</label>
+            <input id="sign-in-email" type="email" name="email" autocomplete="email" maxlength="254" required placeholder="you@example.com" aria-describedby="email-help">
+            <p id="email-help" class="note">We will email you a one-time sign-in code. No password needed.</p>
+            <button id="send-email-code" class="button" type="submit">Send me a code</button>
+          </form>
+          <form id="email-code-form" hidden>
+            <p>Enter the code sent to <strong id="code-email"></strong>.</p>
+            <label for="email-code">Email code</label>
+            <input id="email-code" type="text" name="otp" autocomplete="one-time-code" inputmode="numeric" maxlength="64" required aria-describedby="code-help">
+            <p id="code-help" class="note">Keep this page open. Check your spam folder too. If your code has expired, request a new one.</p>
+            <div class="auth-actions"><button id="verify-email-code" class="button" type="submit">Sign in with code</button>
+            <button id="resend-email-code" class="button outline" type="button">Send another code</button>
+            <button id="change-email" class="button outline" type="button">Use a different email</button></div>
+          </form>
           <p class="note">No account needed to read the book or run Prolog exercises.</p>
         </div>
         <div id="signed-in" hidden>
           <h2>Welcome, <span id="user-name"></span>!</h2>
           <p>You are signed in as <strong id="user-email"></strong>.</p>
-          <p class="note">Nicknames, newsletter preferences, comments and voting are coming next. Signing in does not subscribe you to the newsletter.</p>
+          <p class="note">Your learning progress can be saved to your account. Signing in does not subscribe you to the newsletter.</p>
 
 <div class="auth-actions">
-  <a href="/" class="continue-learning-btn">
+  <a href="/progress.html" class="continue-learning-btn">
     Continue learning →
   </a>
 
@@ -46,7 +62,7 @@
         </div>
         <div id="auth-error" class="error" role="alert" hidden></div>
       </div>
-      <p class="legal">By signing in, you authenticate with Google via Neon Auth. Only basic profile information is requested. <a href="/">Return to chapters</a>.</p>
+      <p class="legal">Sign in with Google or a one-time email code, managed by Neon Auth. No newsletter subscription is added when you sign in. <a href="/">Return to chapters</a>.</p>
     </section>
   </main>
 </body>

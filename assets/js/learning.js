@@ -1,5 +1,6 @@
+import { loadAuthConfig } from './auth-config.js';
 import { chapters, experiences, prefix, canAccess, complete, mergeProgress } from './course-model.js';
-const AUTH_URL='https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-central-1.aws.neon.tech/neondb/auth';
+let AUTH_URL;
 const key='pme-learning-guest-v1';
 const path=location.pathname;
 const request=(url,options={})=>fetch(url,{...options,signal:AbortSignal.timeout(15000)});
@@ -87,6 +88,7 @@ function render(){
 async function init(){
   state=guest();
   try{
+    ({ authUrl: AUTH_URL } = await loadAuthConfig());
     const session=await request(`${AUTH_URL}/get-session`,{credentials:'include',cache:'no-store'});
     if(!session.ok)throw new Error('Unable to check your account.');
     const data=await session.json();account=!!data?.user;

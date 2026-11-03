@@ -1,5 +1,8 @@
 import { createAuthClient } from '@neondatabase/auth';
-const AUTH_URL='https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-central-1.aws.neon.tech/neondb/auth';
+import { loadAuthConfig } from '../assets/js/auth-config.js';
+
+async function start() {
+const { authUrl: AUTH_URL } = await loadAuthConfig();
 const auth=createAuthClient(AUTH_URL);
 const $=id=>document.getElementById(id);
 const status=$('profile-status'), form=$('profile-form');
@@ -62,3 +65,5 @@ form.addEventListener('submit',async event=>{
  finally{button.disabled=false;}
 });
 init();
+}
+start().catch(error => { document.getElementById('profile-status').textContent = error.message; });

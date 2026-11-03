@@ -4,8 +4,14 @@
   "type": "module",
   "scripts": {
     "build": "esbuild auth-entry.js --bundle --format=esm --platform=browser --target=es2020 --outfile=../assets/js/auth.js",
-    "build:social": "esbuild profile-entry.js --bundle --format=iife --platform=browser --target=es2020 --outfile=../assets/js/profile.js && esbuild community-entry.js --bundle --format=iife --platform=browser --target=es2020 --outfile=../assets/js/community-v2.js"
+    "build:social": "esbuild profile-entry.js --bundle --format=iife --platform=browser --target=es2020 --outfile=../assets/js/profile.js && esbuild community-entry.js --bundle --format=iife --platform=browser --target=es2020 --outfile=../assets/js/community-v2.js",
+    "build:header": "esbuild header-auth-entry.js --bundle --format=iife --platform=browser --target=es2020 --outfile=../assets/js/header-auth.js",
+    "build:all": "npm run build && npm run build:social && npm run build:header"
   },
-  "dependencies": {"@neondatabase/auth": "0.7.0-beta"},
-  "devDependencies": {"esbuild": "^0.25.0"}
+  "dependencies": {
+    "@neondatabase/auth": "0.7.0-beta"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
 }

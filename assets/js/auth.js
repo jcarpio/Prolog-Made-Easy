@@ -13,7 +13,7 @@ var __privateGet = (obj, member, getter) => (__accessCheck(obj, member, "read fr
 var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
 var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), setter ? setter.call(obj, value) : member.set(obj, value), value);
 
-// node_modules/tslib/tslib.es6.mjs
+// auth-build/node_modules/tslib/tslib.es6.mjs
 function __rest(s, e) {
   var t = {};
   for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -26,10 +26,10 @@ function __rest(s, e) {
   return t;
 }
 
-// node_modules/@supabase/auth-js/dist/module/lib/version.js
+// auth-build/node_modules/@supabase/auth-js/dist/module/lib/version.js
 var version = "2.79.0";
 
-// node_modules/@supabase/auth-js/dist/module/lib/constants.js
+// auth-build/node_modules/@supabase/auth-js/dist/module/lib/constants.js
 var AUTO_REFRESH_TICK_DURATION_MS = 30 * 1e3;
 var AUTO_REFRESH_TICK_THRESHOLD = 3;
 var EXPIRY_MARGIN_MS = AUTO_REFRESH_TICK_THRESHOLD * AUTO_REFRESH_TICK_DURATION_MS;
@@ -46,13 +46,13 @@ var API_VERSIONS = {
 var BASE64URL_REGEX = /^([a-z0-9_-]{4})*($|[a-z0-9_-]{3}$|[a-z0-9_-]{2}$)$/i;
 var JWKS_TTL = 10 * 60 * 1e3;
 
-// node_modules/@supabase/auth-js/dist/module/lib/errors.js
+// auth-build/node_modules/@supabase/auth-js/dist/module/lib/errors.js
 var AuthError = class extends Error {
-  constructor(message2, status2, code) {
-    super(message2);
+  constructor(message, status, code) {
+    super(message);
     this.__isAuthError = true;
     this.name = "AuthError";
-    this.status = status2;
+    this.status = status;
     this.code = code;
   }
 };
@@ -60,10 +60,10 @@ function isAuthError(error61) {
   return typeof error61 === "object" && error61 !== null && "__isAuthError" in error61;
 }
 var AuthApiError = class extends AuthError {
-  constructor(message2, status2, code) {
-    super(message2, status2, code);
+  constructor(message, status, code) {
+    super(message, status, code);
     this.name = "AuthApiError";
-    this.status = status2;
+    this.status = status;
     this.code = code;
   }
 };
@@ -71,17 +71,17 @@ function isAuthApiError(error61) {
   return isAuthError(error61) && error61.name === "AuthApiError";
 }
 var AuthUnknownError = class extends AuthError {
-  constructor(message2, originalError) {
-    super(message2);
+  constructor(message, originalError) {
+    super(message);
     this.name = "AuthUnknownError";
     this.originalError = originalError;
   }
 };
 var CustomAuthError = class extends AuthError {
-  constructor(message2, name2, status2, code) {
-    super(message2, status2, code);
+  constructor(message, name2, status, code) {
+    super(message, status, code);
     this.name = name2;
-    this.status = status2;
+    this.status = status;
   }
 };
 var AuthSessionMissingError = class extends CustomAuthError {
@@ -98,13 +98,13 @@ var AuthInvalidTokenResponseError = class extends CustomAuthError {
   }
 };
 var AuthInvalidCredentialsError = class extends CustomAuthError {
-  constructor(message2) {
-    super(message2, "AuthInvalidCredentialsError", 400, void 0);
+  constructor(message) {
+    super(message, "AuthInvalidCredentialsError", 400, void 0);
   }
 };
 var AuthImplicitGrantRedirectError = class extends CustomAuthError {
-  constructor(message2, details = null) {
-    super(message2, "AuthImplicitGrantRedirectError", 500, void 0);
+  constructor(message, details = null) {
+    super(message, "AuthImplicitGrantRedirectError", 500, void 0);
     this.details = null;
     this.details = details;
   }
@@ -121,8 +121,8 @@ function isAuthImplicitGrantRedirectError(error61) {
   return isAuthError(error61) && error61.name === "AuthImplicitGrantRedirectError";
 }
 var AuthPKCEGrantCodeExchangeError = class extends CustomAuthError {
-  constructor(message2, details = null) {
-    super(message2, "AuthPKCEGrantCodeExchangeError", 500, void 0);
+  constructor(message, details = null) {
+    super(message, "AuthPKCEGrantCodeExchangeError", 500, void 0);
     this.details = null;
     this.details = details;
   }
@@ -136,26 +136,26 @@ var AuthPKCEGrantCodeExchangeError = class extends CustomAuthError {
   }
 };
 var AuthRetryableFetchError = class extends CustomAuthError {
-  constructor(message2, status2) {
-    super(message2, "AuthRetryableFetchError", status2, void 0);
+  constructor(message, status) {
+    super(message, "AuthRetryableFetchError", status, void 0);
   }
 };
 function isAuthRetryableFetchError(error61) {
   return isAuthError(error61) && error61.name === "AuthRetryableFetchError";
 }
 var AuthWeakPasswordError = class extends CustomAuthError {
-  constructor(message2, status2, reasons) {
-    super(message2, "AuthWeakPasswordError", status2, "weak_password");
+  constructor(message, status, reasons) {
+    super(message, "AuthWeakPasswordError", status, "weak_password");
     this.reasons = reasons;
   }
 };
 var AuthInvalidJwtError = class extends CustomAuthError {
-  constructor(message2) {
-    super(message2, "AuthInvalidJwtError", 400, "invalid_jwt");
+  constructor(message) {
+    super(message, "AuthInvalidJwtError", 400, "invalid_jwt");
   }
 };
 
-// node_modules/@supabase/auth-js/dist/module/lib/base64url.js
+// auth-build/node_modules/@supabase/auth-js/dist/module/lib/base64url.js
 var TO_BASE64URL = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_".split("");
 var IGNORE_BASE64URL = " 	\n\r=".split("");
 var FROM_BASE64URL = (() => {
@@ -317,7 +317,7 @@ function bytesToBase64URL(bytes) {
   return result.join("");
 }
 
-// node_modules/@supabase/auth-js/dist/module/lib/helpers.js
+// auth-build/node_modules/@supabase/auth-js/dist/module/lib/helpers.js
 function expiresAt(expiresIn) {
   const timeNow = Math.round(Date.now() / 1e3);
   return timeNow + expiresIn;
@@ -602,7 +602,7 @@ function deepClone(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
 
-// node_modules/@supabase/auth-js/dist/module/lib/fetch.js
+// auth-build/node_modules/@supabase/auth-js/dist/module/lib/fetch.js
 var _getErrorMessage = (err) => err.msg || err.message || err.error_description || err.error || JSON.stringify(err);
 var NETWORK_ERROR_CODES = [502, 503, 504];
 async function handleError(error61) {
@@ -739,10 +739,10 @@ function hasSession(data) {
   return data.access_token && data.refresh_token && data.expires_in;
 }
 
-// node_modules/@supabase/auth-js/dist/module/lib/types.js
+// auth-build/node_modules/@supabase/auth-js/dist/module/lib/types.js
 var SIGN_OUT_SCOPES = ["global", "local", "others"];
 
-// node_modules/@supabase/auth-js/dist/module/GoTrueAdminApi.js
+// auth-build/node_modules/@supabase/auth-js/dist/module/GoTrueAdminApi.js
 var GoTrueAdminApi = class {
   constructor({ url: url2 = "", headers = {}, fetch: fetch2 }) {
     this.url = url2;
@@ -1146,7 +1146,7 @@ var GoTrueAdminApi = class {
   }
 };
 
-// node_modules/@supabase/auth-js/dist/module/lib/local-storage.js
+// auth-build/node_modules/@supabase/auth-js/dist/module/lib/local-storage.js
 function memoryLocalStorageAdapter(store = {}) {
   return {
     getItem: (key) => {
@@ -1161,7 +1161,7 @@ function memoryLocalStorageAdapter(store = {}) {
   };
 }
 
-// node_modules/@supabase/auth-js/dist/module/lib/locks.js
+// auth-build/node_modules/@supabase/auth-js/dist/module/lib/locks.js
 var internals = {
   /**
    * @experimental
@@ -1169,8 +1169,8 @@ var internals = {
   debug: !!(globalThis && supportsLocalStorage() && globalThis.localStorage && globalThis.localStorage.getItem("supabase.gotrue-js.locks.debug") === "true")
 };
 var LockAcquireTimeoutError = class extends Error {
-  constructor(message2) {
-    super(message2);
+  constructor(message) {
+    super(message);
     this.isAcquireTimeout = true;
   }
 };
@@ -1229,7 +1229,7 @@ async function navigatorLock(name2, acquireTimeout, fn) {
   }));
 }
 
-// node_modules/@supabase/auth-js/dist/module/lib/polyfills.js
+// auth-build/node_modules/@supabase/auth-js/dist/module/lib/polyfills.js
 function polyfillGlobalThis() {
   if (typeof globalThis === "object")
     return;
@@ -1249,7 +1249,7 @@ function polyfillGlobalThis() {
   }
 }
 
-// node_modules/@supabase/auth-js/dist/module/lib/web3/ethereum.js
+// auth-build/node_modules/@supabase/auth-js/dist/module/lib/web3/ethereum.js
 function getAddress(address) {
   if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
     throw new Error(`@supabase/auth-js: Address "${address}" is invalid.`);
@@ -1317,22 +1317,22 @@ Request ID: ${requestId}`;
 ${suffix}`;
 }
 
-// node_modules/@supabase/auth-js/dist/module/lib/webauthn.errors.js
+// auth-build/node_modules/@supabase/auth-js/dist/module/lib/webauthn.errors.js
 var WebAuthnError = class extends Error {
-  constructor({ message: message2, code, cause, name: name2 }) {
+  constructor({ message, code, cause, name: name2 }) {
     var _a3;
-    super(message2, { cause });
+    super(message, { cause });
     this.__isWebAuthnError = true;
     this.name = (_a3 = name2 !== null && name2 !== void 0 ? name2 : cause instanceof Error ? cause.name : void 0) !== null && _a3 !== void 0 ? _a3 : "Unknown Error";
     this.code = code;
   }
 };
 var WebAuthnUnknownError = class extends WebAuthnError {
-  constructor(message2, originalError) {
+  constructor(message, originalError) {
     super({
       code: "ERROR_PASSTHROUGH_SEE_CAUSE_PROPERTY",
       cause: originalError,
-      message: message2
+      message
     });
     this.name = "WebAuthnUnknownError";
     this.originalError = originalError;
@@ -1485,7 +1485,7 @@ function identifyAuthenticationError({ error: error61, options }) {
   });
 }
 
-// node_modules/@supabase/auth-js/dist/module/lib/webauthn.js
+// auth-build/node_modules/@supabase/auth-js/dist/module/lib/webauthn.js
 var WebAuthnAbortService = class {
   /**
    * Create an abort signal for a new WebAuthn operation.
@@ -1998,7 +1998,7 @@ var WebAuthnApi = class {
   }
 };
 
-// node_modules/@supabase/auth-js/dist/module/GoTrueClient.js
+// auth-build/node_modules/@supabase/auth-js/dist/module/GoTrueClient.js
 polyfillGlobalThis();
 var DEFAULT_OPTIONS = {
   url: GOTRUE_URL,
@@ -2436,10 +2436,10 @@ var GoTrueClient = class _GoTrueClient {
   }
   async signInWithEthereum(credentials) {
     var _a3, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
-    let message2;
+    let message;
     let signature;
     if ("message" in credentials) {
-      message2 = credentials.message;
+      message = credentials.message;
       signature = credentials.signature;
     } else {
       const { chain, wallet, statement, options } = credentials;
@@ -2490,10 +2490,10 @@ var GoTrueClient = class _GoTrueClient {
         requestId: (_h = options === null || options === void 0 ? void 0 : options.signInWithEthereum) === null || _h === void 0 ? void 0 : _h.requestId,
         resources: (_j = options === null || options === void 0 ? void 0 : options.signInWithEthereum) === null || _j === void 0 ? void 0 : _j.resources
       };
-      message2 = createSiweMessage(siweMessage);
+      message = createSiweMessage(siweMessage);
       signature = await resolvedWallet.request({
         method: "personal_sign",
-        params: [toHex(message2), address]
+        params: [toHex(message), address]
       });
     }
     try {
@@ -2501,7 +2501,7 @@ var GoTrueClient = class _GoTrueClient {
         headers: this.headers,
         body: Object.assign({
           chain: "ethereum",
-          message: message2,
+          message,
           signature
         }, ((_k = credentials.options) === null || _k === void 0 ? void 0 : _k.captchaToken) ? { gotrue_meta_security: { captcha_token: (_l = credentials.options) === null || _l === void 0 ? void 0 : _l.captchaToken } } : null),
         xform: _sessionResponse
@@ -2527,10 +2527,10 @@ var GoTrueClient = class _GoTrueClient {
   }
   async signInWithSolana(credentials) {
     var _a3, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
-    let message2;
+    let message;
     let signature;
     if ("message" in credentials) {
-      message2 = credentials.message;
+      message = credentials.message;
       signature = credentials.signature;
     } else {
       const { chain, wallet, statement, options } = credentials;
@@ -2567,7 +2567,7 @@ var GoTrueClient = class _GoTrueClient {
           throw new Error("@supabase/auth-js: Wallet method signIn() returned unrecognized value");
         }
         if ("signedMessage" in outputToProcess && "signature" in outputToProcess && (typeof outputToProcess.signedMessage === "string" || outputToProcess.signedMessage instanceof Uint8Array) && outputToProcess.signature instanceof Uint8Array) {
-          message2 = typeof outputToProcess.signedMessage === "string" ? outputToProcess.signedMessage : new TextDecoder().decode(outputToProcess.signedMessage);
+          message = typeof outputToProcess.signedMessage === "string" ? outputToProcess.signedMessage : new TextDecoder().decode(outputToProcess.signedMessage);
           signature = outputToProcess.signature;
         } else {
           throw new Error("@supabase/auth-js: Wallet method signIn() API returned object without signedMessage and signature fields");
@@ -2576,7 +2576,7 @@ var GoTrueClient = class _GoTrueClient {
         if (!("signMessage" in resolvedWallet) || typeof resolvedWallet.signMessage !== "function" || !("publicKey" in resolvedWallet) || typeof resolvedWallet !== "object" || !resolvedWallet.publicKey || !("toBase58" in resolvedWallet.publicKey) || typeof resolvedWallet.publicKey.toBase58 !== "function") {
           throw new Error("@supabase/auth-js: Wallet does not have a compatible signMessage() and publicKey.toBase58() API");
         }
-        message2 = [
+        message = [
           `${url2.host} wants you to sign in with your Solana account:`,
           resolvedWallet.publicKey.toBase58(),
           ...statement ? ["", statement, ""] : [""],
@@ -2593,7 +2593,7 @@ var GoTrueClient = class _GoTrueClient {
             ...options.signInWithSolana.resources.map((resource) => `- ${resource}`)
           ] : []
         ].join("\n");
-        const maybeSignature = await resolvedWallet.signMessage(new TextEncoder().encode(message2), "utf8");
+        const maybeSignature = await resolvedWallet.signMessage(new TextEncoder().encode(message), "utf8");
         if (!maybeSignature || !(maybeSignature instanceof Uint8Array)) {
           throw new Error("@supabase/auth-js: Wallet signMessage() API returned an recognized value");
         }
@@ -2603,7 +2603,7 @@ var GoTrueClient = class _GoTrueClient {
     try {
       const { data, error: error61 } = await _request(this.fetch, "POST", `${this.url}/token?grant_type=web3`, {
         headers: this.headers,
-        body: Object.assign({ chain: "solana", message: message2, signature: bytesToBase64URL(signature) }, ((_l = credentials.options) === null || _l === void 0 ? void 0 : _l.captchaToken) ? { gotrue_meta_security: { captcha_token: (_m = credentials.options) === null || _m === void 0 ? void 0 : _m.captchaToken } } : null),
+        body: Object.assign({ chain: "solana", message, signature: bytesToBase64URL(signature) }, ((_l = credentials.options) === null || _l === void 0 ? void 0 : _l.captchaToken) ? { gotrue_meta_security: { captcha_token: (_m = credentials.options) === null || _m === void 0 ? void 0 : _m.captchaToken } } : null),
         xform: _sessionResponse
       });
       if (error61) {
@@ -4396,7 +4396,7 @@ var GoTrueClient = class _GoTrueClient {
 };
 GoTrueClient.nextInstanceID = 0;
 
-// node_modules/@neondatabase/auth/dist/better-auth-helpers-DdjQRVvx.mjs
+// auth-build/node_modules/@neondatabase/auth/dist/better-auth-helpers-DdjQRVvx.mjs
 var SESSION_CACHE_TTL_MS = 6e4;
 var CLOCK_SKEW_BUFFER_MS = 1e4;
 var NEON_AUTH_SESSION_VERIFIER_PARAM_NAME = "neon_auth_session_verifier";
@@ -4763,16 +4763,16 @@ var STATUS_CODE_ERROR_MAP = {
 function normalizeBetterAuthError(error61) {
   if (error61 !== null && error61 !== void 0 && typeof error61 === "object" && "status" in error61 && "statusText" in error61) {
     const betterError = error61;
-    const status2 = betterError.status;
+    const status = betterError.status;
     if ("code" in betterError && betterError.code && typeof betterError.code === "string") {
       const mappedCode = BETTER_AUTH_ERROR_MAP[betterError.code];
       if (mappedCode) {
         const def$2 = getErrorDefinition(mappedCode);
-        return createNormalizedError(def$2.message, def$2.status, def$2.code, status2);
+        return createNormalizedError(def$2.message, def$2.status, def$2.code, status);
       }
     }
-    const def$1 = getErrorDefinition(mapStatusCodeToErrorCode(status2, betterError.message || betterError.statusText));
-    return createNormalizedError(betterError.message || def$1.message, status2, def$1.code, status2);
+    const def$1 = getErrorDefinition(mapStatusCodeToErrorCode(status, betterError.message || betterError.statusText));
+    return createNormalizedError(betterError.message || def$1.message, status, def$1.code, status);
   }
   if (error61 instanceof Error) {
     const def$1 = getErrorDefinition(mapMessageToErrorCode(error61.message));
@@ -4781,9 +4781,9 @@ function normalizeBetterAuthError(error61) {
   const def = getErrorDefinition(AuthErrorCode.UnknownError);
   return new AuthError(def.message, def.status, def.code);
 }
-function mapStatusCodeToErrorCode(status2, message2) {
-  const lowerMessage = message2?.toLowerCase() || "";
-  switch (status2) {
+function mapStatusCodeToErrorCode(status, message) {
+  const lowerMessage = message?.toLowerCase() || "";
+  switch (status) {
     case 401:
       if (lowerMessage.includes("token") || lowerMessage.includes("jwt")) return AuthErrorCode.BadJwt;
       if (lowerMessage.includes("session")) return AuthErrorCode.SessionNotFound;
@@ -4825,8 +4825,8 @@ function mapStatusCodeToErrorCode(status2, message2) {
       return AuthErrorCode.UnexpectedFailure;
   }
 }
-function mapMessageToErrorCode(message2) {
-  const lower = message2.toLowerCase();
+function mapMessageToErrorCode(message) {
+  const lower = message.toLowerCase();
   if (lower.includes("invalid login") || lower.includes("incorrect") || lower.includes("wrong password")) return AuthErrorCode.InvalidCredentials;
   if (lower.includes("token") && (lower.includes("invalid") || lower.includes("expired"))) return AuthErrorCode.BadJwt;
   if (lower.includes("session") && lower.includes("expired")) return AuthErrorCode.SessionExpired;
@@ -4843,19 +4843,19 @@ function mapMessageToErrorCode(message2) {
   if (lower.includes("provider") && lower.includes("not supported")) return AuthErrorCode.OAuthProviderNotSupported;
   return AuthErrorCode.UnexpectedFailure;
 }
-function createNormalizedError(message2, targetStatus, code, _originalStatus) {
-  const status2 = targetStatus;
-  if (status2 !== 500 && status2 !== 501 && status2 !== 503) return new AuthApiError(message2, status2, code);
-  return new AuthError(message2, status2, code);
+function createNormalizedError(message, targetStatus, code, _originalStatus) {
+  const status = targetStatus;
+  if (status !== 500 && status !== 501 && status !== 503) return new AuthApiError(message, status, code);
+  return new AuthError(message, status, code);
 }
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/package.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/package.mjs
 var version3 = "1.7.6";
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/version.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/version.mjs
 var PACKAGE_VERSION = version3;
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/broadcast-channel.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/broadcast-channel.mjs
 var kBroadcastChannel = Symbol.for("better-auth:broadcast-channel");
 var now = () => Math.floor(Date.now() / 1e3);
 var WindowBroadcastChannel = class {
@@ -4870,11 +4870,11 @@ var WindowBroadcastChannel = class {
       this.listeners.delete(listener);
     };
   }
-  post(message2) {
+  post(message) {
     if (typeof window === "undefined") return;
     try {
       localStorage.setItem(this.name, JSON.stringify({
-        ...message2,
+        ...message,
         timestamp: now()
       }));
     } catch {
@@ -4885,9 +4885,9 @@ var WindowBroadcastChannel = class {
     };
     const handler = (event) => {
       if (event.key !== this.name) return;
-      const message2 = JSON.parse(event.newValue ?? "{}");
-      if (message2?.event !== "session" || !message2?.data) return;
-      this.listeners.forEach((listener) => listener(message2));
+      const message = JSON.parse(event.newValue ?? "{}");
+      if (message?.event !== "session" || !message?.data) return;
+      this.listeners.forEach((listener) => listener(message));
     };
     window.addEventListener("storage", handler);
     return () => {
@@ -4900,10 +4900,10 @@ function getGlobalBroadcastChannel(name2 = "better-auth.message") {
   return globalThis[kBroadcastChannel];
 }
 
-// node_modules/nanostores/clean-stores/index.js
+// auth-build/node_modules/nanostores/clean-stores/index.js
 var clean = Symbol("clean");
 
-// node_modules/nanostores/atom/index.js
+// auth-build/node_modules/nanostores/atom/index.js
 var listenerQueue = [];
 var lqIndex = 0;
 var batchSeen = null;
@@ -5015,7 +5015,7 @@ var atom = /* @__NO_SIDE_EFFECTS__ */ (initialValue) => {
   return $atom;
 };
 
-// node_modules/nanostores/lifecycle/index.js
+// auth-build/node_modules/nanostores/lifecycle/index.js
 var SET = 2;
 var MOUNT = 5;
 var UNMOUNT = 6;
@@ -5117,7 +5117,7 @@ var onMount = ($store, initialize) => {
   });
 };
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/equality.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/equality.mjs
 function isPlainObject(value) {
   if (typeof value !== "object" || value === null) return false;
   const prototype = Object.getPrototypeOf(value);
@@ -5145,7 +5145,7 @@ function withEquality(store, isEqual) {
   });
 }
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/focus-manager.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/focus-manager.mjs
 var kFocusManager = Symbol.for("better-auth:focus-manager");
 var WindowFocusManager = class {
   constructor() {
@@ -5177,7 +5177,7 @@ function getGlobalFocusManager() {
   return globalThis[kFocusManager];
 }
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/online-manager.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/online-manager.mjs
 var kOnlineManager = Symbol.for("better-auth:online-manager");
 var WindowOnlineManager = class {
   constructor() {
@@ -5212,7 +5212,7 @@ function getGlobalOnlineManager() {
   return globalThis[kOnlineManager];
 }
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/parser.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/parser.mjs
 var PROTO_POLLUTION_PATTERNS = {
   proto: /"(?:_|\\u0{2}5[Ff]){2}(?:p|\\u0{2}70)(?:r|\\u0{2}72)(?:o|\\u0{2}6[Ff])(?:t|\\u0{2}74)(?:o|\\u0{2}6[Ff])(?:_|\\u0{2}5[Ff]){2}"\s*:/,
   constructor: /"(?:c|\\u0063)(?:o|\\u006[Ff])(?:n|\\u006[Ee])(?:s|\\u0073)(?:t|\\u0074)(?:r|\\u0072)(?:u|\\u0075)(?:c|\\u0063)(?:t|\\u0074)(?:o|\\u006[Ff])(?:r|\\u0072)"\s*:/,
@@ -5281,7 +5281,7 @@ function parseJSON(value, options = { strict: true }) {
   return betterJSONParse(value, options);
 }
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/query-atom.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/query-atom.mjs
 var kAuthQuery = Symbol.for("better-auth:auth-query");
 function createAuthQueryAtom(initialValue) {
   const queryAtom = atom(initialValue);
@@ -5289,7 +5289,7 @@ function createAuthQueryAtom(initialValue) {
   return queryAtom;
 }
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/query.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/query.mjs
 var isServer = () => typeof window === "undefined";
 function isAuthQueryStateEqual(a, b) {
   return isJsonEqual(a.data, b.data) && a.error === b.error && a.isPending === b.isPending && a.isRefetching === b.isRefetching && a.refetch === b.refetch;
@@ -5419,7 +5419,7 @@ var useAuthQuery = (initializedAtom, path, $fetch, options) => {
   return value;
 };
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/session-refresh.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/session-refresh.mjs
 var now2 = () => Math.floor(Date.now() / 1e3);
 var FOCUS_REFETCH_RATE_LIMIT_SECONDS = 5;
 function createSessionRefreshManager(opts) {
@@ -5543,7 +5543,7 @@ function createSessionRefreshManager(opts) {
   };
 }
 
-// node_modules/@better-auth/core/dist/env/env-impl.mjs
+// auth-build/node_modules/@better-auth/core/dist/env/env-impl.mjs
 var _envShim = /* @__PURE__ */ Object.create(null);
 var _getEnv = (useShim) => globalThis.process?.env || globalThis.Deno?.env.toObject() || globalThis.__env__ || (useShim ? _envShim : globalThis);
 var env = new Proxy(_envShim, {
@@ -5600,7 +5600,7 @@ var ENV = Object.freeze({
   }
 });
 
-// node_modules/@better-auth/core/dist/env/color-depth.mjs
+// auth-build/node_modules/@better-auth/core/dist/env/color-depth.mjs
 var COLORS_2 = 1;
 var COLORS_16 = 4;
 var COLORS_256 = 8;
@@ -5690,7 +5690,7 @@ function getColorDepth() {
   return COLORS_2;
 }
 
-// node_modules/@better-auth/core/dist/context/global.mjs
+// auth-build/node_modules/@better-auth/core/dist/context/global.mjs
 var symbol = Symbol.for("better-auth:global");
 var bind = null;
 var __context = {};
@@ -5715,7 +5715,7 @@ function __getCurrentEndpointContext() {
   return __getBetterAuthGlobal().context.endpointContextAsyncStorage?.getStore();
 }
 
-// node_modules/@better-auth/core/dist/env/logger.mjs
+// auth-build/node_modules/@better-auth/core/dist/env/logger.mjs
 var TTY_COLORS = {
   reset: "\x1B[0m",
   bright: "\x1B[1m",
@@ -5763,28 +5763,28 @@ var levelColors = {
   error: TTY_COLORS.fg.red,
   debug: TTY_COLORS.fg.magenta
 };
-var formatMessage = (level, message2, colorsEnabled) => {
+var formatMessage = (level, message, colorsEnabled) => {
   const timestamp = (/* @__PURE__ */ new Date()).toISOString();
-  if (colorsEnabled) return `${TTY_COLORS.dim}${timestamp}${TTY_COLORS.reset} ${levelColors[level]}${level.toUpperCase()}${TTY_COLORS.reset} ${TTY_COLORS.bright}[Better Auth]:${TTY_COLORS.reset} ${message2}`;
-  return `${timestamp} ${level.toUpperCase()} [Better Auth]: ${message2}`;
+  if (colorsEnabled) return `${TTY_COLORS.dim}${timestamp}${TTY_COLORS.reset} ${levelColors[level]}${level.toUpperCase()}${TTY_COLORS.reset} ${TTY_COLORS.bright}[Better Auth]:${TTY_COLORS.reset} ${message}`;
+  return `${timestamp} ${level.toUpperCase()} [Better Auth]: ${message}`;
 };
 var createLogger = (options) => {
   const enabled = options?.disabled !== true;
   const logLevel = options?.level ?? "warn";
   const colorsEnabled = options?.disableColors !== void 0 ? !options.disableColors : getColorDepth() !== 1;
-  const LogFunc = (level, message2, args = []) => {
+  const LogFunc = (level, message, args = []) => {
     if (!enabled || !shouldPublishLog(logLevel, level)) return;
-    const formattedMessage = formatMessage(level, message2, colorsEnabled);
+    const formattedMessage = formatMessage(level, message, colorsEnabled);
     if (!options || typeof options.log !== "function") {
       if (level === "error") console.error(formattedMessage, ...args);
       else if (level === "warn") console.warn(formattedMessage, ...args);
       else console.log(formattedMessage, ...args);
       return;
     }
-    options.log(level === "success" ? "info" : level, message2, ...args);
+    options.log(level === "success" ? "info" : level, message, ...args);
   };
   return {
-    ...Object.fromEntries(levels.map((level) => [level, (...[message2, ...args]) => LogFunc(level, message2, args)])),
+    ...Object.fromEntries(levels.map((level) => [level, (...[message, ...args]) => LogFunc(level, message, args)])),
     get level() {
       return logLevel;
     }
@@ -5806,7 +5806,7 @@ var logger = {
   }
 };
 
-// node_modules/@better-auth/core/dist/utils/error-codes.mjs
+// auth-build/node_modules/@better-auth/core/dist/utils/error-codes.mjs
 function defineErrorCodes(codes) {
   return Object.fromEntries(Object.entries(codes).map(([key, value]) => [key, {
     code: key,
@@ -5815,7 +5815,7 @@ function defineErrorCodes(codes) {
   }]));
 }
 
-// node_modules/better-call/dist/error.mjs
+// auth-build/node_modules/better-call/dist/error.mjs
 function isErrorStackTraceLimitWritable() {
   const desc = Object.getOwnPropertyDescriptor(Error, "stackTraceLimit");
   if (desc === void 0) return Object.isExtensible(Error);
@@ -5912,18 +5912,18 @@ var statusCodes = {
   NETWORK_AUTHENTICATION_REQUIRED: 511
 };
 var InternalAPIError = class extends Error {
-  constructor(status2 = "INTERNAL_SERVER_ERROR", body = void 0, headers = {}, statusCode = typeof status2 === "number" ? status2 : statusCodes[status2]) {
+  constructor(status = "INTERNAL_SERVER_ERROR", body = void 0, headers = {}, statusCode = typeof status === "number" ? status : statusCodes[status]) {
     super(body?.message, body?.cause ? { cause: body.cause } : void 0);
     __publicField(this, "status");
     __publicField(this, "body");
     __publicField(this, "headers");
     __publicField(this, "statusCode");
-    this.status = status2;
+    this.status = status;
     this.body = body;
     this.headers = headers;
     this.statusCode = statusCode;
     this.name = "APIError";
-    this.status = status2;
+    this.status = status;
     this.headers = headers;
     this.statusCode = statusCode;
     this.body = body;
@@ -5932,17 +5932,17 @@ var InternalAPIError = class extends Error {
 var kAPIErrorHeaderSymbol = Symbol.for("better-call:api-error-headers");
 var APIError = makeErrorForHideStackFrame(InternalAPIError, Error);
 
-// node_modules/@better-auth/core/dist/error/index.mjs
+// auth-build/node_modules/@better-auth/core/dist/error/index.mjs
 var BetterAuthError = class extends Error {
-  constructor(message2, options) {
-    super(message2, options);
+  constructor(message, options) {
+    super(message, options);
     this.name = "BetterAuthError";
-    this.message = message2;
+    this.message = message;
     this.stack = "";
   }
 };
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/utils/url.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/utils/url.mjs
 var SLASH_CHAR_CODE = "/".charCodeAt(0);
 function trimTrailingSlashes(value) {
   let end = value.length;
@@ -6021,7 +6021,7 @@ function getOrigin(url2) {
   }
 }
 
-// node_modules/@better-auth/core/dist/utils/url.mjs
+// auth-build/node_modules/@better-auth/core/dist/utils/url.mjs
 var DANGEROUS_URL_SCHEMES = [
   "javascript:",
   "data:",
@@ -6037,7 +6037,7 @@ function isSafeUrlScheme(value) {
   return !DANGEROUS_URL_SCHEMES.includes(parsed.protocol);
 }
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/fetch-plugins.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/fetch-plugins.mjs
 var redirectPlugin = {
   id: "redirect",
   name: "Redirect",
@@ -6053,7 +6053,7 @@ var redirectPlugin = {
   } }
 };
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/session-atom.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/session-atom.mjs
 var isServer2 = () => typeof window === "undefined";
 var SESSION_MOUNT_DEDUPE_INTERVAL = STORE_UNMOUNT_DELAY;
 function hydrateSessionAtom(sessionAtom, session) {
@@ -6224,7 +6224,7 @@ function getSessionAtom($fetch, options) {
   };
 }
 
-// node_modules/defu/dist/defu.mjs
+// auth-build/node_modules/defu/dist/defu.mjs
 function isPlainObject2(value) {
   if (value === null || typeof value !== "object") {
     return false;
@@ -6292,11 +6292,11 @@ var defuArrayFn = createDefu((object2, key, currentValue) => {
   }
 });
 
-// node_modules/@better-fetch/fetch/dist/index.js
+// auth-build/node_modules/@better-fetch/fetch/dist/index.js
 var BetterFetchError = class extends Error {
-  constructor(status2, statusText, error61) {
-    super(statusText || status2.toString(), { cause: error61 });
-    this.status = status2;
+  constructor(status, statusText, error61) {
+    super(statusText || status.toString(), { cause: error61 });
+    this.status = status;
     this.statusText = statusText;
     this.error = error61;
     Error.captureStackTrace(this, this.constructor);
@@ -6566,8 +6566,8 @@ function getTimeout(options, controller) {
   };
 }
 var ValidationError = class ValidationError2 extends Error {
-  constructor(issues, message2) {
-    super(message2 || JSON.stringify(issues, null, 2));
+  constructor(issues, message) {
+    super(message || JSON.stringify(issues, null, 2));
     this.issues = issues;
     Object.setPrototypeOf(this, ValidationError2.prototype);
   }
@@ -6829,7 +6829,7 @@ var createFetch = (config2) => {
   return $fetch;
 };
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/config.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/config.mjs
 var resolvePublicAuthUrl = (basePath) => {
   if (typeof process === "undefined") return void 0;
   const path = basePath ?? "/api/auth";
@@ -6937,12 +6937,12 @@ var getClientConfig = (options, loadEnv) => {
   };
 };
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/utils/is-atom.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/utils/is-atom.mjs
 function isAtom(value) {
   return typeof value === "object" && value !== null && "get" in value && typeof value.get === "function" && "lc" in value && typeof value.lc === "number";
 }
 
-// node_modules/@better-auth/core/dist/utils/string.mjs
+// auth-build/node_modules/@better-auth/core/dist/utils/string.mjs
 function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -6955,7 +6955,7 @@ function toKebabCase(input2) {
   return splitWords(input2).map((word) => word.toLowerCase()).join("-");
 }
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/proxy.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/proxy.mjs
 function getMethod2(path, knownPathMethods, args) {
   const method = knownPathMethods[path];
   const { fetchOptions, query: _query, ...body } = args || {};
@@ -7025,7 +7025,7 @@ function createDynamicPathProxy(routes, client, knownPathMethods, atoms, atomLis
   return createProxy();
 }
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/vanilla.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/vanilla.mjs
 function createAuthClient(options) {
   const { pluginPathMethods, pluginsActions, pluginsAtoms, hydrateSession, $fetch, atomListeners, $store } = getClientConfig(options);
   const resolvedHooks = {};
@@ -7039,7 +7039,7 @@ function createAuthClient(options) {
   }, $fetch, pluginPathMethods, pluginsAtoms, atomListeners);
 }
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/error-codes.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/error-codes.mjs
 var ADMIN_ERROR_CODES = defineErrorCodes({
   FAILED_TO_CREATE_USER: "Failed to create user",
   USER_ALREADY_EXISTS: "User already exists.",
@@ -7066,7 +7066,7 @@ var ADMIN_ERROR_CODES = defineErrorCodes({
   PASSWORD_CANNOT_BE_UPDATED_VIA_UPDATE_USER: "Password cannot be updated through update-user. Use the set-user-password endpoint instead"
 });
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/access/access.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/access/access.mjs
 function unknownResourceResponse(requestedResource) {
   return {
     success: false,
@@ -7142,7 +7142,7 @@ function createAccessControl(s) {
   };
 }
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/access/statement.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/access/statement.mjs
 var defaultStatements = {
   user: [
     "create",
@@ -7192,7 +7192,7 @@ var defaultRoles = {
   user: userAc
 };
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/has-permission.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/has-permission.mjs
 var hasPermission = (input2) => {
   if (input2.userId && input2.options?.adminUserIds?.includes(input2.userId)) return true;
   if (!input2.permissions) return false;
@@ -7202,7 +7202,7 @@ var hasPermission = (input2) => {
   return false;
 };
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/client.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/client.mjs
 var adminClient = (options) => {
   const roles = {
     admin: adminAc,
@@ -7236,14 +7236,14 @@ var adminClient = (options) => {
   };
 };
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/email-otp/error-codes.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/email-otp/error-codes.mjs
 var EMAIL_OTP_ERROR_CODES = defineErrorCodes({
   OTP_EXPIRED: "OTP expired",
   INVALID_OTP: "Invalid OTP",
   TOO_MANY_ATTEMPTS: "Too many attempts"
 });
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/email-otp/client.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/email-otp/client.mjs
 var emailOTPClient = () => {
   return {
     id: "email-otp",
@@ -7257,7 +7257,7 @@ var emailOTPClient = () => {
   };
 };
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/jwt/client.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/jwt/client.mjs
 var jwtClient = (options) => {
   const jwksPath = options?.jwks?.jwksPath ?? "/jwks";
   return {
@@ -7274,7 +7274,7 @@ var jwtClient = (options) => {
   };
 };
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/magic-link/client.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/magic-link/client.mjs
 var magicLinkClient = () => {
   return {
     id: "magic-link",
@@ -7283,7 +7283,7 @@ var magicLinkClient = () => {
   };
 };
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/error-codes.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/error-codes.mjs
 var ORGANIZATION_ERROR_CODES = defineErrorCodes({
   YOU_ARE_NOT_ALLOWED_TO_CREATE_A_NEW_ORGANIZATION: "You are not allowed to create a new organization",
   YOU_HAVE_REACHED_THE_MAXIMUM_NUMBER_OF_ORGANIZATIONS: "You have reached the maximum number of organizations",
@@ -7346,7 +7346,7 @@ var ORGANIZATION_ERROR_CODES = defineErrorCodes({
   INVALID_TEAM_ID: "Team id contains a reserved character"
 });
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/access/statement.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/access/statement.mjs
 var defaultStatements2 = {
   organization: ["update", "delete"],
   member: [
@@ -7421,7 +7421,7 @@ var defaultRoles2 = {
   member: memberAc
 };
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/permission.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/permission.mjs
 var hasPermissionFn = (input2, acRoles) => {
   if (!input2.permissions) return false;
   const roles = input2.role.split(",");
@@ -7433,7 +7433,7 @@ var hasPermissionFn = (input2, acRoles) => {
   return false;
 };
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/client.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/client.mjs
 var clientSideHasPermission = (input2) => {
   return hasPermissionFn(input2, input2.options.roles || defaultRoles2);
 };
@@ -7524,7 +7524,7 @@ var organizationClient = (options) => {
   };
 };
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/phone-number/error-codes.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/phone-number/error-codes.mjs
 var PHONE_NUMBER_ERROR_CODES = defineErrorCodes({
   INVALID_PHONE_NUMBER: "Invalid phone number",
   PHONE_NUMBER_EXIST: "Phone number already exists",
@@ -7540,7 +7540,7 @@ var PHONE_NUMBER_ERROR_CODES = defineErrorCodes({
   TOO_MANY_ATTEMPTS: "Too many attempts"
 });
 
-// node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/phone-number/client.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/phone-number/client.mjs
 var phoneNumberClient = () => {
   return {
     id: "phoneNumber",
@@ -7556,7 +7556,7 @@ var phoneNumberClient = () => {
   };
 };
 
-// node_modules/@neondatabase/auth/node_modules/@better-auth/oauth-provider/dist/signed-query-Df1MNiSH.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/@better-auth/oauth-provider/dist/signed-query-Df1MNiSH.mjs
 var signedQueryParameterNameParam = "ba_param";
 function getSignedOAuthQueryParameterNames(params) {
   const signedParameterNames = params.getAll(signedQueryParameterNameParam);
@@ -7573,10 +7573,10 @@ function buildSignedOAuthQuery(search) {
   return signedParams.toString();
 }
 
-// node_modules/@neondatabase/auth/node_modules/@better-auth/oauth-provider/dist/version-9KCSx144.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/@better-auth/oauth-provider/dist/version-9KCSx144.mjs
 var PACKAGE_VERSION2 = "1.7.6";
 
-// node_modules/@better-auth/core/dist/utils/json.mjs
+// auth-build/node_modules/@better-auth/core/dist/utils/json.mjs
 var iso8601Regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/;
 function reviveDate(value) {
   if (typeof value === "string" && iso8601Regex.test(value)) {
@@ -7610,7 +7610,7 @@ function safeJSONParse(data) {
   }
 }
 
-// node_modules/@neondatabase/auth/node_modules/@better-auth/oauth-provider/dist/client.mjs
+// auth-build/node_modules/@neondatabase/auth/node_modules/@better-auth/oauth-provider/dist/client.mjs
 var oauthProviderClient = () => {
   return {
     id: "oauth-provider-client",
@@ -7633,7 +7633,7 @@ var oauthProviderClient = () => {
   };
 };
 
-// node_modules/zod/v4/classic/external.js
+// auth-build/node_modules/zod/v4/classic/external.js
 var external_exports = {};
 __export(external_exports, {
   $brand: () => $brand,
@@ -7890,7 +7890,7 @@ __export(external_exports, {
   xor: () => xor
 });
 
-// node_modules/zod/v4/core/index.js
+// auth-build/node_modules/zod/v4/core/index.js
 var core_exports2 = {};
 __export(core_exports2, {
   $ZodAny: () => $ZodAny,
@@ -8197,7 +8197,7 @@ __export(core_exports2, {
   version: () => version4
 });
 
-// node_modules/zod/v4/core/util.js
+// auth-build/node_modules/zod/v4/core/util.js
 var util_exports = {};
 __export(util_exports, {
   BIGINT_FORMAT_RANGES: () => BIGINT_FORMAT_RANGES,
@@ -8320,9 +8320,9 @@ function nullish(input2) {
   return input2 === null || input2 === void 0;
 }
 function cleanRegex(source) {
-  const start = source.startsWith("^") ? 1 : 0;
+  const start2 = source.startsWith("^") ? 1 : 0;
   const end = source.endsWith("$") ? source.length - 1 : source.length;
-  return source.slice(start, end);
+  return source.slice(start2, end);
 }
 function floatSafeRemainder(val, step) {
   const ratio = val / step;
@@ -8800,12 +8800,12 @@ function prefixIssues(path, issues) {
     return iss;
   });
 }
-function unwrapMessage(message2) {
-  return typeof message2 === "string" ? message2 : message2?.message;
+function unwrapMessage(message) {
+  return typeof message === "string" ? message : message?.message;
 }
-function attachSchema(issues, start, inst) {
+function attachSchema(issues, start2, inst) {
   var _a3;
-  for (let i = start; i < issues.length; i++) {
+  for (let i = start2; i < issues.length; i++) {
     (_a3 = issues[i]).schema ?? (_a3.schema = inst);
   }
 }
@@ -8819,10 +8819,10 @@ function finalizeIssue(iss, ctx, config2) {
       iss.schema = iss.inst;
   }
   const schemaError = iss.schema !== iss.inst ? iss.schema?._zod.def?.error : void 0;
-  const message2 = iss.message ? iss.message : unwrapMessage(iss.inst?._zod.def?.error?.(iss)) ?? unwrapMessage(schemaError?.(iss)) ?? unwrapMessage(ctx?.error?.(iss)) ?? unwrapMessage(config2.customError?.(iss)) ?? unwrapMessage(config2.localeError?.(iss)) ?? "Invalid input";
+  const message = iss.message ? iss.message : unwrapMessage(iss.inst?._zod.def?.error?.(iss)) ?? unwrapMessage(schemaError?.(iss)) ?? unwrapMessage(ctx?.error?.(iss)) ?? unwrapMessage(config2.customError?.(iss)) ?? unwrapMessage(config2.localeError?.(iss)) ?? "Invalid input";
   const { inst: _inst, schema: _schema, continue: _continue, input: _input, ...rest } = iss;
   rest.path ?? (rest.path = []);
-  rest.message = message2;
+  rest.message = message;
   if (ctx?.reportInput) {
     rest.input = _input;
   }
@@ -9034,7 +9034,7 @@ function constantCatch(value) {
   return fn;
 }
 
-// node_modules/zod/v4/core/core.js
+// auth-build/node_modules/zod/v4/core/core.js
 var _a;
 var NEVER = /* @__PURE__ */ Object.freeze({
   status: "aborted"
@@ -9157,7 +9157,7 @@ function config(newConfig) {
   return globalConfig;
 }
 
-// node_modules/zod/v4/core/errors.js
+// auth-build/node_modules/zod/v4/core/errors.js
 function _getMessage() {
   const internals2 = this._zod;
   internals2.message ?? (internals2.message = JSON.stringify(internals2.def, jsonStringifyReplacer, 2));
@@ -9353,7 +9353,7 @@ function prettifyError(error61) {
   return lines.join("\n");
 }
 
-// node_modules/zod/v4/core/parse.js
+// auth-build/node_modules/zod/v4/core/parse.js
 function finalizeParams(callee, params) {
   return { callee: params?.callee ?? callee, Err: params?.Err };
 }
@@ -9496,7 +9496,7 @@ var _safeDecodeAsync = (_Err) => async (schema, value, _ctx) => {
 };
 var safeDecodeAsync = /* @__PURE__ */ _safeDecodeAsync($ZodRealError);
 
-// node_modules/zod/v4/core/regexes.js
+// auth-build/node_modules/zod/v4/core/regexes.js
 var regexes_exports = {};
 __export(regexes_exports, {
   base64: () => base64,
@@ -9662,7 +9662,7 @@ var sha512_hex = /^[0-9a-fA-F]{128}$/;
 var sha512_base64 = /* @__PURE__ */ fixedBase64(86, "==");
 var sha512_base64url = /* @__PURE__ */ fixedBase64url(86);
 
-// node_modules/zod/v4/core/checks.js
+// auth-build/node_modules/zod/v4/core/checks.js
 var $ZodCheck = /* @__PURE__ */ $constructor("$ZodCheck", (inst, def) => {
   var _a3;
   inst._zod ?? (inst._zod = {});
@@ -10206,7 +10206,7 @@ var $ZodCheckOverwrite = /* @__PURE__ */ $constructor("$ZodCheckOverwrite", (ins
   };
 });
 
-// node_modules/zod/v4/core/doc.js
+// auth-build/node_modules/zod/v4/core/doc.js
 var Doc = class {
   constructor(args = [], closed = {}) {
     this.content = [];
@@ -10243,14 +10243,14 @@ ${content.join("\n")}
   }
 };
 
-// node_modules/zod/v4/core/versions.js
+// auth-build/node_modules/zod/v4/core/versions.js
 var version4 = {
   major: 4,
   minor: 5,
   patch: 4
 };
 
-// node_modules/zod/v4/core/schemas.js
+// auth-build/node_modules/zod/v4/core/schemas.js
 var $ZodType = /* @__PURE__ */ $constructor("$ZodType", (inst, def) => {
   var _a3;
   inst ?? (inst = {});
@@ -12346,9 +12346,9 @@ var $ZodTemplateLiteral = /* @__PURE__ */ $constructor("$ZodTemplateLiteral", (i
       const source = part._zod.pattern instanceof RegExp ? part._zod.pattern.source : part._zod.pattern;
       if (!source)
         throw new Error(`Invalid template literal part: ${part._zod.traits}`);
-      const start = source.startsWith("^") ? 1 : 0;
+      const start2 = source.startsWith("^") ? 1 : 0;
       const end = source.endsWith("$") ? source.length - 1 : source.length;
-      regexParts.push(source.slice(start, end));
+      regexParts.push(source.slice(start2, end));
     } else if (part === null || primitiveTypes.has(typeof part)) {
       regexParts.push(escapeRegex(`${part}`));
     } else {
@@ -12514,7 +12514,7 @@ function handleRefineResult(result, payload, input2, inst) {
   }
 }
 
-// node_modules/zod/v4/core/memoizer.js
+// auth-build/node_modules/zod/v4/core/memoizer.js
 var $ZodCyclicError = class extends Error {
   constructor() {
     super(`Cannot parse a reference cycle that closes through a transform`);
@@ -12755,7 +12755,7 @@ function isBackEdge(ctx, value) {
   return backEdges !== void 0 && value !== null && typeof value === "object" && backEdges.has(value);
 }
 
-// node_modules/zod/v4/locales/index.js
+// auth-build/node_modules/zod/v4/locales/index.js
 var locales_exports = {};
 __export(locales_exports, {
   ar: () => ar_default,
@@ -12822,7 +12822,7 @@ __export(locales_exports, {
   zhTW: () => zh_TW_default
 });
 
-// node_modules/zod/v4/locales/ar.js
+// auth-build/node_modules/zod/v4/locales/ar.js
 var error = () => {
   const Sizable = {
     string: { unit: "\u062D\u0631\u0641", verb: "\u0623\u0646 \u064A\u062D\u0648\u064A" },
@@ -12932,7 +12932,7 @@ function ar_default() {
   };
 }
 
-// node_modules/zod/v4/locales/az.js
+// auth-build/node_modules/zod/v4/locales/az.js
 var error2 = () => {
   const Sizable = {
     string: { unit: "simvol", verb: "olmal\u0131d\u0131r" },
@@ -13041,7 +13041,7 @@ function az_default() {
   };
 }
 
-// node_modules/zod/v4/locales/be.js
+// auth-build/node_modules/zod/v4/locales/be.js
 function getBelarusianPlural(count, one, few, many) {
   const absCount = Math.abs(count);
   const lastDigit = absCount % 10;
@@ -13208,7 +13208,7 @@ function be_default() {
   };
 }
 
-// node_modules/zod/v4/locales/bg.js
+// auth-build/node_modules/zod/v4/locales/bg.js
 var error4 = () => {
   const Sizable = {
     string: { unit: "\u0441\u0438\u043C\u0432\u043E\u043B\u0430", verb: "\u0434\u0430 \u0441\u044A\u0434\u044A\u0440\u0436\u0430" },
@@ -13332,7 +13332,7 @@ function bg_default() {
   };
 }
 
-// node_modules/zod/v4/locales/bn.js
+// auth-build/node_modules/zod/v4/locales/bn.js
 var error5 = () => {
   const Sizable = {
     string: { unit: "\u0985\u0995\u09CD\u09B7\u09B0", verb: "\u09A5\u09BE\u0995\u09A4\u09C7 \u09B9\u09AC\u09C7" },
@@ -13444,7 +13444,7 @@ function bn_default() {
   };
 }
 
-// node_modules/zod/v4/locales/ca.js
+// auth-build/node_modules/zod/v4/locales/ca.js
 var error6 = () => {
   const Sizable = {
     string: { unit: "car\xE0cters", verb: "contenir" },
@@ -13556,7 +13556,7 @@ function ca_default() {
   };
 }
 
-// node_modules/zod/v4/locales/ckb.js
+// auth-build/node_modules/zod/v4/locales/ckb.js
 var error7 = () => {
   const Sizable = {
     string: { unit: "\u067E\u06CC\u062A", verb: "\u0628\u06CE\u062A" },
@@ -13687,7 +13687,7 @@ function ckb_default() {
   };
 }
 
-// node_modules/zod/v4/locales/cs.js
+// auth-build/node_modules/zod/v4/locales/cs.js
 var error8 = () => {
   const Sizable = {
     string: { unit: "znak\u016F", verb: "m\xEDt" },
@@ -13802,7 +13802,7 @@ function cs_default() {
   };
 }
 
-// node_modules/zod/v4/locales/da.js
+// auth-build/node_modules/zod/v4/locales/da.js
 var error9 = () => {
   const Sizable = {
     string: { unit: "tegn", verb: "havde" },
@@ -13921,7 +13921,7 @@ function da_default() {
   };
 }
 
-// node_modules/zod/v4/locales/de.js
+// auth-build/node_modules/zod/v4/locales/de.js
 var error10 = () => {
   const Sizable = {
     string: { unit: "Zeichen", verb: "zu haben" },
@@ -14033,7 +14033,7 @@ function de_default() {
   };
 }
 
-// node_modules/zod/v4/locales/el.js
+// auth-build/node_modules/zod/v4/locales/el.js
 var error11 = () => {
   const Sizable = {
     string: { unit: "\u03C7\u03B1\u03C1\u03B1\u03BA\u03C4\u03AE\u03C1\u03B5\u03C2", verb: "\u03BD\u03B1 \u03AD\u03C7\u03B5\u03B9" },
@@ -14144,7 +14144,7 @@ function el_default() {
   };
 }
 
-// node_modules/zod/v4/locales/en.js
+// auth-build/node_modules/zod/v4/locales/en.js
 var error12 = () => {
   const Sizable = {
     string: { unit: "characters", verb: "to have" },
@@ -14267,7 +14267,7 @@ function en_default() {
   };
 }
 
-// node_modules/zod/v4/locales/eo.js
+// auth-build/node_modules/zod/v4/locales/eo.js
 var error13 = () => {
   const Sizable = {
     string: { unit: "karaktrojn", verb: "havi" },
@@ -14380,7 +14380,7 @@ function eo_default() {
   };
 }
 
-// node_modules/zod/v4/locales/es.js
+// auth-build/node_modules/zod/v4/locales/es.js
 var error14 = () => {
   const Sizable = {
     string: { unit: "caracteres", verb: "tener" },
@@ -14515,7 +14515,7 @@ function es_default() {
   };
 }
 
-// node_modules/zod/v4/locales/fa.js
+// auth-build/node_modules/zod/v4/locales/fa.js
 var error15 = () => {
   const Sizable = {
     string: { unit: "\u06A9\u0627\u0631\u0627\u06A9\u062A\u0631", verb: "\u062F\u0627\u0634\u062A\u0647 \u0628\u0627\u0634\u062F" },
@@ -14633,7 +14633,7 @@ function fa_default() {
   };
 }
 
-// node_modules/zod/v4/locales/fi.js
+// auth-build/node_modules/zod/v4/locales/fi.js
 var error16 = () => {
   const Sizable = {
     string: { unit: "merkki\xE4", subject: "merkkijonon" },
@@ -14749,7 +14749,7 @@ function fi_default() {
   };
 }
 
-// node_modules/zod/v4/locales/fr.js
+// auth-build/node_modules/zod/v4/locales/fr.js
 var error17 = () => {
   const Sizable = {
     string: { unit: "caract\xE8res", verb: "avoir" },
@@ -14877,7 +14877,7 @@ function fr_default() {
   };
 }
 
-// node_modules/zod/v4/locales/fr-CA.js
+// auth-build/node_modules/zod/v4/locales/fr-CA.js
 var error18 = () => {
   const Sizable = {
     string: { unit: "caract\xE8res", verb: "avoir" },
@@ -14988,7 +14988,7 @@ function fr_CA_default() {
   };
 }
 
-// node_modules/zod/v4/locales/gu.js
+// auth-build/node_modules/zod/v4/locales/gu.js
 var error19 = () => {
   const Sizable = {
     string: { unit: "\u0A85\u0A95\u0ACD\u0AB7\u0AB0", verb: "\u0AB9\u0ACB\u0AB5\u0ABE \u0A9C\u0ACB\u0A88\u0A8F" },
@@ -15100,7 +15100,7 @@ function gu_default() {
   };
 }
 
-// node_modules/zod/v4/locales/he.js
+// auth-build/node_modules/zod/v4/locales/he.js
 var error20 = () => {
   const TypeNames = {
     string: { label: "\u05DE\u05D7\u05E8\u05D5\u05D6\u05EA", gender: "f" },
@@ -15300,7 +15300,7 @@ function he_default() {
   };
 }
 
-// node_modules/zod/v4/locales/hi.js
+// auth-build/node_modules/zod/v4/locales/hi.js
 var error21 = () => {
   const Sizable = {
     string: { unit: "\u0905\u0915\u094D\u0937\u0930", verb: "\u0930\u0916\u0928\u0947 \u0915\u0947 \u0932\u093F\u090F" },
@@ -15410,7 +15410,7 @@ function hi_default() {
   };
 }
 
-// node_modules/zod/v4/locales/hr.js
+// auth-build/node_modules/zod/v4/locales/hr.js
 var error22 = () => {
   const Sizable = {
     string: { unit: "znakova", verb: "imati" },
@@ -15535,7 +15535,7 @@ function hr_default() {
   };
 }
 
-// node_modules/zod/v4/locales/hu.js
+// auth-build/node_modules/zod/v4/locales/hu.js
 var error23 = () => {
   const Sizable = {
     string: { unit: "karakter", verb: "legyen" },
@@ -15647,7 +15647,7 @@ function hu_default() {
   };
 }
 
-// node_modules/zod/v4/locales/hy.js
+// auth-build/node_modules/zod/v4/locales/hy.js
 function getArmenianPlural(count, one, many) {
   return Math.abs(count) === 1 ? one : many;
 }
@@ -15804,7 +15804,7 @@ function hy_default() {
   };
 }
 
-// node_modules/zod/v4/locales/id.js
+// auth-build/node_modules/zod/v4/locales/id.js
 var error25 = () => {
   const Sizable = {
     string: { unit: "karakter", verb: "memiliki" },
@@ -15914,7 +15914,7 @@ function id_default() {
   };
 }
 
-// node_modules/zod/v4/locales/is.js
+// auth-build/node_modules/zod/v4/locales/is.js
 var error26 = () => {
   const Sizable = {
     string: { unit: "stafi", verb: "a\xF0 hafa" },
@@ -16027,7 +16027,7 @@ function is_default() {
   };
 }
 
-// node_modules/zod/v4/locales/it.js
+// auth-build/node_modules/zod/v4/locales/it.js
 var error27 = () => {
   const Sizable = {
     string: { unit: "caratteri", verb: "avere" },
@@ -16139,7 +16139,7 @@ function it_default() {
   };
 }
 
-// node_modules/zod/v4/locales/ja.js
+// auth-build/node_modules/zod/v4/locales/ja.js
 var error28 = () => {
   const Sizable = {
     string: { unit: "\u6587\u5B57", verb: "\u3067\u3042\u308B" },
@@ -16250,7 +16250,7 @@ function ja_default() {
   };
 }
 
-// node_modules/zod/v4/locales/ka.js
+// auth-build/node_modules/zod/v4/locales/ka.js
 var error29 = () => {
   const Sizable = {
     string: { unit: "\u10E1\u10D8\u10DB\u10D1\u10DD\u10DA\u10DD", verb: "\u10E3\u10DC\u10D3\u10D0 \u10E8\u10D4\u10D8\u10EA\u10D0\u10D5\u10D3\u10D4\u10E1" },
@@ -16366,7 +16366,7 @@ function ka_default() {
   };
 }
 
-// node_modules/zod/v4/locales/km.js
+// auth-build/node_modules/zod/v4/locales/km.js
 var error30 = () => {
   const Sizable = {
     string: { unit: "\u178F\u17BD\u17A2\u1780\u17D2\u179F\u179A", verb: "\u1782\u17BD\u179A\u1798\u17B6\u1793" },
@@ -16480,12 +16480,12 @@ function km_default() {
   };
 }
 
-// node_modules/zod/v4/locales/kh.js
+// auth-build/node_modules/zod/v4/locales/kh.js
 function kh_default() {
   return km_default();
 }
 
-// node_modules/zod/v4/locales/kn.js
+// auth-build/node_modules/zod/v4/locales/kn.js
 var error31 = () => {
   const Sizable = {
     string: { unit: "\u0C85\u0C95\u0CCD\u0CB7\u0CB0\u0C97\u0CB3\u0CC1", verb: "\u0CB9\u0CCA\u0C82\u0CA6\u0CB2\u0CC1" },
@@ -16599,7 +16599,7 @@ function kn_default() {
   };
 }
 
-// node_modules/zod/v4/locales/ko.js
+// auth-build/node_modules/zod/v4/locales/ko.js
 var error32 = () => {
   const Sizable = {
     string: { unit: "\uBB38\uC790", verb: "to have" },
@@ -16714,7 +16714,7 @@ function ko_default() {
   };
 }
 
-// node_modules/zod/v4/locales/lt.js
+// auth-build/node_modules/zod/v4/locales/lt.js
 var capitalizeFirstCharacter = (text) => {
   return text.charAt(0).toUpperCase() + text.slice(1);
 };
@@ -16920,7 +16920,7 @@ function lt_default() {
   };
 }
 
-// node_modules/zod/v4/locales/mk.js
+// auth-build/node_modules/zod/v4/locales/mk.js
 var error34 = () => {
   const Sizable = {
     string: { unit: "\u0437\u043D\u0430\u0446\u0438", verb: "\u0434\u0430 \u0438\u043C\u0430\u0430\u0442" },
@@ -17033,7 +17033,7 @@ function mk_default() {
   };
 }
 
-// node_modules/zod/v4/locales/ms.js
+// auth-build/node_modules/zod/v4/locales/ms.js
 var error35 = () => {
   const Sizable = {
     string: { unit: "aksara", verb: "mempunyai" },
@@ -17144,7 +17144,7 @@ function ms_default() {
   };
 }
 
-// node_modules/zod/v4/locales/ne.js
+// auth-build/node_modules/zod/v4/locales/ne.js
 var error36 = () => {
   const Sizable = {
     string: { unit: "\u0905\u0915\u094D\u0937\u0930", verb: "\u0939\u0941\u0928\u0941\u092A\u0930\u094D\u091B" },
@@ -17254,7 +17254,7 @@ function ne_default() {
   };
 }
 
-// node_modules/zod/v4/locales/nl.js
+// auth-build/node_modules/zod/v4/locales/nl.js
 var error37 = () => {
   const Sizable = {
     string: { unit: "tekens", verb: "heeft" },
@@ -17368,7 +17368,7 @@ function nl_default() {
   };
 }
 
-// node_modules/zod/v4/locales/nn.js
+// auth-build/node_modules/zod/v4/locales/nn.js
 var error38 = () => {
   const Sizable = {
     string: { unit: "teikn", verb: "\xE5 ha" },
@@ -17480,7 +17480,7 @@ function nn_default() {
   };
 }
 
-// node_modules/zod/v4/locales/no.js
+// auth-build/node_modules/zod/v4/locales/no.js
 var error39 = () => {
   const Sizable = {
     string: { unit: "tegn", verb: "\xE5 ha" },
@@ -17592,7 +17592,7 @@ function no_default() {
   };
 }
 
-// node_modules/zod/v4/locales/ota.js
+// auth-build/node_modules/zod/v4/locales/ota.js
 var error40 = () => {
   const Sizable = {
     string: { unit: "harf", verb: "olmal\u0131d\u0131r" },
@@ -17705,7 +17705,7 @@ function ota_default() {
   };
 }
 
-// node_modules/zod/v4/locales/ps.js
+// auth-build/node_modules/zod/v4/locales/ps.js
 var error41 = () => {
   const Sizable = {
     string: { unit: "\u062A\u0648\u06A9\u064A", verb: "\u0648\u0644\u0631\u064A" },
@@ -17823,7 +17823,7 @@ function ps_default() {
   };
 }
 
-// node_modules/zod/v4/locales/pl.js
+// auth-build/node_modules/zod/v4/locales/pl.js
 var error42 = () => {
   const Sizable = {
     string: { unit: "znak\xF3w", verb: "mie\u0107" },
@@ -17936,7 +17936,7 @@ function pl_default() {
   };
 }
 
-// node_modules/zod/v4/locales/pt.js
+// auth-build/node_modules/zod/v4/locales/pt.js
 var error43 = () => {
   const Sizable = {
     string: { unit: "caracteres" },
@@ -18078,7 +18078,7 @@ function pt_default() {
   };
 }
 
-// node_modules/zod/v4/locales/pt-BR.js
+// auth-build/node_modules/zod/v4/locales/pt-BR.js
 var error44 = () => {
   const Sizable = {
     string: { unit: "caracteres" },
@@ -18221,7 +18221,7 @@ function pt_BR_default() {
   };
 }
 
-// node_modules/zod/v4/locales/ro.js
+// auth-build/node_modules/zod/v4/locales/ro.js
 var error45 = () => {
   const Sizable = {
     string: { unit: "caractere", verb: "s\u0103 aib\u0103" },
@@ -18342,7 +18342,7 @@ function ro_default() {
   };
 }
 
-// node_modules/zod/v4/locales/ru.js
+// auth-build/node_modules/zod/v4/locales/ru.js
 function getRussianPlural(count, one, few, many) {
   const absCount = Math.abs(count);
   const lastDigit = absCount % 10;
@@ -18509,7 +18509,7 @@ function ru_default() {
   };
 }
 
-// node_modules/zod/v4/locales/sk.js
+// auth-build/node_modules/zod/v4/locales/sk.js
 var error47 = () => {
   const Sizable = {
     string: { unit: "znakov", verb: "ma\u0165" },
@@ -18624,7 +18624,7 @@ function sk_default() {
   };
 }
 
-// node_modules/zod/v4/locales/sl.js
+// auth-build/node_modules/zod/v4/locales/sl.js
 var error48 = () => {
   const Sizable = {
     string: { unit: "znakov", verb: "imeti" },
@@ -18737,7 +18737,7 @@ function sl_default() {
   };
 }
 
-// node_modules/zod/v4/locales/sv.js
+// auth-build/node_modules/zod/v4/locales/sv.js
 var error49 = () => {
   const Sizable = {
     string: { unit: "tecken", verb: "att ha" },
@@ -18851,7 +18851,7 @@ function sv_default() {
   };
 }
 
-// node_modules/zod/v4/locales/ta.js
+// auth-build/node_modules/zod/v4/locales/ta.js
 var error50 = () => {
   const Sizable = {
     string: { unit: "\u0B8E\u0BB4\u0BC1\u0BA4\u0BCD\u0BA4\u0BC1\u0B95\u0BCD\u0B95\u0BB3\u0BCD", verb: "\u0B95\u0BCA\u0BA3\u0BCD\u0B9F\u0BBF\u0BB0\u0BC1\u0B95\u0BCD\u0B95 \u0BB5\u0BC7\u0BA3\u0BCD\u0B9F\u0BC1\u0BAE\u0BCD" },
@@ -18965,7 +18965,7 @@ function ta_default() {
   };
 }
 
-// node_modules/zod/v4/locales/th.js
+// auth-build/node_modules/zod/v4/locales/th.js
 var error51 = () => {
   const Sizable = {
     string: { unit: "\u0E15\u0E31\u0E27\u0E2D\u0E31\u0E01\u0E29\u0E23", verb: "\u0E04\u0E27\u0E23\u0E21\u0E35" },
@@ -19079,7 +19079,7 @@ function th_default() {
   };
 }
 
-// node_modules/zod/v4/locales/tk.js
+// auth-build/node_modules/zod/v4/locales/tk.js
 var error52 = () => {
   const Sizable = {
     string: { unit: "simwol", verb: "bolmaly" },
@@ -19185,7 +19185,7 @@ function tk_default() {
   };
 }
 
-// node_modules/zod/v4/locales/tr.js
+// auth-build/node_modules/zod/v4/locales/tr.js
 var error53 = () => {
   const Sizable = {
     string: { unit: "karakter", verb: "olmal\u0131" },
@@ -19294,7 +19294,7 @@ function tr_default() {
   };
 }
 
-// node_modules/zod/v4/locales/uk.js
+// auth-build/node_modules/zod/v4/locales/uk.js
 var error54 = () => {
   const Sizable = {
     string: { unit: "\u0441\u0438\u043C\u0432\u043E\u043B\u0456\u0432", verb: "\u043C\u0430\u0442\u0438\u043C\u0435" },
@@ -19406,12 +19406,12 @@ function uk_default() {
   };
 }
 
-// node_modules/zod/v4/locales/ua.js
+// auth-build/node_modules/zod/v4/locales/ua.js
 function ua_default() {
   return uk_default();
 }
 
-// node_modules/zod/v4/locales/ur.js
+// auth-build/node_modules/zod/v4/locales/ur.js
 var error55 = () => {
   const Sizable = {
     string: { unit: "\u062D\u0631\u0648\u0641", verb: "\u06C1\u0648\u0646\u0627" },
@@ -19525,7 +19525,7 @@ function ur_default() {
   };
 }
 
-// node_modules/zod/v4/locales/uz.js
+// auth-build/node_modules/zod/v4/locales/uz.js
 var error56 = () => {
   const Sizable = {
     string: { unit: "belgi", verb: "bo\u2018lishi kerak" },
@@ -19637,7 +19637,7 @@ function uz_default() {
   };
 }
 
-// node_modules/zod/v4/locales/vi.js
+// auth-build/node_modules/zod/v4/locales/vi.js
 var error57 = () => {
   const Sizable = {
     string: { unit: "k\xFD t\u1EF1", verb: "c\xF3" },
@@ -19749,7 +19749,7 @@ function vi_default() {
   };
 }
 
-// node_modules/zod/v4/locales/zh-CN.js
+// auth-build/node_modules/zod/v4/locales/zh-CN.js
 var error58 = () => {
   const Sizable = {
     string: { unit: "\u5B57\u7B26", verb: "\u5305\u542B" },
@@ -19862,7 +19862,7 @@ function zh_CN_default() {
   };
 }
 
-// node_modules/zod/v4/locales/zh-TW.js
+// auth-build/node_modules/zod/v4/locales/zh-TW.js
 var error59 = () => {
   const Sizable = {
     string: { unit: "\u5B57\u5143", verb: "\u64C1\u6709" },
@@ -19973,7 +19973,7 @@ function zh_TW_default() {
   };
 }
 
-// node_modules/zod/v4/locales/yo.js
+// auth-build/node_modules/zod/v4/locales/yo.js
 var error60 = () => {
   const Sizable = {
     string: { unit: "\xE0mi", verb: "n\xED" },
@@ -20084,7 +20084,7 @@ function yo_default() {
   };
 }
 
-// node_modules/zod/v4/core/registries.js
+// auth-build/node_modules/zod/v4/core/registries.js
 var _a2;
 var $output = /* @__PURE__ */ Symbol("ZodOutput");
 var $input = /* @__PURE__ */ Symbol("ZodInput");
@@ -20134,12 +20134,12 @@ function registry() {
 (_a2 = globalThis).__zod_globalRegistry ?? (_a2.__zod_globalRegistry = registry());
 var globalRegistry = globalThis.__zod_globalRegistry;
 
-// node_modules/zod/v4/core/compile.js
+// auth-build/node_modules/zod/v4/core/compile.js
 var INVALID = Symbol.for("zod.compile.invalid");
 var FALLBACK_FLAG = Symbol.for("zod.compile.fallback");
 var ZodCompileAsyncError = class extends Error {
-  constructor(message2 = "z.compile does not support async refinements, transforms, or checks") {
-    super(message2);
+  constructor(message = "z.compile does not support async refinements, transforms, or checks") {
+    super(message);
     this.name = "ZodCompileAsyncError";
   }
 };
@@ -21677,7 +21677,7 @@ function generateTransformCheck(doc, ctx, schema, accessor) {
   return accessor;
 }
 
-// node_modules/zod/v4/core/api.js
+// auth-build/node_modules/zod/v4/core/api.js
 // @__NO_SIDE_EFFECTS__
 function _string(Class2, params) {
   return new Class2({
@@ -22733,7 +22733,7 @@ function _stringFormat(Class2, format, fnOrRegex, _params = {}) {
   return inst;
 }
 
-// node_modules/zod/v4/core/to-json-schema.js
+// auth-build/node_modules/zod/v4/core/to-json-schema.js
 function assignProps(target, ...sources) {
   for (const source of sources) {
     for (const key of Reflect.ownKeys(source)) {
@@ -22769,12 +22769,12 @@ function initializeContext(params) {
     external: params?.external ?? void 0
   };
 }
-function handleUnrepresentable(schema, ctx, json2, params, message2) {
-  const result = typeof ctx.unrepresentable === "function" ? ctx.unrepresentable({ zodSchema: schema, path: params.path, message: message2 }) : ctx.unrepresentable;
+function handleUnrepresentable(schema, ctx, json2, params, message) {
+  const result = typeof ctx.unrepresentable === "function" ? ctx.unrepresentable({ zodSchema: schema, path: params.path, message }) : ctx.unrepresentable;
   if (result === "any")
     return false;
   if (result === void 0 || result === "throw")
-    throw new Error(message2);
+    throw new Error(message);
   Object.assign(json2, result);
   return true;
 }
@@ -23264,7 +23264,7 @@ var createStandardJSONSchemaMethod = (schema, io, processors = {}) => (params) =
   return finalize(ctx, schema);
 };
 
-// node_modules/zod/v4/core/json-schema-processors.js
+// auth-build/node_modules/zod/v4/core/json-schema-processors.js
 var formatMap = {
   guid: "uuid",
   url: "uri",
@@ -23922,7 +23922,7 @@ function toJSONSchema(input2, params) {
   return finalize(ctx, input2);
 }
 
-// node_modules/zod/v4/core/json-schema-generator.js
+// auth-build/node_modules/zod/v4/core/json-schema-generator.js
 var JSONSchemaGenerator = class {
   /** @deprecated Access via ctx instead */
   get metadataRegistry() {
@@ -24000,10 +24000,10 @@ var JSONSchemaGenerator = class {
   }
 };
 
-// node_modules/zod/v4/core/json-schema.js
+// auth-build/node_modules/zod/v4/core/json-schema.js
 var json_schema_exports = {};
 
-// node_modules/zod/v4/classic/schemas.js
+// auth-build/node_modules/zod/v4/classic/schemas.js
 var schemas_exports2 = {};
 __export(schemas_exports2, {
   ZodAny: () => ZodAny,
@@ -24180,7 +24180,7 @@ __export(schemas_exports2, {
   xor: () => xor
 });
 
-// node_modules/zod/v4/classic/checks.js
+// auth-build/node_modules/zod/v4/classic/checks.js
 var checks_exports2 = {};
 __export(checks_exports2, {
   endsWith: () => _endsWith,
@@ -24215,7 +24215,7 @@ __export(checks_exports2, {
   uppercase: () => _uppercase
 });
 
-// node_modules/zod/v4/classic/errors.js
+// auth-build/node_modules/zod/v4/classic/errors.js
 var _installedErrorProtos = /* @__PURE__ */ new WeakSet([Object.prototype, Error.prototype]);
 function _lazyMethod(proto, key, make) {
   Object.defineProperty(proto, key, {
@@ -24261,7 +24261,7 @@ var ZodRealError = /* @__PURE__ */ $constructor("ZodError", initializer2, void 0
   Parent: Error
 });
 
-// node_modules/zod/v4/classic/parse.js
+// auth-build/node_modules/zod/v4/classic/parse.js
 var parse2 = /* @__PURE__ */ _parse(ZodRealError);
 var parseAsync2 = /* @__PURE__ */ _parseAsync(ZodRealError);
 var safeParse2 = /* @__PURE__ */ _safeParse(ZodRealError);
@@ -24275,7 +24275,7 @@ var safeDecode2 = /* @__PURE__ */ _safeDecode(ZodRealError);
 var safeEncodeAsync2 = /* @__PURE__ */ _safeEncodeAsync(ZodRealError);
 var safeDecodeAsync2 = /* @__PURE__ */ _safeDecodeAsync(ZodRealError);
 
-// node_modules/zod/v4/classic/schemas.js
+// auth-build/node_modules/zod/v4/classic/schemas.js
 function _ensureDefaultLocale() {
   if (!globalConfig.localeError)
     config(en_default());
@@ -25686,7 +25686,7 @@ function preprocess(fn, schema) {
   });
 }
 
-// node_modules/zod/v4/classic/compat.js
+// auth-build/node_modules/zod/v4/classic/compat.js
 var ZodIssueCode = {
   invalid_type: "invalid_type",
   too_big: "too_big",
@@ -25712,7 +25712,7 @@ var ZodFirstPartyTypeKind;
 /* @__PURE__ */ (function(ZodFirstPartyTypeKind2) {
 })(ZodFirstPartyTypeKind || (ZodFirstPartyTypeKind = {}));
 
-// node_modules/zod/v4/classic/iso.js
+// auth-build/node_modules/zod/v4/classic/iso.js
 var iso_exports = {};
 __export(iso_exports, {
   ZodISODate: () => ZodISODate,
@@ -25737,7 +25737,7 @@ function duration2(params) {
   return _isoDuration(ZodISODuration, params);
 }
 
-// node_modules/zod/v4/classic/from-json-schema.js
+// auth-build/node_modules/zod/v4/classic/from-json-schema.js
 var z = {
   ...schemas_exports2,
   ...checks_exports2,
@@ -26277,7 +26277,7 @@ function fromJSONSchema(schema, params) {
   return convertSchema(normalized, ctx);
 }
 
-// node_modules/zod/v4/core/visit.js
+// auth-build/node_modules/zod/v4/core/visit.js
 var RESOLVING = Symbol("z.visit/resolving");
 function visit(schema, fnOrHandlers) {
   const fn = typeof fnOrHandlers === "function" ? fnOrHandlers : (node2, rewritten) => {
@@ -26432,7 +26432,7 @@ function visit(schema, fnOrHandlers) {
   return run(schema);
 }
 
-// node_modules/zod/v4/classic/deep-partial.js
+// auth-build/node_modules/zod/v4/classic/deep-partial.js
 function deepPartial(schema) {
   return visit(schema, {
     object: (s) => s.partial(),
@@ -26444,7 +26444,7 @@ function deepPartial(schema) {
   });
 }
 
-// node_modules/zod/v4/classic/in-out.js
+// auth-build/node_modules/zod/v4/classic/in-out.js
 function withChecks(side, checks) {
   if (!checks?.length)
     return side;
@@ -26474,7 +26474,7 @@ function output(schema) {
   });
 }
 
-// node_modules/zod/v4/classic/coerce.js
+// auth-build/node_modules/zod/v4/classic/coerce.js
 var coerce_exports = {};
 __export(coerce_exports, {
   bigint: () => bigint3,
@@ -26499,7 +26499,7 @@ function date4(params) {
   return _coercedDate(ZodDate, params);
 }
 
-// node_modules/@neondatabase/auth/dist/adapter-core-N_pQf5vS.mjs
+// auth-build/node_modules/@neondatabase/auth/dist/adapter-core-N_pQf5vS.mjs
 var InFlightRequestManager = class {
   constructor() {
     /**
@@ -27044,9 +27044,9 @@ function initBroadcastChannel() {
       return;
     }
   }
-  getGlobalBroadcastChannel().subscribe((message2) => {
-    if (message2.clientId === CURRENT_TAB_CLIENT_ID) return;
-    const trigger = message2.data?.trigger;
+  getGlobalBroadcastChannel().subscribe((message) => {
+    if (message.clientId === CURRENT_TAB_CLIENT_ID) return;
+    const trigger = message.data?.trigger;
     if (trigger === "signout" || trigger === "updateUser" || trigger === "getSession") BETTER_AUTH_METHODS_CACHE.clearSessionCache();
   });
 }
@@ -27153,7 +27153,7 @@ var NeonAuthAdapterCore = class {
   }
 };
 
-// node_modules/@neondatabase/auth/dist/supabase-adapter-DxJ7sJJ5.mjs
+// auth-build/node_modules/@neondatabase/auth/dist/supabase-adapter-DxJ7sJJ5.mjs
 var BetterAuthVanillaAdapterImpl = class extends NeonAuthAdapterCore {
   constructor(betterAuthClientOptions) {
     super(betterAuthClientOptions);
@@ -27178,7 +27178,7 @@ function BetterAuthVanillaAdapter(options) {
   });
 }
 
-// node_modules/@neondatabase/auth/dist/neon-auth-ygjyFOIe.mjs
+// auth-build/node_modules/@neondatabase/auth/dist/neon-auth-ygjyFOIe.mjs
 function createInternalNeonAuth(url2, config2) {
   const adapterBuilder = config2?.adapter ?? BetterAuthVanillaAdapter();
   const { fetchOptions } = config2 ?? {};
@@ -27197,69 +27197,244 @@ function createAuthClient2(url2, config2) {
   return createInternalNeonAuth(url2, config2).adapter;
 }
 
-// auth-entry.js
-var AUTH_URL = "https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-central-1.aws.neon.tech/neondb/auth";
-var auth = createAuthClient2(AUTH_URL);
-var byId = (id) => document.getElementById(id);
-var status = byId("auth-status");
-var errorBox = byId("auth-error");
-var signedOut = byId("signed-out");
-var signedIn = byId("signed-in");
-var googleButton = byId("google-sign-in");
-var logoutButton = byId("sign-out");
-var message = (e) => e?.message || e?.error?.message || String(e || "Unknown error");
-function showError(err) {
-  errorBox.textContent = message(err);
-  errorBox.hidden = false;
-  status.textContent = "Authentication needs attention.";
+// auth-build/email-code-flow.js
+function createEmailCodeFlow(auth, { now: now3 = Date.now, cooldownMs = 6e4 } = {}) {
+  let email3 = null, nextSendAt = 0, pending = false;
+  const state = () => ({ email: email3, pending, retryAfter: Math.max(0, Math.ceil((nextSendAt - now3()) / 1e3)) });
+  async function send(address) {
+    if (pending) throw new Error("Please wait for the current request.");
+    if (now3() < nextSendAt) throw new Error("Please wait before requesting another code.");
+    const target = String(address || "").trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(target) || target.length > 254) throw new Error("Enter a valid email address.");
+    pending = true;
+    try {
+      const result = await auth.emailOtp.sendVerificationOtp({ email: target, type: "sign-in" });
+      if (result?.error) throw result.error;
+      email3 = target;
+      nextSendAt = now3() + cooldownMs;
+    } finally {
+      pending = false;
+    }
+  }
+  async function verify(value) {
+    if (pending) throw new Error("Please wait for the current request.");
+    if (!email3) throw new Error("Request a code first.");
+    const otp = String(value || "").trim();
+    if (!otp || otp.length > 64) throw new Error("Enter the code from your email.");
+    pending = true;
+    try {
+      const result = await auth.signIn.emailOtp({ email: email3, otp });
+      if (result?.error) throw result.error;
+      return result;
+    } finally {
+      pending = false;
+    }
+  }
+  function reset() {
+    if (pending) throw new Error("Please wait for the current request.");
+    email3 = null;
+  }
+  return { send, verify, reset, state };
 }
-function clearError() {
-  errorBox.textContent = "";
-  errorBox.hidden = true;
+function emailCodeError(error61) {
+  const code = String(error61?.code || error61?.error?.code || "").toUpperCase();
+  if (/TOO_MANY|RATE_LIMIT/.test(code) || error61?.status === 429) return "Too many attempts. Please wait before requesting a new code.";
+  if (/OTP|EXPIRED|INVALID_CODE/.test(code)) return "That code could not be verified. Check it or request a new code.";
+  if (/DISABLED|NOT_ENABLED|NOT_FOUND/.test(code) || error61?.status === 404) return "Email sign-in is not available yet. Please try Google or contact the course author.";
+  return "We could not complete email sign-in. Please try again. If it continues, check the email sign-in settings with the course author.";
 }
-function showSession(user) {
-  signedIn.hidden = !user;
-  signedOut.hidden = !!user;
-  byId("user-name").textContent = user?.name || "Logic Explorer";
-  byId("user-email").textContent = user?.email || "(email unavailable)";
-  status.textContent = user ? "Signed in successfully." : "You are not signed in.";
-}
-async function refreshSession() {
-  clearError();
+
+// assets/js/auth-config.js
+async function loadAuthConfig(fetcher = fetch) {
+  const response = await fetcher("/api/auth-config", { cache: "no-store", credentials: "same-origin", signal: AbortSignal.timeout(15e3) });
+  if (!response.ok) throw new Error("Sign-in is not configured for this environment. Please contact the course author.");
+  const data = await response.json();
   try {
-    const result = await auth.getSession();
-    if (result?.error) throw result.error;
-    showSession(result?.data?.user || null);
-  } catch (e) {
-    showSession(null);
-    showError(e);
+    const url2 = new URL(data.authUrl);
+    if (url2.protocol !== "https:" || url2.username || url2.password || url2.search || url2.hash || !url2.pathname.endsWith("/auth")) throw new Error();
+    return { authUrl: url2.href };
+  } catch {
+    throw new Error("The sign-in configuration could not be loaded. Please try again later.");
   }
 }
-googleButton.addEventListener("click", async () => {
-  clearError();
-  googleButton.disabled = true;
-  status.textContent = "Redirecting to Google\u2026";
-  try {
-    const callbackURL = new URL("/login.html", window.location.origin).href;
-    const result = await auth.signIn.social({ provider: "google", callbackURL });
-    if (result?.error) throw result.error;
-  } catch (e) {
-    showError(e);
-    googleButton.disabled = false;
+
+// auth-build/auth-entry.js
+async function start() {
+  const { authUrl: AUTH_URL } = await loadAuthConfig();
+  const auth = createAuthClient2(AUTH_URL);
+  const byId = (id) => document.getElementById(id);
+  const status = byId("auth-status");
+  const errorBox = byId("auth-error");
+  const signedOut = byId("signed-out");
+  const signedIn = byId("signed-in");
+  const googleButton = byId("google-sign-in");
+  const logoutButton = byId("sign-out");
+  const message = (e) => e?.message || e?.error?.message || String(e || "Unknown error");
+  function showError(err) {
+    errorBox.textContent = message(err);
+    errorBox.hidden = false;
+    status.textContent = "Authentication needs attention.";
   }
+  function clearError() {
+    errorBox.textContent = "";
+    errorBox.hidden = true;
+  }
+  function showSession(user) {
+    if (user) resetEmailUI();
+    signedIn.hidden = !user;
+    signedOut.hidden = !!user;
+    byId("user-name").textContent = user?.name || "Logic Explorer";
+    byId("user-email").textContent = user?.email || "(email unavailable)";
+    status.textContent = user ? "Signed in successfully." : "You are not signed in.";
+  }
+  async function refreshSession() {
+    clearError();
+    try {
+      const result = await auth.getSession();
+      if (result?.error) throw result.error;
+      showSession(result?.data?.user || null);
+      return result?.data?.user || null;
+    } catch (e) {
+      showSession(null);
+      showError(e);
+    }
+  }
+  googleButton.addEventListener("click", async () => {
+    if (emailBusy) return;
+    clearError();
+    emailBusy = true;
+    updateEmailButtons();
+    googleButton.disabled = true;
+    status.textContent = "Redirecting to Google\u2026";
+    try {
+      const callbackURL = new URL("/login.html", window.location.origin).href;
+      const result = await auth.signIn.social({ provider: "google", callbackURL });
+      if (result?.error) throw result.error;
+    } catch (e) {
+      showError(e);
+      emailBusy = false;
+      updateEmailButtons();
+    }
+  });
+  logoutButton.addEventListener("click", async () => {
+    clearError();
+    logoutButton.disabled = true;
+    status.textContent = "Signing out\u2026";
+    try {
+      const result = await auth.signOut();
+      if (result?.error) throw result.error;
+      await refreshSession();
+    } catch (e) {
+      showError(e);
+    } finally {
+      logoutButton.disabled = false;
+    }
+  });
+  const emailFlow = createEmailCodeFlow(auth);
+  const emailForm = byId("email-sign-in-form");
+  const codeForm = byId("email-code-form");
+  const emailInput = byId("sign-in-email");
+  const codeInput = byId("email-code");
+  const sendButton = byId("send-email-code");
+  const resendButton = byId("resend-email-code");
+  const verifyButton = byId("verify-email-code");
+  const changeButton = byId("change-email");
+  let emailBusy = false;
+  let cooldownTimer;
+  function updateEmailButtons() {
+    const retry = emailFlow.state().retryAfter;
+    sendButton.disabled = emailBusy || retry > 0;
+    resendButton.disabled = emailBusy || retry > 0;
+    sendButton.textContent = retry ? `Send a code (${retry}s)` : "Send me a code";
+    resendButton.textContent = retry ? `Send another code (${retry}s)` : "Send another code";
+    verifyButton.disabled = emailBusy;
+    changeButton.disabled = emailBusy;
+    googleButton.disabled = emailBusy;
+    emailInput.disabled = emailBusy;
+    codeInput.disabled = emailBusy;
+    if (!retry && cooldownTimer) {
+      clearInterval(cooldownTimer);
+      cooldownTimer = void 0;
+    }
+  }
+  function startCooldown() {
+    clearInterval(cooldownTimer);
+    cooldownTimer = setInterval(updateEmailButtons, 1e3);
+  }
+  function resetEmailUI() {
+    clearInterval(cooldownTimer);
+    cooldownTimer = void 0;
+    emailFlow.reset();
+    codeInput.value = "";
+    emailInput.value = "";
+    emailForm.hidden = false;
+    codeForm.hidden = true;
+    if (emailFlow.state().retryAfter) startCooldown();
+  }
+  async function requestEmailCode(address) {
+    if (emailBusy) return;
+    clearError();
+    emailBusy = true;
+    updateEmailButtons();
+    status.textContent = "Requesting your email code\u2026";
+    try {
+      await emailFlow.send(address);
+      byId("code-email").textContent = emailFlow.state().email;
+      codeInput.value = "";
+      emailForm.hidden = true;
+      codeForm.hidden = false;
+      status.textContent = "Code requested. Check your inbox and spam folder.";
+      startCooldown();
+    } catch (error61) {
+      showError(emailCodeError(error61));
+    } finally {
+      emailBusy = false;
+      updateEmailButtons();
+      if (!codeForm.hidden) codeInput.focus();
+    }
+  }
+  emailForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    requestEmailCode(emailInput.value.trim());
+  });
+  resendButton.addEventListener("click", () => requestEmailCode(emailFlow.state().email));
+  changeButton.addEventListener("click", () => {
+    if (emailBusy) return;
+    emailFlow.reset();
+    codeInput.value = "";
+    codeForm.hidden = true;
+    emailForm.hidden = false;
+    clearError();
+    status.textContent = "Enter your email address to receive a sign-in code.";
+    updateEmailButtons();
+    emailInput.focus();
+  });
+  codeForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (emailBusy) return;
+    clearError();
+    emailBusy = true;
+    updateEmailButtons();
+    status.textContent = "Checking your code\u2026";
+    try {
+      await emailFlow.verify(codeInput.value);
+      codeInput.value = "";
+      const user = await refreshSession();
+      if (!user) showError("Your session could not be confirmed. Please try signing in again.");
+      else byId("signed-in").querySelector("a").focus();
+    } catch (error61) {
+      codeInput.value = "";
+      showError(emailCodeError(error61));
+    } finally {
+      emailBusy = false;
+      updateEmailButtons();
+    }
+  });
+  refreshSession();
+}
+start().catch((error61) => {
+  document.getElementById("auth-status").textContent = "Sign-in is unavailable.";
+  const box = document.getElementById("auth-error");
+  box.textContent = error61.message;
+  box.hidden = false;
 });
-logoutButton.addEventListener("click", async () => {
-  clearError();
-  logoutButton.disabled = true;
-  status.textContent = "Signing out\u2026";
-  try {
-    const result = await auth.signOut();
-    if (result?.error) throw result.error;
-    await refreshSession();
-  } catch (e) {
-    showError(e);
-  } finally {
-    logoutButton.disabled = false;
-  }
-});
-refreshSession();

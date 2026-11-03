@@ -8321,9 +8321,9 @@ ${suffix}`;
     return input2 === null || input2 === void 0;
   }
   function cleanRegex(source) {
-    const start = source.startsWith("^") ? 1 : 0;
+    const start2 = source.startsWith("^") ? 1 : 0;
     const end = source.endsWith("$") ? source.length - 1 : source.length;
-    return source.slice(start, end);
+    return source.slice(start2, end);
   }
   function floatSafeRemainder(val, step) {
     const ratio = val / step;
@@ -8804,9 +8804,9 @@ ${suffix}`;
   function unwrapMessage(message) {
     return typeof message === "string" ? message : message?.message;
   }
-  function attachSchema(issues, start, inst) {
+  function attachSchema(issues, start2, inst) {
     var _a3;
-    for (let i = start; i < issues.length; i++) {
+    for (let i = start2; i < issues.length; i++) {
       (_a3 = issues[i]).schema ?? (_a3.schema = inst);
     }
   }
@@ -12347,9 +12347,9 @@ ${content.join("\n")}
         const source = part._zod.pattern instanceof RegExp ? part._zod.pattern.source : part._zod.pattern;
         if (!source)
           throw new Error(`Invalid template literal part: ${part._zod.traits}`);
-        const start = source.startsWith("^") ? 1 : 0;
+        const start2 = source.startsWith("^") ? 1 : 0;
         const end = source.endsWith("$") ? source.length - 1 : source.length;
-        regexParts.push(source.slice(start, end));
+        regexParts.push(source.slice(start2, end));
       } else if (part === null || primitiveTypes.has(typeof part)) {
         regexParts.push(escapeRegex(`${part}`));
       } else {
@@ -27198,23 +27198,38 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     return createInternalNeonAuth(url2, config2).adapter;
   }
 
-  // auth-build/header-auth-entry.js
-  var AUTH_URL = "https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-central-1.aws.neon.tech/neondb/auth";
-  var auth = createAuthClient2(AUTH_URL);
-  async function updateHeader() {
-    const link = document.getElementById("header-auth-link");
-    const menu = document.getElementById("account-menu");
-    const nickname = document.getElementById("account-nickname");
-    const signOut = document.getElementById("header-sign-out");
-    if (!link || !menu || !signOut) return;
+  // assets/js/auth-config.js
+  async function loadAuthConfig(fetcher = fetch) {
+    const response = await fetcher("/api/auth-config", { cache: "no-store", credentials: "same-origin", signal: AbortSignal.timeout(15e3) });
+    if (!response.ok) throw new Error("Sign-in is not configured for this environment. Please contact the course author.");
+    const data = await response.json();
     try {
-      const { data, error: error61 } = await auth.getSession();
-      if (error61) throw error61;
-      if (!data?.user) return;
-      link.href = "/profile.html";
-      link.setAttribute("aria-label", "My profile");
-      link.setAttribute("title", "My profile");
-      link.innerHTML = `
+      const url2 = new URL(data.authUrl);
+      if (url2.protocol !== "https:" || url2.username || url2.password || url2.search || url2.hash || !url2.pathname.endsWith("/auth")) throw new Error();
+      return { authUrl: url2.href };
+    } catch {
+      throw new Error("The sign-in configuration could not be loaded. Please try again later.");
+    }
+  }
+
+  // auth-build/header-auth-entry.js
+  async function start() {
+    const { authUrl: AUTH_URL } = await loadAuthConfig();
+    const auth = createAuthClient2(AUTH_URL);
+    async function updateHeader() {
+      const link = document.getElementById("header-auth-link");
+      const menu = document.getElementById("account-menu");
+      const nickname = document.getElementById("account-nickname");
+      const signOut = document.getElementById("header-sign-out");
+      if (!link || !menu || !signOut) return;
+      try {
+        const { data, error: error61 } = await auth.getSession();
+        if (error61) throw error61;
+        if (!data?.user) return;
+        link.href = "/profile.html";
+        link.setAttribute("aria-label", "My profile");
+        link.setAttribute("title", "My profile");
+        link.innerHTML = `
       <svg width="22" height="22"
            viewBox="0 0 24 24"
            fill="none"
@@ -27228,36 +27243,41 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         <path d="M5.5 19a7 7 0 0 1 13 0"/>
       </svg>
     `;
-      link.style.display = "inline-flex";
-      link.style.alignItems = "center";
-      nickname.textContent = data.user.name || "Logic Explorer";
-      link.setAttribute("aria-haspopup", "true");
-      link.setAttribute("aria-expanded", "false");
-      link.addEventListener("click", (event) => {
-        event.preventDefault();
-        menu.hidden = !menu.hidden;
-        link.setAttribute("aria-expanded", String(!menu.hidden));
-      });
-      document.addEventListener("click", (event) => {
-        if (!event.target.closest(".header-account")) {
-          menu.hidden = true;
-          link.setAttribute("aria-expanded", "false");
-        }
-      });
-      signOut.addEventListener("click", async () => {
-        signOut.disabled = true;
-        try {
-          const result = await auth.signOut();
-          if (result?.error) throw result.error;
-          window.location.assign("/");
-        } catch (error62) {
-          console.error("Sign out failed:", error62);
-          signOut.disabled = false;
-        }
-      });
-    } catch (error61) {
-      console.error("Unable to check session:", error61);
+        link.style.display = "inline-flex";
+        link.style.alignItems = "center";
+        nickname.textContent = data.user.name || "Logic Explorer";
+        link.setAttribute("aria-haspopup", "true");
+        link.setAttribute("aria-expanded", "false");
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          menu.hidden = !menu.hidden;
+          link.setAttribute("aria-expanded", String(!menu.hidden));
+        });
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".header-account")) {
+            menu.hidden = true;
+            link.setAttribute("aria-expanded", "false");
+          }
+        });
+        signOut.addEventListener("click", async () => {
+          signOut.disabled = true;
+          try {
+            const result = await auth.signOut();
+            if (result?.error) throw result.error;
+            window.location.assign("/");
+          } catch (error62) {
+            console.error("Sign out failed:", error62);
+            signOut.disabled = false;
+          }
+        });
+      } catch (error61) {
+        console.error("Unable to check session:", error61);
+      }
     }
+    updateHeader();
   }
-  updateHeader();
+  start().catch(() => {
+    const link = document.getElementById("header-auth-link");
+    if (link) link.title = "Sign-in is unavailable. Please try again later.";
+  });
 })();

@@ -1,6 +1,9 @@
 import { createAuthClient } from '@neondatabase/auth';
+import { loadAuthConfig } from '../assets/js/auth-config.js';
 
-const AUTH_URL = 'https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-central-1.aws.neon.tech/neondb/auth';
+async function start() {
+
+const { authUrl: AUTH_URL } = await loadAuthConfig();
 
 const auth = createAuthClient(AUTH_URL);
 
@@ -58,7 +61,7 @@ async function init(mount){
  mount.append(stats,heading,comments);
  try{await load(id,stats,comments);}catch(e){stats.textContent=e.message;}
  const {data}=await auth.getSession().catch(()=>({data:null}));
- if(!data?.user){const info=el('p','pme-community-notice','Sign in to vote or comment. Reading is open to everyone.');const a=el('a','',' Sign in with Google');a.href='/login.html';info.append(a);mount.append(info);return;}
+ if(!data?.user){const info=el('p','pme-community-notice','Sign in to vote or comment. Reading is open to everyone.');const a=el('a','',' Sign in');a.href='/login.html';info.append(a);mount.append(info);return;}
  const controls=el('div','pme-community-actions');
  const up=el('button','pme-action','Helpful ▲'),down=el('button','pme-action','Needs improvement ▼');
  const feedback=el('p','pme-community-muted','');feedback.setAttribute('role','status');
@@ -96,3 +99,5 @@ form.onsubmit = async (e) => {
 
 }
 mounts.forEach(m=>init(m).catch(e=>{m.append(el('p','pme-community-muted',e.message));}));
+}
+start().catch(error => { for (const mount of document.querySelectorAll('[data-pme-community]')) { const p = document.createElement('p'); p.textContent = error.message; mount.append(p); } });

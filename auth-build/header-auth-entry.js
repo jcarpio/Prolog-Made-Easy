@@ -1,8 +1,11 @@
-
 import { createAuthClient } from '@neondatabase/auth';
+import { loadAuthConfig } from '../assets/js/auth-config.js';
 
-const AUTH_URL =
-  'https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-central-1.aws.neon.tech/neondb/auth';
+async function start() {
+
+
+
+const { authUrl: AUTH_URL } = await loadAuthConfig();
 
 const auth = createAuthClient(AUTH_URL);
 
@@ -82,3 +85,5 @@ async function updateHeader() {
 
 updateHeader();
 
+}
+start().catch(() => { const link = document.getElementById('header-auth-link'); if (link) link.title = 'Sign-in is unavailable. Please try again later.'; });

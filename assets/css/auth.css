@@ -25,3 +25,14 @@
   outline: 3px solid #e3aa43;
   outline-offset: 3px;
 }
+
+/* Passwordless email sign-in, scoped to the login card. */
+.auth-card [hidden]{display:none!important}
+.auth-divider{display:flex;align-items:center;gap:12px;margin:24px 0;color:var(--muted);font-size:.9rem}
+.auth-divider:before,.auth-divider:after{content:"";height:1px;flex:1;background:#dbe6e0}
+.auth-card form label{display:block;font-weight:650;margin:12px 0 8px}
+.auth-card form input{width:100%;min-height:48px;border:1px solid #9ab5ad;border-radius:8px;padding:12px;font:inherit;color:var(--ink);background:white}
+.auth-card form input:focus-visible{outline:3px solid #efaa30;outline-offset:3px}
+.auth-card form .auth-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+#code-email{overflow-wrap:anywhere}
+#email-code{letter-spacing:.2em}

@@ -14,7 +14,7 @@
   var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
   var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), setter ? setter.call(obj, value) : member.set(obj, value), value);
 
-  // node_modules/tslib/tslib.es6.mjs
+  // auth-build/node_modules/tslib/tslib.es6.mjs
   function __rest(s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -27,10 +27,10 @@
     return t;
   }
 
-  // node_modules/@supabase/auth-js/dist/module/lib/version.js
+  // auth-build/node_modules/@supabase/auth-js/dist/module/lib/version.js
   var version = "2.79.0";
 
-  // node_modules/@supabase/auth-js/dist/module/lib/constants.js
+  // auth-build/node_modules/@supabase/auth-js/dist/module/lib/constants.js
   var AUTO_REFRESH_TICK_DURATION_MS = 30 * 1e3;
   var AUTO_REFRESH_TICK_THRESHOLD = 3;
   var EXPIRY_MARGIN_MS = AUTO_REFRESH_TICK_THRESHOLD * AUTO_REFRESH_TICK_DURATION_MS;
@@ -47,7 +47,7 @@
   var BASE64URL_REGEX = /^([a-z0-9_-]{4})*($|[a-z0-9_-]{3}$|[a-z0-9_-]{2}$)$/i;
   var JWKS_TTL = 10 * 60 * 1e3;
 
-  // node_modules/@supabase/auth-js/dist/module/lib/errors.js
+  // auth-build/node_modules/@supabase/auth-js/dist/module/lib/errors.js
   var AuthError = class extends Error {
     constructor(message, status, code) {
       super(message);
@@ -156,7 +156,7 @@
     }
   };
 
-  // node_modules/@supabase/auth-js/dist/module/lib/base64url.js
+  // auth-build/node_modules/@supabase/auth-js/dist/module/lib/base64url.js
   var TO_BASE64URL = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_".split("");
   var IGNORE_BASE64URL = " 	\n\r=".split("");
   var FROM_BASE64URL = (() => {
@@ -318,7 +318,7 @@
     return result.join("");
   }
 
-  // node_modules/@supabase/auth-js/dist/module/lib/helpers.js
+  // auth-build/node_modules/@supabase/auth-js/dist/module/lib/helpers.js
   function expiresAt(expiresIn) {
     const timeNow = Math.round(Date.now() / 1e3);
     return timeNow + expiresIn;
@@ -414,8 +414,8 @@
     }
   };
   Deferred.promiseConstructor = Promise;
-  function decodeJWT(token2) {
-    const parts = token2.split(".");
+  function decodeJWT(token) {
+    const parts = token.split(".");
     if (parts.length !== 3) {
       throw new AuthInvalidJwtError("Invalid JWT structure");
     }
@@ -603,7 +603,7 @@
     return JSON.parse(JSON.stringify(obj));
   }
 
-  // node_modules/@supabase/auth-js/dist/module/lib/fetch.js
+  // auth-build/node_modules/@supabase/auth-js/dist/module/lib/fetch.js
   var _getErrorMessage = (err) => err.msg || err.message || err.error_description || err.error || JSON.stringify(err);
   var NETWORK_ERROR_CODES = [502, 503, 504];
   async function handleError(error61) {
@@ -740,10 +740,10 @@
     return data.access_token && data.refresh_token && data.expires_in;
   }
 
-  // node_modules/@supabase/auth-js/dist/module/lib/types.js
+  // auth-build/node_modules/@supabase/auth-js/dist/module/lib/types.js
   var SIGN_OUT_SCOPES = ["global", "local", "others"];
 
-  // node_modules/@supabase/auth-js/dist/module/GoTrueAdminApi.js
+  // auth-build/node_modules/@supabase/auth-js/dist/module/GoTrueAdminApi.js
   var GoTrueAdminApi = class {
     constructor({ url: url2 = "", headers = {}, fetch: fetch2 }) {
       this.url = url2;
@@ -1147,7 +1147,7 @@
     }
   };
 
-  // node_modules/@supabase/auth-js/dist/module/lib/local-storage.js
+  // auth-build/node_modules/@supabase/auth-js/dist/module/lib/local-storage.js
   function memoryLocalStorageAdapter(store = {}) {
     return {
       getItem: (key) => {
@@ -1162,7 +1162,7 @@
     };
   }
 
-  // node_modules/@supabase/auth-js/dist/module/lib/locks.js
+  // auth-build/node_modules/@supabase/auth-js/dist/module/lib/locks.js
   var internals = {
     /**
      * @experimental
@@ -1230,7 +1230,7 @@
     }));
   }
 
-  // node_modules/@supabase/auth-js/dist/module/lib/polyfills.js
+  // auth-build/node_modules/@supabase/auth-js/dist/module/lib/polyfills.js
   function polyfillGlobalThis() {
     if (typeof globalThis === "object")
       return;
@@ -1250,7 +1250,7 @@
     }
   }
 
-  // node_modules/@supabase/auth-js/dist/module/lib/web3/ethereum.js
+  // auth-build/node_modules/@supabase/auth-js/dist/module/lib/web3/ethereum.js
   function getAddress(address) {
     if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
       throw new Error(`@supabase/auth-js: Address "${address}" is invalid.`);
@@ -1318,7 +1318,7 @@ Request ID: ${requestId}`;
 ${suffix}`;
   }
 
-  // node_modules/@supabase/auth-js/dist/module/lib/webauthn.errors.js
+  // auth-build/node_modules/@supabase/auth-js/dist/module/lib/webauthn.errors.js
   var WebAuthnError = class extends Error {
     constructor({ message, code, cause, name: name2 }) {
       var _a3;
@@ -1486,7 +1486,7 @@ ${suffix}`;
     });
   }
 
-  // node_modules/@supabase/auth-js/dist/module/lib/webauthn.js
+  // auth-build/node_modules/@supabase/auth-js/dist/module/lib/webauthn.js
   var WebAuthnAbortService = class {
     /**
      * Create an abort signal for a new WebAuthn operation.
@@ -1999,7 +1999,7 @@ ${suffix}`;
     }
   };
 
-  // node_modules/@supabase/auth-js/dist/module/GoTrueClient.js
+  // auth-build/node_modules/@supabase/auth-js/dist/module/GoTrueClient.js
   polyfillGlobalThis();
   var DEFAULT_OPTIONS = {
     url: GOTRUE_URL,
@@ -2670,12 +2670,12 @@ ${suffix}`;
      */
     async signInWithIdToken(credentials) {
       try {
-        const { options, provider, token: token2, access_token, nonce } = credentials;
+        const { options, provider, token, access_token, nonce } = credentials;
         const res = await _request(this.fetch, "POST", `${this.url}/token?grant_type=id_token`, {
           headers: this.headers,
           body: {
             provider,
-            id_token: token2,
+            id_token: token,
             access_token,
             nonce,
             gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken }
@@ -3520,13 +3520,13 @@ ${suffix}`;
           const { error: sessionError, data: { session } } = result;
           if (sessionError)
             throw sessionError;
-          const { options, provider, token: token2, access_token, nonce } = credentials;
+          const { options, provider, token, access_token, nonce } = credentials;
           const res = await _request(this.fetch, "POST", `${this.url}/token?grant_type=id_token`, {
             headers: this.headers,
             jwt: (_a3 = session === null || session === void 0 ? void 0 : session.access_token) !== null && _a3 !== void 0 ? _a3 : void 0,
             body: {
               provider,
-              id_token: token2,
+              id_token: token,
               access_token,
               nonce,
               link_identity: true,
@@ -4344,21 +4344,21 @@ ${suffix}`;
      */
     async getClaims(jwt2, options = {}) {
       try {
-        let token2 = jwt2;
-        if (!token2) {
+        let token = jwt2;
+        if (!token) {
           const { data, error: error61 } = await this.getSession();
           if (error61 || !data.session) {
             return this._returnResult({ data: null, error: error61 });
           }
-          token2 = data.session.access_token;
+          token = data.session.access_token;
         }
-        const { header, payload, signature, raw: { header: rawHeader, payload: rawPayload } } = decodeJWT(token2);
+        const { header, payload, signature, raw: { header: rawHeader, payload: rawPayload } } = decodeJWT(token);
         if (!(options === null || options === void 0 ? void 0 : options.allowExpired)) {
           validateExp(payload.exp);
         }
         const signingKey = !header.alg || header.alg.startsWith("HS") || !header.kid || !("crypto" in globalThis && "subtle" in globalThis.crypto) ? null : await this.fetchJwk(header.kid, (options === null || options === void 0 ? void 0 : options.keys) ? { keys: options.keys } : options === null || options === void 0 ? void 0 : options.jwks);
         if (!signingKey) {
-          const { error: error61 } = await this.getUser(token2);
+          const { error: error61 } = await this.getUser(token);
           if (error61) {
             throw error61;
           }
@@ -4397,7 +4397,7 @@ ${suffix}`;
   };
   GoTrueClient.nextInstanceID = 0;
 
-  // node_modules/@neondatabase/auth/dist/better-auth-helpers-DdjQRVvx.mjs
+  // auth-build/node_modules/@neondatabase/auth/dist/better-auth-helpers-DdjQRVvx.mjs
   var SESSION_CACHE_TTL_MS = 6e4;
   var CLOCK_SKEW_BUFFER_MS = 1e4;
   var NEON_AUTH_SESSION_VERIFIER_PARAM_NAME = "neon_auth_session_verifier";
@@ -4850,13 +4850,13 @@ ${suffix}`;
     return new AuthError(message, status, code);
   }
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/package.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/package.mjs
   var version3 = "1.7.6";
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/version.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/version.mjs
   var PACKAGE_VERSION = version3;
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/broadcast-channel.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/broadcast-channel.mjs
   var kBroadcastChannel = Symbol.for("better-auth:broadcast-channel");
   var now = () => Math.floor(Date.now() / 1e3);
   var WindowBroadcastChannel = class {
@@ -4901,10 +4901,10 @@ ${suffix}`;
     return globalThis[kBroadcastChannel];
   }
 
-  // node_modules/nanostores/clean-stores/index.js
+  // auth-build/node_modules/nanostores/clean-stores/index.js
   var clean = Symbol("clean");
 
-  // node_modules/nanostores/atom/index.js
+  // auth-build/node_modules/nanostores/atom/index.js
   var listenerQueue = [];
   var lqIndex = 0;
   var batchSeen = null;
@@ -5016,7 +5016,7 @@ ${suffix}`;
     return $atom;
   };
 
-  // node_modules/nanostores/lifecycle/index.js
+  // auth-build/node_modules/nanostores/lifecycle/index.js
   var SET = 2;
   var MOUNT = 5;
   var UNMOUNT = 6;
@@ -5118,7 +5118,7 @@ ${suffix}`;
     });
   };
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/equality.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/equality.mjs
   function isPlainObject(value) {
     if (typeof value !== "object" || value === null) return false;
     const prototype = Object.getPrototypeOf(value);
@@ -5146,7 +5146,7 @@ ${suffix}`;
     });
   }
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/focus-manager.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/focus-manager.mjs
   var kFocusManager = Symbol.for("better-auth:focus-manager");
   var WindowFocusManager = class {
     constructor() {
@@ -5178,7 +5178,7 @@ ${suffix}`;
     return globalThis[kFocusManager];
   }
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/online-manager.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/online-manager.mjs
   var kOnlineManager = Symbol.for("better-auth:online-manager");
   var WindowOnlineManager = class {
     constructor() {
@@ -5213,7 +5213,7 @@ ${suffix}`;
     return globalThis[kOnlineManager];
   }
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/parser.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/parser.mjs
   var PROTO_POLLUTION_PATTERNS = {
     proto: /"(?:_|\\u0{2}5[Ff]){2}(?:p|\\u0{2}70)(?:r|\\u0{2}72)(?:o|\\u0{2}6[Ff])(?:t|\\u0{2}74)(?:o|\\u0{2}6[Ff])(?:_|\\u0{2}5[Ff]){2}"\s*:/,
     constructor: /"(?:c|\\u0063)(?:o|\\u006[Ff])(?:n|\\u006[Ee])(?:s|\\u0073)(?:t|\\u0074)(?:r|\\u0072)(?:u|\\u0075)(?:c|\\u0063)(?:t|\\u0074)(?:o|\\u006[Ff])(?:r|\\u0072)"\s*:/,
@@ -5282,7 +5282,7 @@ ${suffix}`;
     return betterJSONParse(value, options);
   }
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/query-atom.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/query-atom.mjs
   var kAuthQuery = Symbol.for("better-auth:auth-query");
   function createAuthQueryAtom(initialValue) {
     const queryAtom = atom(initialValue);
@@ -5290,7 +5290,7 @@ ${suffix}`;
     return queryAtom;
   }
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/query.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/query.mjs
   var isServer = () => typeof window === "undefined";
   function isAuthQueryStateEqual(a, b) {
     return isJsonEqual(a.data, b.data) && a.error === b.error && a.isPending === b.isPending && a.isRefetching === b.isRefetching && a.refetch === b.refetch;
@@ -5420,7 +5420,7 @@ ${suffix}`;
     return value;
   };
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/session-refresh.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/session-refresh.mjs
   var now2 = () => Math.floor(Date.now() / 1e3);
   var FOCUS_REFETCH_RATE_LIMIT_SECONDS = 5;
   function createSessionRefreshManager(opts) {
@@ -5487,7 +5487,7 @@ ${suffix}`;
         fetchSession();
       });
     };
-    const init2 = () => {
+    const init = () => {
       if (state.isInitialized) return;
       state.isInitialized = true;
       setupPolling();
@@ -5537,14 +5537,14 @@ ${suffix}`;
       state.lastSessionRequest = 0;
     };
     return {
-      init: init2,
+      init,
       cleanup,
       triggerRefetch,
       broadcastSessionUpdate
     };
   }
 
-  // node_modules/@better-auth/core/dist/env/env-impl.mjs
+  // auth-build/node_modules/@better-auth/core/dist/env/env-impl.mjs
   var _envShim = /* @__PURE__ */ Object.create(null);
   var _getEnv = (useShim) => globalThis.process?.env || globalThis.Deno?.env.toObject() || globalThis.__env__ || (useShim ? _envShim : globalThis);
   var env = new Proxy(_envShim, {
@@ -5601,7 +5601,7 @@ ${suffix}`;
     }
   });
 
-  // node_modules/@better-auth/core/dist/env/color-depth.mjs
+  // auth-build/node_modules/@better-auth/core/dist/env/color-depth.mjs
   var COLORS_2 = 1;
   var COLORS_16 = 4;
   var COLORS_256 = 8;
@@ -5691,7 +5691,7 @@ ${suffix}`;
     return COLORS_2;
   }
 
-  // node_modules/@better-auth/core/dist/context/global.mjs
+  // auth-build/node_modules/@better-auth/core/dist/context/global.mjs
   var symbol = Symbol.for("better-auth:global");
   var bind = null;
   var __context = {};
@@ -5716,7 +5716,7 @@ ${suffix}`;
     return __getBetterAuthGlobal().context.endpointContextAsyncStorage?.getStore();
   }
 
-  // node_modules/@better-auth/core/dist/env/logger.mjs
+  // auth-build/node_modules/@better-auth/core/dist/env/logger.mjs
   var TTY_COLORS = {
     reset: "\x1B[0m",
     bright: "\x1B[1m",
@@ -5807,7 +5807,7 @@ ${suffix}`;
     }
   };
 
-  // node_modules/@better-auth/core/dist/utils/error-codes.mjs
+  // auth-build/node_modules/@better-auth/core/dist/utils/error-codes.mjs
   function defineErrorCodes(codes) {
     return Object.fromEntries(Object.entries(codes).map(([key, value]) => [key, {
       code: key,
@@ -5816,7 +5816,7 @@ ${suffix}`;
     }]));
   }
 
-  // node_modules/better-call/dist/error.mjs
+  // auth-build/node_modules/better-call/dist/error.mjs
   function isErrorStackTraceLimitWritable() {
     const desc = Object.getOwnPropertyDescriptor(Error, "stackTraceLimit");
     if (desc === void 0) return Object.isExtensible(Error);
@@ -5933,7 +5933,7 @@ ${suffix}`;
   var kAPIErrorHeaderSymbol = Symbol.for("better-call:api-error-headers");
   var APIError = makeErrorForHideStackFrame(InternalAPIError, Error);
 
-  // node_modules/@better-auth/core/dist/error/index.mjs
+  // auth-build/node_modules/@better-auth/core/dist/error/index.mjs
   var BetterAuthError = class extends Error {
     constructor(message, options) {
       super(message, options);
@@ -5943,7 +5943,7 @@ ${suffix}`;
     }
   };
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/utils/url.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/utils/url.mjs
   var SLASH_CHAR_CODE = "/".charCodeAt(0);
   function trimTrailingSlashes(value) {
     let end = value.length;
@@ -6022,7 +6022,7 @@ ${suffix}`;
     }
   }
 
-  // node_modules/@better-auth/core/dist/utils/url.mjs
+  // auth-build/node_modules/@better-auth/core/dist/utils/url.mjs
   var DANGEROUS_URL_SCHEMES = [
     "javascript:",
     "data:",
@@ -6038,7 +6038,7 @@ ${suffix}`;
     return !DANGEROUS_URL_SCHEMES.includes(parsed.protocol);
   }
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/fetch-plugins.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/fetch-plugins.mjs
   var redirectPlugin = {
     id: "redirect",
     name: "Redirect",
@@ -6054,7 +6054,7 @@ ${suffix}`;
     } }
   };
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/session-atom.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/session-atom.mjs
   var isServer2 = () => typeof window === "undefined";
   var SESSION_MOUNT_DEDUPE_INTERVAL = STORE_UNMOUNT_DELAY;
   function hydrateSessionAtom(sessionAtom, session) {
@@ -6225,7 +6225,7 @@ ${suffix}`;
     };
   }
 
-  // node_modules/defu/dist/defu.mjs
+  // auth-build/node_modules/defu/dist/defu.mjs
   function isPlainObject2(value) {
     if (value === null || typeof value !== "object") {
       return false;
@@ -6293,7 +6293,7 @@ ${suffix}`;
     }
   });
 
-  // node_modules/@better-fetch/fetch/dist/index.js
+  // auth-build/node_modules/@better-fetch/fetch/dist/index.js
   var BetterFetchError = class extends Error {
     constructor(status, statusText, error61) {
       super(statusText || status.toString(), { cause: error61 });
@@ -6449,9 +6449,9 @@ ${suffix}`;
     const getValue = async (value) => typeof value === "function" ? await value() : value;
     if (options === null || options === void 0 ? void 0 : options.auth) {
       if (options.auth.type === "Bearer") {
-        const token2 = await getValue(options.auth.token);
-        if (!token2) return headers;
-        headers["authorization"] = `Bearer ${token2}`;
+        const token = await getValue(options.auth.token);
+        if (!token) return headers;
+        headers["authorization"] = `Bearer ${token}`;
       } else if (options.auth.type === "Basic") {
         const [username, password] = await Promise.all([getValue(options.auth.username), getValue(options.auth.password)]);
         if (!username || !password) return headers;
@@ -6830,7 +6830,7 @@ ${suffix}`;
     return $fetch;
   };
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/config.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/config.mjs
   var resolvePublicAuthUrl = (basePath) => {
     if (typeof process === "undefined") return void 0;
     const path = basePath ?? "/api/auth";
@@ -6938,12 +6938,12 @@ ${suffix}`;
     };
   };
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/utils/is-atom.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/utils/is-atom.mjs
   function isAtom(value) {
     return typeof value === "object" && value !== null && "get" in value && typeof value.get === "function" && "lc" in value && typeof value.lc === "number";
   }
 
-  // node_modules/@better-auth/core/dist/utils/string.mjs
+  // auth-build/node_modules/@better-auth/core/dist/utils/string.mjs
   function capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
@@ -6956,7 +6956,7 @@ ${suffix}`;
     return splitWords(input2).map((word) => word.toLowerCase()).join("-");
   }
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/proxy.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/proxy.mjs
   function getMethod2(path, knownPathMethods, args) {
     const method = knownPathMethods[path];
     const { fetchOptions, query: _query, ...body } = args || {};
@@ -7026,7 +7026,7 @@ ${suffix}`;
     return createProxy();
   }
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/vanilla.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/client/vanilla.mjs
   function createAuthClient(options) {
     const { pluginPathMethods, pluginsActions, pluginsAtoms, hydrateSession, $fetch, atomListeners, $store } = getClientConfig(options);
     const resolvedHooks = {};
@@ -7040,7 +7040,7 @@ ${suffix}`;
     }, $fetch, pluginPathMethods, pluginsAtoms, atomListeners);
   }
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/error-codes.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/error-codes.mjs
   var ADMIN_ERROR_CODES = defineErrorCodes({
     FAILED_TO_CREATE_USER: "Failed to create user",
     USER_ALREADY_EXISTS: "User already exists.",
@@ -7067,7 +7067,7 @@ ${suffix}`;
     PASSWORD_CANNOT_BE_UPDATED_VIA_UPDATE_USER: "Password cannot be updated through update-user. Use the set-user-password endpoint instead"
   });
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/access/access.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/access/access.mjs
   function unknownResourceResponse(requestedResource) {
     return {
       success: false,
@@ -7143,7 +7143,7 @@ ${suffix}`;
     };
   }
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/access/statement.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/access/statement.mjs
   var defaultStatements = {
     user: [
       "create",
@@ -7193,7 +7193,7 @@ ${suffix}`;
     user: userAc
   };
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/has-permission.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/has-permission.mjs
   var hasPermission = (input2) => {
     if (input2.userId && input2.options?.adminUserIds?.includes(input2.userId)) return true;
     if (!input2.permissions) return false;
@@ -7203,7 +7203,7 @@ ${suffix}`;
     return false;
   };
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/client.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/admin/client.mjs
   var adminClient = (options) => {
     const roles = {
       admin: adminAc,
@@ -7237,14 +7237,14 @@ ${suffix}`;
     };
   };
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/email-otp/error-codes.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/email-otp/error-codes.mjs
   var EMAIL_OTP_ERROR_CODES = defineErrorCodes({
     OTP_EXPIRED: "OTP expired",
     INVALID_OTP: "Invalid OTP",
     TOO_MANY_ATTEMPTS: "Too many attempts"
   });
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/email-otp/client.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/email-otp/client.mjs
   var emailOTPClient = () => {
     return {
       id: "email-otp",
@@ -7258,7 +7258,7 @@ ${suffix}`;
     };
   };
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/jwt/client.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/jwt/client.mjs
   var jwtClient = (options) => {
     const jwksPath = options?.jwks?.jwksPath ?? "/jwks";
     return {
@@ -7275,7 +7275,7 @@ ${suffix}`;
     };
   };
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/magic-link/client.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/magic-link/client.mjs
   var magicLinkClient = () => {
     return {
       id: "magic-link",
@@ -7284,7 +7284,7 @@ ${suffix}`;
     };
   };
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/error-codes.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/error-codes.mjs
   var ORGANIZATION_ERROR_CODES = defineErrorCodes({
     YOU_ARE_NOT_ALLOWED_TO_CREATE_A_NEW_ORGANIZATION: "You are not allowed to create a new organization",
     YOU_HAVE_REACHED_THE_MAXIMUM_NUMBER_OF_ORGANIZATIONS: "You have reached the maximum number of organizations",
@@ -7347,7 +7347,7 @@ ${suffix}`;
     INVALID_TEAM_ID: "Team id contains a reserved character"
   });
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/access/statement.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/access/statement.mjs
   var defaultStatements2 = {
     organization: ["update", "delete"],
     member: [
@@ -7422,7 +7422,7 @@ ${suffix}`;
     member: memberAc
   };
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/permission.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/permission.mjs
   var hasPermissionFn = (input2, acRoles) => {
     if (!input2.permissions) return false;
     const roles = input2.role.split(",");
@@ -7434,7 +7434,7 @@ ${suffix}`;
     return false;
   };
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/client.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/organization/client.mjs
   var clientSideHasPermission = (input2) => {
     return hasPermissionFn(input2, input2.options.roles || defaultRoles2);
   };
@@ -7525,7 +7525,7 @@ ${suffix}`;
     };
   };
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/phone-number/error-codes.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/phone-number/error-codes.mjs
   var PHONE_NUMBER_ERROR_CODES = defineErrorCodes({
     INVALID_PHONE_NUMBER: "Invalid phone number",
     PHONE_NUMBER_EXIST: "Phone number already exists",
@@ -7541,7 +7541,7 @@ ${suffix}`;
     TOO_MANY_ATTEMPTS: "Too many attempts"
   });
 
-  // node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/phone-number/client.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/better-auth/dist/plugins/phone-number/client.mjs
   var phoneNumberClient = () => {
     return {
       id: "phoneNumber",
@@ -7557,7 +7557,7 @@ ${suffix}`;
     };
   };
 
-  // node_modules/@neondatabase/auth/node_modules/@better-auth/oauth-provider/dist/signed-query-Df1MNiSH.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/@better-auth/oauth-provider/dist/signed-query-Df1MNiSH.mjs
   var signedQueryParameterNameParam = "ba_param";
   function getSignedOAuthQueryParameterNames(params) {
     const signedParameterNames = params.getAll(signedQueryParameterNameParam);
@@ -7574,10 +7574,10 @@ ${suffix}`;
     return signedParams.toString();
   }
 
-  // node_modules/@neondatabase/auth/node_modules/@better-auth/oauth-provider/dist/version-9KCSx144.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/@better-auth/oauth-provider/dist/version-9KCSx144.mjs
   var PACKAGE_VERSION2 = "1.7.6";
 
-  // node_modules/@better-auth/core/dist/utils/json.mjs
+  // auth-build/node_modules/@better-auth/core/dist/utils/json.mjs
   var iso8601Regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/;
   function reviveDate(value) {
     if (typeof value === "string" && iso8601Regex.test(value)) {
@@ -7611,7 +7611,7 @@ ${suffix}`;
     }
   }
 
-  // node_modules/@neondatabase/auth/node_modules/@better-auth/oauth-provider/dist/client.mjs
+  // auth-build/node_modules/@neondatabase/auth/node_modules/@better-auth/oauth-provider/dist/client.mjs
   var oauthProviderClient = () => {
     return {
       id: "oauth-provider-client",
@@ -7634,7 +7634,7 @@ ${suffix}`;
     };
   };
 
-  // node_modules/zod/v4/classic/external.js
+  // auth-build/node_modules/zod/v4/classic/external.js
   var external_exports = {};
   __export(external_exports, {
     $brand: () => $brand,
@@ -7891,7 +7891,7 @@ ${suffix}`;
     xor: () => xor
   });
 
-  // node_modules/zod/v4/core/index.js
+  // auth-build/node_modules/zod/v4/core/index.js
   var core_exports2 = {};
   __export(core_exports2, {
     $ZodAny: () => $ZodAny,
@@ -8198,7 +8198,7 @@ ${suffix}`;
     version: () => version4
   });
 
-  // node_modules/zod/v4/core/util.js
+  // auth-build/node_modules/zod/v4/core/util.js
   var util_exports = {};
   __export(util_exports, {
     BIGINT_FORMAT_RANGES: () => BIGINT_FORMAT_RANGES,
@@ -8321,9 +8321,9 @@ ${suffix}`;
     return input2 === null || input2 === void 0;
   }
   function cleanRegex(source) {
-    const start = source.startsWith("^") ? 1 : 0;
+    const start2 = source.startsWith("^") ? 1 : 0;
     const end = source.endsWith("$") ? source.length - 1 : source.length;
-    return source.slice(start, end);
+    return source.slice(start2, end);
   }
   function floatSafeRemainder(val, step) {
     const ratio = val / step;
@@ -8804,9 +8804,9 @@ ${suffix}`;
   function unwrapMessage(message) {
     return typeof message === "string" ? message : message?.message;
   }
-  function attachSchema(issues, start, inst) {
+  function attachSchema(issues, start2, inst) {
     var _a3;
-    for (let i = start; i < issues.length; i++) {
+    for (let i = start2; i < issues.length; i++) {
       (_a3 = issues[i]).schema ?? (_a3.schema = inst);
     }
   }
@@ -8895,7 +8895,7 @@ ${suffix}`;
   function cleanEnum(obj) {
     return Object.entries(obj).filter(([k, _]) => {
       return Number.isNaN(Number.parseInt(k, 10));
-    }).map((el2) => el2[1]);
+    }).map((el) => el[1]);
   }
   function base64ToUint8Array(base643) {
     const binaryString = atob(base643);
@@ -9035,7 +9035,7 @@ ${suffix}`;
     return fn;
   }
 
-  // node_modules/zod/v4/core/core.js
+  // auth-build/node_modules/zod/v4/core/core.js
   var _a;
   var NEVER = /* @__PURE__ */ Object.freeze({
     status: "aborted"
@@ -9073,7 +9073,7 @@ ${suffix}`;
     Internals.prototype = zodProto;
     const protoMembers = proto;
     const initialized = protoMembers && /* @__PURE__ */ new WeakSet();
-    function init2(inst, def) {
+    function init(inst, def) {
       if (!inst._zod) {
         _zodDesc.value = new Internals(def);
         try {
@@ -9114,7 +9114,7 @@ ${suffix}`;
     Object.defineProperty(Definition, "name", { value: name2 });
     function _(def) {
       const inst = params?.Parent ? newError(Definition) : this;
-      init2(inst, def);
+      init(inst, def);
       const deferred = inst._zod.deferred;
       if (deferred) {
         for (const fn of deferred) {
@@ -9127,7 +9127,7 @@ ${suffix}`;
         pp(inst);
       return inst;
     }
-    Object.defineProperty(_, "init", { value: init2 });
+    Object.defineProperty(_, "init", { value: init });
     Object.defineProperty(_, Symbol.hasInstance, {
       value: (inst) => {
         if (params?.Parent && inst instanceof params.Parent)
@@ -9158,7 +9158,7 @@ ${suffix}`;
     return globalConfig;
   }
 
-  // node_modules/zod/v4/core/errors.js
+  // auth-build/node_modules/zod/v4/core/errors.js
   function _getMessage() {
     const internals2 = this._zod;
     internals2.message ?? (internals2.message = JSON.stringify(internals2.def, jsonStringifyReplacer, 2));
@@ -9246,23 +9246,23 @@ ${suffix}`;
             let curr = fieldErrors;
             let i = 0;
             while (i < fullpath.length) {
-              const el2 = fullpath[i];
+              const el = fullpath[i];
               const terminal = i === fullpath.length - 1;
-              if (el2 === "_errors") {
+              if (el === "_errors") {
                 if (terminal)
                   curr._errors.push(mapper(issue2));
                 i++;
                 continue;
               }
-              if (!Object.prototype.hasOwnProperty.call(curr, el2)) {
-                Object.defineProperty(curr, el2, {
+              if (!Object.prototype.hasOwnProperty.call(curr, el)) {
+                Object.defineProperty(curr, el, {
                   value: { _errors: [] },
                   enumerable: true,
                   writable: true,
                   configurable: true
                 });
               }
-              const node2 = curr[el2];
+              const node2 = curr[el];
               if (terminal) {
                 node2._errors.push(mapper(issue2));
               }
@@ -9296,23 +9296,23 @@ ${suffix}`;
           let curr = result;
           let i = 0;
           while (i < fullpath.length) {
-            const el2 = fullpath[i];
+            const el = fullpath[i];
             const terminal = i === fullpath.length - 1;
-            if (typeof el2 === "string") {
+            if (typeof el === "string") {
               curr.properties ?? (curr.properties = {});
-              if (!Object.prototype.hasOwnProperty.call(curr.properties, el2)) {
-                Object.defineProperty(curr.properties, el2, {
+              if (!Object.prototype.hasOwnProperty.call(curr.properties, el)) {
+                Object.defineProperty(curr.properties, el, {
                   value: { errors: [] },
                   enumerable: true,
                   writable: true,
                   configurable: true
                 });
               }
-              curr = curr.properties[el2];
+              curr = curr.properties[el];
             } else {
               curr.items ?? (curr.items = []);
-              (_a3 = curr.items)[el2] ?? (_a3[el2] = { errors: [] });
-              curr = curr.items[el2];
+              (_a3 = curr.items)[el] ?? (_a3[el] = { errors: [] });
+              curr = curr.items[el];
             }
             if (terminal) {
               curr.errors.push(mapper(issue2));
@@ -9354,7 +9354,7 @@ ${suffix}`;
     return lines.join("\n");
   }
 
-  // node_modules/zod/v4/core/parse.js
+  // auth-build/node_modules/zod/v4/core/parse.js
   function finalizeParams(callee, params) {
     return { callee: params?.callee ?? callee, Err: params?.Err };
   }
@@ -9497,7 +9497,7 @@ ${suffix}`;
   };
   var safeDecodeAsync = /* @__PURE__ */ _safeDecodeAsync($ZodRealError);
 
-  // node_modules/zod/v4/core/regexes.js
+  // auth-build/node_modules/zod/v4/core/regexes.js
   var regexes_exports = {};
   __export(regexes_exports, {
     base64: () => base64,
@@ -9663,7 +9663,7 @@ ${suffix}`;
   var sha512_base64 = /* @__PURE__ */ fixedBase64(86, "==");
   var sha512_base64url = /* @__PURE__ */ fixedBase64url(86);
 
-  // node_modules/zod/v4/core/checks.js
+  // auth-build/node_modules/zod/v4/core/checks.js
   var $ZodCheck = /* @__PURE__ */ $constructor("$ZodCheck", (inst, def) => {
     var _a3;
     inst._zod ?? (inst._zod = {});
@@ -10207,7 +10207,7 @@ ${suffix}`;
     };
   });
 
-  // node_modules/zod/v4/core/doc.js
+  // auth-build/node_modules/zod/v4/core/doc.js
   var Doc = class {
     constructor(args = [], closed = {}) {
       this.content = [];
@@ -10244,14 +10244,14 @@ ${content.join("\n")}
     }
   };
 
-  // node_modules/zod/v4/core/versions.js
+  // auth-build/node_modules/zod/v4/core/versions.js
   var version4 = {
     major: 4,
     minor: 5,
     patch: 4
   };
 
-  // node_modules/zod/v4/core/schemas.js
+  // auth-build/node_modules/zod/v4/core/schemas.js
   var $ZodType = /* @__PURE__ */ $constructor("$ZodType", (inst, def) => {
     var _a3;
     inst ?? (inst = {});
@@ -10724,9 +10724,9 @@ ${content.join("\n")}
       });
     };
   });
-  function isValidJWT(token2, algorithm = null) {
+  function isValidJWT(token, algorithm = null) {
     try {
-      const tokensParts = token2.split(".");
+      const tokensParts = token.split(".");
       if (tokensParts.length !== 3)
         return false;
       const [header] = tokensParts;
@@ -11148,10 +11148,10 @@ ${content.join("\n")}
       for (const key of value.allKeys) {
         if (key === "__proto__")
           continue;
-        const el2 = shape[key];
-        const optin = el2._zod.optin;
-        const optout = el2._zod.optout;
-        const r = el2._zod.run({ value: input2[key], issues: [] }, ctx);
+        const el = shape[key];
+        const optin = el._zod.optin;
+        const optout = el._zod.optout;
+        const r = el._zod.run({ value: input2[key], issues: [] }, ctx);
         if (r instanceof Promise) {
           proms.push(r.then((r2) => handlePropertyResult(r2, payload, key, input2, optin, optout)));
         } else {
@@ -11664,9 +11664,9 @@ ${content.join("\n")}
       if (def.rest) {
         let i = items.length - 1;
         const rest = input2.slice(items.length);
-        for (const el2 of rest) {
+        for (const el of rest) {
           i++;
-          const result = def.rest._zod.run({ value: el2, issues: [] }, ctx);
+          const result = def.rest._zod.run({ value: el, issues: [] }, ctx);
           if (result instanceof Promise) {
             proms.push(result.then((r) => handleTupleResult(r, payload, i)));
           } else {
@@ -12347,9 +12347,9 @@ ${content.join("\n")}
         const source = part._zod.pattern instanceof RegExp ? part._zod.pattern.source : part._zod.pattern;
         if (!source)
           throw new Error(`Invalid template literal part: ${part._zod.traits}`);
-        const start = source.startsWith("^") ? 1 : 0;
+        const start2 = source.startsWith("^") ? 1 : 0;
         const end = source.endsWith("$") ? source.length - 1 : source.length;
-        regexParts.push(source.slice(start, end));
+        regexParts.push(source.slice(start2, end));
       } else if (part === null || primitiveTypes.has(typeof part)) {
         regexParts.push(escapeRegex(`${part}`));
       } else {
@@ -12515,7 +12515,7 @@ ${content.join("\n")}
     }
   }
 
-  // node_modules/zod/v4/core/memoizer.js
+  // auth-build/node_modules/zod/v4/core/memoizer.js
   var $ZodCyclicError = class extends Error {
     constructor() {
       super(`Cannot parse a reference cycle that closes through a transform`);
@@ -12553,8 +12553,8 @@ ${content.join("\n")}
         check2(def.element);
         break;
       case "tuple":
-        for (const el2 of def.items)
-          check2(el2);
+        for (const el of def.items)
+          check2(el);
         check2(def.rest);
         break;
       case "record":
@@ -12566,8 +12566,8 @@ ${content.join("\n")}
         check2(def.valueType);
         break;
       case "union":
-        for (const el2 of def.options)
-          check2(el2);
+        for (const el of def.options)
+          check2(el);
         break;
       case "intersection":
         check2(def.left);
@@ -12631,8 +12631,8 @@ ${content.join("\n")}
           if (value._zod)
             check2(value);
           else if (Array.isArray(value))
-            for (const el2 of value)
-              check2(el2);
+            for (const el of value)
+              check2(el);
         }
       }
     }
@@ -12756,7 +12756,7 @@ ${content.join("\n")}
     return backEdges !== void 0 && value !== null && typeof value === "object" && backEdges.has(value);
   }
 
-  // node_modules/zod/v4/locales/index.js
+  // auth-build/node_modules/zod/v4/locales/index.js
   var locales_exports = {};
   __export(locales_exports, {
     ar: () => ar_default,
@@ -12823,7 +12823,7 @@ ${content.join("\n")}
     zhTW: () => zh_TW_default
   });
 
-  // node_modules/zod/v4/locales/ar.js
+  // auth-build/node_modules/zod/v4/locales/ar.js
   var error = () => {
     const Sizable = {
       string: { unit: "\u062D\u0631\u0641", verb: "\u0623\u0646 \u064A\u062D\u0648\u064A" },
@@ -12933,7 +12933,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/az.js
+  // auth-build/node_modules/zod/v4/locales/az.js
   var error2 = () => {
     const Sizable = {
       string: { unit: "simvol", verb: "olmal\u0131d\u0131r" },
@@ -13042,7 +13042,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/be.js
+  // auth-build/node_modules/zod/v4/locales/be.js
   function getBelarusianPlural(count, one, few, many) {
     const absCount = Math.abs(count);
     const lastDigit = absCount % 10;
@@ -13209,7 +13209,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/bg.js
+  // auth-build/node_modules/zod/v4/locales/bg.js
   var error4 = () => {
     const Sizable = {
       string: { unit: "\u0441\u0438\u043C\u0432\u043E\u043B\u0430", verb: "\u0434\u0430 \u0441\u044A\u0434\u044A\u0440\u0436\u0430" },
@@ -13333,7 +13333,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/bn.js
+  // auth-build/node_modules/zod/v4/locales/bn.js
   var error5 = () => {
     const Sizable = {
       string: { unit: "\u0985\u0995\u09CD\u09B7\u09B0", verb: "\u09A5\u09BE\u0995\u09A4\u09C7 \u09B9\u09AC\u09C7" },
@@ -13445,7 +13445,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/ca.js
+  // auth-build/node_modules/zod/v4/locales/ca.js
   var error6 = () => {
     const Sizable = {
       string: { unit: "car\xE0cters", verb: "contenir" },
@@ -13557,7 +13557,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/ckb.js
+  // auth-build/node_modules/zod/v4/locales/ckb.js
   var error7 = () => {
     const Sizable = {
       string: { unit: "\u067E\u06CC\u062A", verb: "\u0628\u06CE\u062A" },
@@ -13688,7 +13688,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/cs.js
+  // auth-build/node_modules/zod/v4/locales/cs.js
   var error8 = () => {
     const Sizable = {
       string: { unit: "znak\u016F", verb: "m\xEDt" },
@@ -13803,7 +13803,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/da.js
+  // auth-build/node_modules/zod/v4/locales/da.js
   var error9 = () => {
     const Sizable = {
       string: { unit: "tegn", verb: "havde" },
@@ -13922,7 +13922,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/de.js
+  // auth-build/node_modules/zod/v4/locales/de.js
   var error10 = () => {
     const Sizable = {
       string: { unit: "Zeichen", verb: "zu haben" },
@@ -14034,7 +14034,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/el.js
+  // auth-build/node_modules/zod/v4/locales/el.js
   var error11 = () => {
     const Sizable = {
       string: { unit: "\u03C7\u03B1\u03C1\u03B1\u03BA\u03C4\u03AE\u03C1\u03B5\u03C2", verb: "\u03BD\u03B1 \u03AD\u03C7\u03B5\u03B9" },
@@ -14145,7 +14145,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/en.js
+  // auth-build/node_modules/zod/v4/locales/en.js
   var error12 = () => {
     const Sizable = {
       string: { unit: "characters", verb: "to have" },
@@ -14268,7 +14268,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/eo.js
+  // auth-build/node_modules/zod/v4/locales/eo.js
   var error13 = () => {
     const Sizable = {
       string: { unit: "karaktrojn", verb: "havi" },
@@ -14381,7 +14381,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/es.js
+  // auth-build/node_modules/zod/v4/locales/es.js
   var error14 = () => {
     const Sizable = {
       string: { unit: "caracteres", verb: "tener" },
@@ -14516,7 +14516,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/fa.js
+  // auth-build/node_modules/zod/v4/locales/fa.js
   var error15 = () => {
     const Sizable = {
       string: { unit: "\u06A9\u0627\u0631\u0627\u06A9\u062A\u0631", verb: "\u062F\u0627\u0634\u062A\u0647 \u0628\u0627\u0634\u062F" },
@@ -14634,7 +14634,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/fi.js
+  // auth-build/node_modules/zod/v4/locales/fi.js
   var error16 = () => {
     const Sizable = {
       string: { unit: "merkki\xE4", subject: "merkkijonon" },
@@ -14750,7 +14750,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/fr.js
+  // auth-build/node_modules/zod/v4/locales/fr.js
   var error17 = () => {
     const Sizable = {
       string: { unit: "caract\xE8res", verb: "avoir" },
@@ -14878,7 +14878,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/fr-CA.js
+  // auth-build/node_modules/zod/v4/locales/fr-CA.js
   var error18 = () => {
     const Sizable = {
       string: { unit: "caract\xE8res", verb: "avoir" },
@@ -14989,7 +14989,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/gu.js
+  // auth-build/node_modules/zod/v4/locales/gu.js
   var error19 = () => {
     const Sizable = {
       string: { unit: "\u0A85\u0A95\u0ACD\u0AB7\u0AB0", verb: "\u0AB9\u0ACB\u0AB5\u0ABE \u0A9C\u0ACB\u0A88\u0A8F" },
@@ -15101,7 +15101,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/he.js
+  // auth-build/node_modules/zod/v4/locales/he.js
   var error20 = () => {
     const TypeNames = {
       string: { label: "\u05DE\u05D7\u05E8\u05D5\u05D6\u05EA", gender: "f" },
@@ -15301,7 +15301,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/hi.js
+  // auth-build/node_modules/zod/v4/locales/hi.js
   var error21 = () => {
     const Sizable = {
       string: { unit: "\u0905\u0915\u094D\u0937\u0930", verb: "\u0930\u0916\u0928\u0947 \u0915\u0947 \u0932\u093F\u090F" },
@@ -15411,7 +15411,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/hr.js
+  // auth-build/node_modules/zod/v4/locales/hr.js
   var error22 = () => {
     const Sizable = {
       string: { unit: "znakova", verb: "imati" },
@@ -15536,7 +15536,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/hu.js
+  // auth-build/node_modules/zod/v4/locales/hu.js
   var error23 = () => {
     const Sizable = {
       string: { unit: "karakter", verb: "legyen" },
@@ -15648,7 +15648,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/hy.js
+  // auth-build/node_modules/zod/v4/locales/hy.js
   function getArmenianPlural(count, one, many) {
     return Math.abs(count) === 1 ? one : many;
   }
@@ -15805,7 +15805,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/id.js
+  // auth-build/node_modules/zod/v4/locales/id.js
   var error25 = () => {
     const Sizable = {
       string: { unit: "karakter", verb: "memiliki" },
@@ -15915,7 +15915,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/is.js
+  // auth-build/node_modules/zod/v4/locales/is.js
   var error26 = () => {
     const Sizable = {
       string: { unit: "stafi", verb: "a\xF0 hafa" },
@@ -16028,7 +16028,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/it.js
+  // auth-build/node_modules/zod/v4/locales/it.js
   var error27 = () => {
     const Sizable = {
       string: { unit: "caratteri", verb: "avere" },
@@ -16140,7 +16140,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/ja.js
+  // auth-build/node_modules/zod/v4/locales/ja.js
   var error28 = () => {
     const Sizable = {
       string: { unit: "\u6587\u5B57", verb: "\u3067\u3042\u308B" },
@@ -16251,7 +16251,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/ka.js
+  // auth-build/node_modules/zod/v4/locales/ka.js
   var error29 = () => {
     const Sizable = {
       string: { unit: "\u10E1\u10D8\u10DB\u10D1\u10DD\u10DA\u10DD", verb: "\u10E3\u10DC\u10D3\u10D0 \u10E8\u10D4\u10D8\u10EA\u10D0\u10D5\u10D3\u10D4\u10E1" },
@@ -16367,7 +16367,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/km.js
+  // auth-build/node_modules/zod/v4/locales/km.js
   var error30 = () => {
     const Sizable = {
       string: { unit: "\u178F\u17BD\u17A2\u1780\u17D2\u179F\u179A", verb: "\u1782\u17BD\u179A\u1798\u17B6\u1793" },
@@ -16481,12 +16481,12 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/kh.js
+  // auth-build/node_modules/zod/v4/locales/kh.js
   function kh_default() {
     return km_default();
   }
 
-  // node_modules/zod/v4/locales/kn.js
+  // auth-build/node_modules/zod/v4/locales/kn.js
   var error31 = () => {
     const Sizable = {
       string: { unit: "\u0C85\u0C95\u0CCD\u0CB7\u0CB0\u0C97\u0CB3\u0CC1", verb: "\u0CB9\u0CCA\u0C82\u0CA6\u0CB2\u0CC1" },
@@ -16600,7 +16600,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/ko.js
+  // auth-build/node_modules/zod/v4/locales/ko.js
   var error32 = () => {
     const Sizable = {
       string: { unit: "\uBB38\uC790", verb: "to have" },
@@ -16715,7 +16715,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/lt.js
+  // auth-build/node_modules/zod/v4/locales/lt.js
   var capitalizeFirstCharacter = (text) => {
     return text.charAt(0).toUpperCase() + text.slice(1);
   };
@@ -16921,7 +16921,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/mk.js
+  // auth-build/node_modules/zod/v4/locales/mk.js
   var error34 = () => {
     const Sizable = {
       string: { unit: "\u0437\u043D\u0430\u0446\u0438", verb: "\u0434\u0430 \u0438\u043C\u0430\u0430\u0442" },
@@ -17034,7 +17034,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/ms.js
+  // auth-build/node_modules/zod/v4/locales/ms.js
   var error35 = () => {
     const Sizable = {
       string: { unit: "aksara", verb: "mempunyai" },
@@ -17145,7 +17145,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/ne.js
+  // auth-build/node_modules/zod/v4/locales/ne.js
   var error36 = () => {
     const Sizable = {
       string: { unit: "\u0905\u0915\u094D\u0937\u0930", verb: "\u0939\u0941\u0928\u0941\u092A\u0930\u094D\u091B" },
@@ -17255,7 +17255,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/nl.js
+  // auth-build/node_modules/zod/v4/locales/nl.js
   var error37 = () => {
     const Sizable = {
       string: { unit: "tekens", verb: "heeft" },
@@ -17369,7 +17369,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/nn.js
+  // auth-build/node_modules/zod/v4/locales/nn.js
   var error38 = () => {
     const Sizable = {
       string: { unit: "teikn", verb: "\xE5 ha" },
@@ -17481,7 +17481,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/no.js
+  // auth-build/node_modules/zod/v4/locales/no.js
   var error39 = () => {
     const Sizable = {
       string: { unit: "tegn", verb: "\xE5 ha" },
@@ -17593,7 +17593,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/ota.js
+  // auth-build/node_modules/zod/v4/locales/ota.js
   var error40 = () => {
     const Sizable = {
       string: { unit: "harf", verb: "olmal\u0131d\u0131r" },
@@ -17706,7 +17706,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/ps.js
+  // auth-build/node_modules/zod/v4/locales/ps.js
   var error41 = () => {
     const Sizable = {
       string: { unit: "\u062A\u0648\u06A9\u064A", verb: "\u0648\u0644\u0631\u064A" },
@@ -17824,7 +17824,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/pl.js
+  // auth-build/node_modules/zod/v4/locales/pl.js
   var error42 = () => {
     const Sizable = {
       string: { unit: "znak\xF3w", verb: "mie\u0107" },
@@ -17937,7 +17937,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/pt.js
+  // auth-build/node_modules/zod/v4/locales/pt.js
   var error43 = () => {
     const Sizable = {
       string: { unit: "caracteres" },
@@ -18079,7 +18079,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/pt-BR.js
+  // auth-build/node_modules/zod/v4/locales/pt-BR.js
   var error44 = () => {
     const Sizable = {
       string: { unit: "caracteres" },
@@ -18222,7 +18222,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/ro.js
+  // auth-build/node_modules/zod/v4/locales/ro.js
   var error45 = () => {
     const Sizable = {
       string: { unit: "caractere", verb: "s\u0103 aib\u0103" },
@@ -18343,7 +18343,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/ru.js
+  // auth-build/node_modules/zod/v4/locales/ru.js
   function getRussianPlural(count, one, few, many) {
     const absCount = Math.abs(count);
     const lastDigit = absCount % 10;
@@ -18510,7 +18510,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/sk.js
+  // auth-build/node_modules/zod/v4/locales/sk.js
   var error47 = () => {
     const Sizable = {
       string: { unit: "znakov", verb: "ma\u0165" },
@@ -18625,7 +18625,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/sl.js
+  // auth-build/node_modules/zod/v4/locales/sl.js
   var error48 = () => {
     const Sizable = {
       string: { unit: "znakov", verb: "imeti" },
@@ -18738,7 +18738,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/sv.js
+  // auth-build/node_modules/zod/v4/locales/sv.js
   var error49 = () => {
     const Sizable = {
       string: { unit: "tecken", verb: "att ha" },
@@ -18852,7 +18852,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/ta.js
+  // auth-build/node_modules/zod/v4/locales/ta.js
   var error50 = () => {
     const Sizable = {
       string: { unit: "\u0B8E\u0BB4\u0BC1\u0BA4\u0BCD\u0BA4\u0BC1\u0B95\u0BCD\u0B95\u0BB3\u0BCD", verb: "\u0B95\u0BCA\u0BA3\u0BCD\u0B9F\u0BBF\u0BB0\u0BC1\u0B95\u0BCD\u0B95 \u0BB5\u0BC7\u0BA3\u0BCD\u0B9F\u0BC1\u0BAE\u0BCD" },
@@ -18966,7 +18966,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/th.js
+  // auth-build/node_modules/zod/v4/locales/th.js
   var error51 = () => {
     const Sizable = {
       string: { unit: "\u0E15\u0E31\u0E27\u0E2D\u0E31\u0E01\u0E29\u0E23", verb: "\u0E04\u0E27\u0E23\u0E21\u0E35" },
@@ -19080,7 +19080,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/tk.js
+  // auth-build/node_modules/zod/v4/locales/tk.js
   var error52 = () => {
     const Sizable = {
       string: { unit: "simwol", verb: "bolmaly" },
@@ -19186,7 +19186,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/tr.js
+  // auth-build/node_modules/zod/v4/locales/tr.js
   var error53 = () => {
     const Sizable = {
       string: { unit: "karakter", verb: "olmal\u0131" },
@@ -19295,7 +19295,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/uk.js
+  // auth-build/node_modules/zod/v4/locales/uk.js
   var error54 = () => {
     const Sizable = {
       string: { unit: "\u0441\u0438\u043C\u0432\u043E\u043B\u0456\u0432", verb: "\u043C\u0430\u0442\u0438\u043C\u0435" },
@@ -19407,12 +19407,12 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/ua.js
+  // auth-build/node_modules/zod/v4/locales/ua.js
   function ua_default() {
     return uk_default();
   }
 
-  // node_modules/zod/v4/locales/ur.js
+  // auth-build/node_modules/zod/v4/locales/ur.js
   var error55 = () => {
     const Sizable = {
       string: { unit: "\u062D\u0631\u0648\u0641", verb: "\u06C1\u0648\u0646\u0627" },
@@ -19526,7 +19526,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/uz.js
+  // auth-build/node_modules/zod/v4/locales/uz.js
   var error56 = () => {
     const Sizable = {
       string: { unit: "belgi", verb: "bo\u2018lishi kerak" },
@@ -19638,7 +19638,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/vi.js
+  // auth-build/node_modules/zod/v4/locales/vi.js
   var error57 = () => {
     const Sizable = {
       string: { unit: "k\xFD t\u1EF1", verb: "c\xF3" },
@@ -19750,7 +19750,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/zh-CN.js
+  // auth-build/node_modules/zod/v4/locales/zh-CN.js
   var error58 = () => {
     const Sizable = {
       string: { unit: "\u5B57\u7B26", verb: "\u5305\u542B" },
@@ -19863,7 +19863,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/zh-TW.js
+  // auth-build/node_modules/zod/v4/locales/zh-TW.js
   var error59 = () => {
     const Sizable = {
       string: { unit: "\u5B57\u5143", verb: "\u64C1\u6709" },
@@ -19974,7 +19974,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/locales/yo.js
+  // auth-build/node_modules/zod/v4/locales/yo.js
   var error60 = () => {
     const Sizable = {
       string: { unit: "\xE0mi", verb: "n\xED" },
@@ -20085,7 +20085,7 @@ ${content.join("\n")}
     };
   }
 
-  // node_modules/zod/v4/core/registries.js
+  // auth-build/node_modules/zod/v4/core/registries.js
   var _a2;
   var $output = /* @__PURE__ */ Symbol("ZodOutput");
   var $input = /* @__PURE__ */ Symbol("ZodInput");
@@ -20135,7 +20135,7 @@ ${content.join("\n")}
   (_a2 = globalThis).__zod_globalRegistry ?? (_a2.__zod_globalRegistry = registry());
   var globalRegistry = globalThis.__zod_globalRegistry;
 
-  // node_modules/zod/v4/core/compile.js
+  // auth-build/node_modules/zod/v4/core/compile.js
   var INVALID = Symbol.for("zod.compile.invalid");
   var FALLBACK_FLAG = Symbol.for("zod.compile.fallback");
   var ZodCompileAsyncError = class extends Error {
@@ -21678,7 +21678,7 @@ ${code}
     return accessor;
   }
 
-  // node_modules/zod/v4/core/api.js
+  // auth-build/node_modules/zod/v4/core/api.js
   // @__NO_SIDE_EFFECTS__
   function _string(Class2, params) {
     return new Class2({
@@ -22734,7 +22734,7 @@ ${code}
     return inst;
   }
 
-  // node_modules/zod/v4/core/to-json-schema.js
+  // auth-build/node_modules/zod/v4/core/to-json-schema.js
   function assignProps(target, ...sources) {
     for (const source of sources) {
       for (const key of Reflect.ownKeys(source)) {
@@ -23265,7 +23265,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     return finalize(ctx, schema);
   };
 
-  // node_modules/zod/v4/core/json-schema-processors.js
+  // auth-build/node_modules/zod/v4/core/json-schema-processors.js
   var formatMap = {
     guid: "uuid",
     url: "uri",
@@ -23923,7 +23923,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     return finalize(ctx, input2);
   }
 
-  // node_modules/zod/v4/core/json-schema-generator.js
+  // auth-build/node_modules/zod/v4/core/json-schema-generator.js
   var JSONSchemaGenerator = class {
     /** @deprecated Access via ctx instead */
     get metadataRegistry() {
@@ -24001,10 +24001,10 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     }
   };
 
-  // node_modules/zod/v4/core/json-schema.js
+  // auth-build/node_modules/zod/v4/core/json-schema.js
   var json_schema_exports = {};
 
-  // node_modules/zod/v4/classic/schemas.js
+  // auth-build/node_modules/zod/v4/classic/schemas.js
   var schemas_exports2 = {};
   __export(schemas_exports2, {
     ZodAny: () => ZodAny,
@@ -24181,7 +24181,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     xor: () => xor
   });
 
-  // node_modules/zod/v4/classic/checks.js
+  // auth-build/node_modules/zod/v4/classic/checks.js
   var checks_exports2 = {};
   __export(checks_exports2, {
     endsWith: () => _endsWith,
@@ -24216,7 +24216,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     uppercase: () => _uppercase
   });
 
-  // node_modules/zod/v4/classic/errors.js
+  // auth-build/node_modules/zod/v4/classic/errors.js
   var _installedErrorProtos = /* @__PURE__ */ new WeakSet([Object.prototype, Error.prototype]);
   function _lazyMethod(proto, key, make) {
     Object.defineProperty(proto, key, {
@@ -24262,7 +24262,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     Parent: Error
   });
 
-  // node_modules/zod/v4/classic/parse.js
+  // auth-build/node_modules/zod/v4/classic/parse.js
   var parse2 = /* @__PURE__ */ _parse(ZodRealError);
   var parseAsync2 = /* @__PURE__ */ _parseAsync(ZodRealError);
   var safeParse2 = /* @__PURE__ */ _safeParse(ZodRealError);
@@ -24276,7 +24276,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   var safeEncodeAsync2 = /* @__PURE__ */ _safeEncodeAsync(ZodRealError);
   var safeDecodeAsync2 = /* @__PURE__ */ _safeDecodeAsync(ZodRealError);
 
-  // node_modules/zod/v4/classic/schemas.js
+  // auth-build/node_modules/zod/v4/classic/schemas.js
   function _ensureDefaultLocale() {
     if (!globalConfig.localeError)
       config(en_default());
@@ -25687,7 +25687,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     });
   }
 
-  // node_modules/zod/v4/classic/compat.js
+  // auth-build/node_modules/zod/v4/classic/compat.js
   var ZodIssueCode = {
     invalid_type: "invalid_type",
     too_big: "too_big",
@@ -25713,7 +25713,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   /* @__PURE__ */ (function(ZodFirstPartyTypeKind2) {
   })(ZodFirstPartyTypeKind || (ZodFirstPartyTypeKind = {}));
 
-  // node_modules/zod/v4/classic/iso.js
+  // auth-build/node_modules/zod/v4/classic/iso.js
   var iso_exports = {};
   __export(iso_exports, {
     ZodISODate: () => ZodISODate,
@@ -25738,7 +25738,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     return _isoDuration(ZodISODuration, params);
   }
 
-  // node_modules/zod/v4/classic/from-json-schema.js
+  // auth-build/node_modules/zod/v4/classic/from-json-schema.js
   var z = {
     ...schemas_exports2,
     ...checks_exports2,
@@ -26278,7 +26278,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     return convertSchema(normalized, ctx);
   }
 
-  // node_modules/zod/v4/core/visit.js
+  // auth-build/node_modules/zod/v4/core/visit.js
   var RESOLVING = Symbol("z.visit/resolving");
   function visit(schema, fnOrHandlers) {
     const fn = typeof fnOrHandlers === "function" ? fnOrHandlers : (node2, rewritten) => {
@@ -26433,7 +26433,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     return run(schema);
   }
 
-  // node_modules/zod/v4/classic/deep-partial.js
+  // auth-build/node_modules/zod/v4/classic/deep-partial.js
   function deepPartial(schema) {
     return visit(schema, {
       object: (s) => s.partial(),
@@ -26445,7 +26445,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     });
   }
 
-  // node_modules/zod/v4/classic/in-out.js
+  // auth-build/node_modules/zod/v4/classic/in-out.js
   function withChecks(side, checks) {
     if (!checks?.length)
       return side;
@@ -26475,7 +26475,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     });
   }
 
-  // node_modules/zod/v4/classic/coerce.js
+  // auth-build/node_modules/zod/v4/classic/coerce.js
   var coerce_exports = {};
   __export(coerce_exports, {
     bigint: () => bigint3,
@@ -26500,7 +26500,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     return _coercedDate(ZodDate, params);
   }
 
-  // node_modules/@neondatabase/auth/dist/adapter-core-N_pQf5vS.mjs
+  // auth-build/node_modules/@neondatabase/auth/dist/adapter-core-N_pQf5vS.mjs
   var InFlightRequestManager = class {
     constructor() {
       /**
@@ -26802,8 +26802,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     anonymousSignIn: "/sign-in/anonymous",
     anonymousToken: "/token/anonymous"
   };
-  async function handleSocialSignInViaPopup(input2, init2) {
-    const body = JSON.parse(init2?.body || "{}");
+  async function handleSocialSignInViaPopup(input2, init) {
+    const body = JSON.parse(init?.body || "{}");
     const originalCallbackURL = body.callbackURL || "/";
     const popupCallbackUrl = new URL(NEON_AUTH_POPUP_CALLBACK_ROUTE, globalThis.location.origin);
     popupCallbackUrl.searchParams.set(NEON_AUTH_POPUP_PARAM_NAME, "1");
@@ -26811,7 +26811,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     body.callbackURL = popupCallbackUrl.toString();
     body.disableRedirect = true;
     const response = await fetch(input2, {
-      ...init2,
+      ...init,
       body: JSON.stringify(body)
     });
     const data = await response.json();
@@ -26843,9 +26843,9 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       }
     },
     signIn: {
-      beforeFetch: (input2, init2) => {
+      beforeFetch: (input2, init) => {
         if (!(typeof input2 === "string" ? input2 : input2.toString()).includes("/sign-in/social") || !isIframe()) return null;
-        return handleSocialSignInViaPopup(input2, init2);
+        return handleSocialSignInViaPopup(input2, init);
       },
       onRequest: () => {
       },
@@ -27082,12 +27082,12 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
             if (method) BETTER_AUTH_METHODS_HOOKS[method].onRequest(request);
             userOnRequest?.(request);
           },
-          customFetchImpl: async (url2, init2) => {
-            const headers = injectClientInfo(init2?.headers);
+          customFetchImpl: async (url2, init) => {
+            const headers = injectClientInfo(init?.headers);
             if (headers.has(FORCE_FETCH_HEADER)) {
               headers.delete(FORCE_FETCH_HEADER);
               const response$1 = await fetch(url2, {
-                ...init2,
+                ...init,
                 headers
               });
               if (!response$1.ok) {
@@ -27104,12 +27104,12 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
             }
             const betterAuthMethod = deriveBetterAuthMethodFromUrl(url2.toString());
             if (betterAuthMethod) {
-              const response$1 = await BETTER_AUTH_METHODS_HOOKS[betterAuthMethod].beforeFetch?.(url2, init2);
+              const response$1 = await BETTER_AUTH_METHODS_HOOKS[betterAuthMethod].beforeFetch?.(url2, init);
               if (response$1) return response$1;
             }
-            const key = `${init2?.method || "GET"}:${url2}:${init2?.body || ""}`;
+            const key = `${init?.method || "GET"}:${url2}:${init?.body || ""}`;
             const response = await BETTER_AUTH_METHODS_IN_FLIGHT_REQUESTS.deduplicate(key, () => fetch(url2, {
-              ...init2,
+              ...init,
               headers
             }));
             if (!response.ok) {
@@ -27154,7 +27154,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     }
   };
 
-  // node_modules/@neondatabase/auth/dist/supabase-adapter-DxJ7sJJ5.mjs
+  // auth-build/node_modules/@neondatabase/auth/dist/supabase-adapter-DxJ7sJJ5.mjs
   var BetterAuthVanillaAdapterImpl = class extends NeonAuthAdapterCore {
     constructor(betterAuthClientOptions) {
       super(betterAuthClientOptions);
@@ -27179,7 +27179,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     });
   }
 
-  // node_modules/@neondatabase/auth/dist/neon-auth-ygjyFOIe.mjs
+  // auth-build/node_modules/@neondatabase/auth/dist/neon-auth-ygjyFOIe.mjs
   function createInternalNeonAuth(url2, config2) {
     const adapterBuilder = config2?.adapter ?? BetterAuthVanillaAdapter();
     const { fetchOptions } = config2 ?? {};
@@ -27198,135 +27198,158 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     return createInternalNeonAuth(url2, config2).adapter;
   }
 
-  // community-entry.js
-  var AUTH_URL = "https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-central-1.aws.neon.tech/neondb/auth";
-  var auth = createAuthClient2(AUTH_URL);
-  var el = (tag, cls, text) => {
-    const e = document.createElement(tag);
-    if (cls) e.className = cls;
-    if (text !== void 0) e.textContent = text;
-    return e;
-  };
-  var mounts = [...document.querySelectorAll("[data-pme-community]")];
-  async function token() {
-    const response = await fetch(`${AUTH_URL}/token`, {
-      method: "GET",
-      credentials: "include",
-      cache: "no-store"
-    });
-    if (!response.ok) {
-      throw new Error(
-        `Unable to obtain JWT from Neon Auth (HTTP ${response.status})`
-      );
-    }
+  // assets/js/auth-config.js
+  async function loadAuthConfig(fetcher = fetch) {
+    const response = await fetcher("/api/auth-config", { cache: "no-store", credentials: "same-origin", signal: AbortSignal.timeout(15e3) });
+    if (!response.ok) throw new Error("Sign-in is not configured for this environment. Please contact the course author.");
     const data = await response.json();
-    const jwt2 = data?.token;
-    if (typeof jwt2 !== "string" || jwt2.split(".").length !== 3) {
-      throw new Error("Neon Auth did not return a valid JWT.");
-    }
-    return jwt2;
-  }
-  async function load(id, stats, comments) {
-    const r = await fetch(`/api/community?exercise=${encodeURIComponent(id)}`, { cache: "no-store" });
-    const data = await r.json();
-    if (!r.ok) throw Error(data.error || `HTTP ${r.status}`);
-    stats.textContent = `Helpful votes: ${data.votes.up} \xB7 Needs improvement: ${data.votes.down}`;
-    comments.replaceChildren();
-    if (!data.comments.length) comments.append(el("p", "pme-community-muted", "No published comments yet. Start the conversation!"));
-    data.comments.forEach((item) => {
-      const article = el("article", "pme-community-comment");
-      const title = el("strong", "", item.nickname + " \xB7 ");
-      const date5 = el("time", "pme-community-muted", new Date(item.created_at).toLocaleDateString());
-      date5.dateTime = item.created_at;
-      const text = el("p", "", item.content);
-      article.append(title, date5, text);
-      comments.append(article);
-    });
-    if (data.hasMore) comments.append(el("p", "pme-community-muted", "Showing 30 latest comments."));
-  }
-  async function send(body) {
-    const response = await fetch("/api/community", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": `Bearer ${await token()}` }, body: JSON.stringify(body) });
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      if (data.needsProfile) location.href = "/profile.html";
-      throw Error(data.error || `HTTP ${response.status}`);
-    }
-    return data;
-  }
-  async function init(mount) {
-    const id = mount.dataset.exerciseId;
-    if (!/^[a-z0-9][a-z0-9-]{1,79}$/.test(id || "")) return;
-    mount.replaceChildren();
-    mount.append(el("h2", "", "Community discussion"), el("p", "pme-community-muted", "Questions, discoveries and feedback from fellow learners."));
-    const stats = el("div", "pme-community-stats", "Loading\u2026"), heading = el("h3", "", "Comments"), comments = el("div", "pme-community-comments");
-    mount.append(stats, heading, comments);
     try {
-      await load(id, stats, comments);
-    } catch (e) {
-      stats.textContent = e.message;
+      const url2 = new URL(data.authUrl);
+      if (url2.protocol !== "https:" || url2.username || url2.password || url2.search || url2.hash || !url2.pathname.endsWith("/auth")) throw new Error();
+      return { authUrl: url2.href };
+    } catch {
+      throw new Error("The sign-in configuration could not be loaded. Please try again later.");
     }
-    const { data } = await auth.getSession().catch(() => ({ data: null }));
-    if (!data?.user) {
-      const info = el("p", "pme-community-notice", "Sign in to vote or comment. Reading is open to everyone.");
-      const a = el("a", "", " Sign in with Google");
-      a.href = "/login.html";
-      info.append(a);
-      mount.append(info);
-      return;
-    }
-    const controls = el("div", "pme-community-actions");
-    const up = el("button", "pme-action", "Helpful \u25B2"), down = el("button", "pme-action", "Needs improvement \u25BC");
-    const feedback = el("p", "pme-community-muted", "");
-    feedback.setAttribute("role", "status");
-    const sendVote = async (value) => {
-      try {
-        await send({ action: "vote", exerciseId: id, value });
-        await load(id, stats, comments);
-        feedback.textContent = "Vote recorded.";
-      } catch (e) {
-        feedback.textContent = e.message;
-      }
-    };
-    up.onclick = () => sendVote(1);
-    down.onclick = () => sendVote(-1);
-    controls.append(up, down);
-    mount.append(controls);
-    const form = el("form", "pme-community-form");
-    const label = el("label", "", "Share a question or discovery");
-    const area = el("textarea", "");
-    area.maxLength = 2e3;
-    area.minLength = 3;
-    area.rows = 3;
-    area.required = true;
-    label.append(area);
-    const submit = el("button", "pme-action", "Post comment");
-    submit.type = "submit";
-    form.append(label, submit);
-    mount.append(form, feedback);
-    form.onsubmit = async (e) => {
-      e.preventDefault();
-      submit.disabled = true;
-      try {
-        const result = await send({
-          action: "comment",
-          exerciseId: id,
-          content: area.value
-        });
-        area.value = "";
-        if (result.status === "published") {
-          await load(id, stats, comments);
-          feedback.textContent = "Comment published successfully!";
-        } else {
-          feedback.textContent = "Comment received! It will appear after moderation.";
-        }
-      } catch (err) {
-        feedback.textContent = err.message;
-      } finally {
-        submit.disabled = false;
-      }
-    };
   }
-  mounts.forEach((m) => init(m).catch((e) => {
-    m.append(el("p", "pme-community-muted", e.message));
-  }));
+
+  // auth-build/community-entry.js
+  async function start() {
+    const { authUrl: AUTH_URL } = await loadAuthConfig();
+    const auth = createAuthClient2(AUTH_URL);
+    const el = (tag, cls, text) => {
+      const e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text !== void 0) e.textContent = text;
+      return e;
+    };
+    const mounts = [...document.querySelectorAll("[data-pme-community]")];
+    async function token() {
+      const response = await fetch(`${AUTH_URL}/token`, {
+        method: "GET",
+        credentials: "include",
+        cache: "no-store"
+      });
+      if (!response.ok) {
+        throw new Error(
+          `Unable to obtain JWT from Neon Auth (HTTP ${response.status})`
+        );
+      }
+      const data = await response.json();
+      const jwt2 = data?.token;
+      if (typeof jwt2 !== "string" || jwt2.split(".").length !== 3) {
+        throw new Error("Neon Auth did not return a valid JWT.");
+      }
+      return jwt2;
+    }
+    async function load(id, stats, comments) {
+      const r = await fetch(`/api/community?exercise=${encodeURIComponent(id)}`, { cache: "no-store" });
+      const data = await r.json();
+      if (!r.ok) throw Error(data.error || `HTTP ${r.status}`);
+      stats.textContent = `Helpful votes: ${data.votes.up} \xB7 Needs improvement: ${data.votes.down}`;
+      comments.replaceChildren();
+      if (!data.comments.length) comments.append(el("p", "pme-community-muted", "No published comments yet. Start the conversation!"));
+      data.comments.forEach((item) => {
+        const article = el("article", "pme-community-comment");
+        const title = el("strong", "", item.nickname + " \xB7 ");
+        const date5 = el("time", "pme-community-muted", new Date(item.created_at).toLocaleDateString());
+        date5.dateTime = item.created_at;
+        const text = el("p", "", item.content);
+        article.append(title, date5, text);
+        comments.append(article);
+      });
+      if (data.hasMore) comments.append(el("p", "pme-community-muted", "Showing 30 latest comments."));
+    }
+    async function send(body) {
+      const response = await fetch("/api/community", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": `Bearer ${await token()}` }, body: JSON.stringify(body) });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        if (data.needsProfile) location.href = "/profile.html";
+        throw Error(data.error || `HTTP ${response.status}`);
+      }
+      return data;
+    }
+    async function init(mount) {
+      const id = mount.dataset.exerciseId;
+      if (!/^[a-z0-9][a-z0-9-]{1,79}$/.test(id || "")) return;
+      mount.replaceChildren();
+      mount.append(el("h2", "", "Community discussion"), el("p", "pme-community-muted", "Questions, discoveries and feedback from fellow learners."));
+      const stats = el("div", "pme-community-stats", "Loading\u2026"), heading = el("h3", "", "Comments"), comments = el("div", "pme-community-comments");
+      mount.append(stats, heading, comments);
+      try {
+        await load(id, stats, comments);
+      } catch (e) {
+        stats.textContent = e.message;
+      }
+      const { data } = await auth.getSession().catch(() => ({ data: null }));
+      if (!data?.user) {
+        const info = el("p", "pme-community-notice", "Sign in to vote or comment. Reading is open to everyone.");
+        const a = el("a", "", " Sign in");
+        a.href = "/login.html";
+        info.append(a);
+        mount.append(info);
+        return;
+      }
+      const controls = el("div", "pme-community-actions");
+      const up = el("button", "pme-action", "Helpful \u25B2"), down = el("button", "pme-action", "Needs improvement \u25BC");
+      const feedback = el("p", "pme-community-muted", "");
+      feedback.setAttribute("role", "status");
+      const sendVote = async (value) => {
+        try {
+          await send({ action: "vote", exerciseId: id, value });
+          await load(id, stats, comments);
+          feedback.textContent = "Vote recorded.";
+        } catch (e) {
+          feedback.textContent = e.message;
+        }
+      };
+      up.onclick = () => sendVote(1);
+      down.onclick = () => sendVote(-1);
+      controls.append(up, down);
+      mount.append(controls);
+      const form = el("form", "pme-community-form");
+      const label = el("label", "", "Share a question or discovery");
+      const area = el("textarea", "");
+      area.maxLength = 2e3;
+      area.minLength = 3;
+      area.rows = 3;
+      area.required = true;
+      label.append(area);
+      const submit = el("button", "pme-action", "Post comment");
+      submit.type = "submit";
+      form.append(label, submit);
+      mount.append(form, feedback);
+      form.onsubmit = async (e) => {
+        e.preventDefault();
+        submit.disabled = true;
+        try {
+          const result = await send({
+            action: "comment",
+            exerciseId: id,
+            content: area.value
+          });
+          area.value = "";
+          if (result.status === "published") {
+            await load(id, stats, comments);
+            feedback.textContent = "Comment published successfully!";
+          } else {
+            feedback.textContent = "Comment received! It will appear after moderation.";
+          }
+        } catch (err) {
+          feedback.textContent = err.message;
+        } finally {
+          submit.disabled = false;
+        }
+      };
+    }
+    mounts.forEach((m) => init(m).catch((e) => {
+      m.append(el("p", "pme-community-muted", e.message));
+    }));
+  }
+  start().catch((error61) => {
+    for (const mount of document.querySelectorAll("[data-pme-community]")) {
+      const p = document.createElement("p");
+      p.textContent = error61.message;
+      mount.append(p);
+    }
+  });
 })();

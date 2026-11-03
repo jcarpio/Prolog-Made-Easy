@@ -1,11 +1,14 @@
 import { createRemoteJWKSet, jwtVerify } from 'jose';
 
-const authUrl = process.env.NEON_AUTH_URL || 'https://ep-calm-mouse-bapjwd5s.neonauth.c-8.eu-central-1.aws.neon.tech/neondb/auth';
-const jwksUrl = process.env.NEON_AUTH_JWKS_URL || `${authUrl}/.well-known/jwks.json`;
-
-const issuer = new URL(authUrl).origin;
-
-const jwks = createRemoteJWKSet(new URL(jwksUrl));
+import { serverAuthConfig } from './auth-config.js';
+let cachedVerifier;
+function verificationConfig() {
+  const config = serverAuthConfig();
+  if (!cachedVerifier || cachedVerifier.jwksUrl !== config.jwksUrl) {
+    cachedVerifier = { ...config, jwks: createRemoteJWKSet(new URL(config.jwksUrl)) };
+  }
+  return cachedVerifier;
+}
 
 export const json = (data, status = 200) => new Response(JSON.stringify(data), {
   status, headers: {
@@ -21,6 +24,7 @@ export async function requireUser(request) {
   const header = request.headers.get('authorization') || '';
   const match = /^Bearer ([A-Za-z0-9._~-]+)$/.exec(header);
   if (!match) throw Object.assign(new Error('Sign in required'), { status: 401 });
+  const { issuer, jwks } = verificationConfig();
   try {
     // Match the configured Neon Auth instance; never trust unsigned or client-supplied user IDs.
     
